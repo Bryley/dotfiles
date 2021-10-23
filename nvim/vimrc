@@ -32,6 +32,8 @@ set wildmenu						" Will show a box of different suggestions when typing command
 " ### Plugins ###
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'Mofiqul/vscode.nvim'
+" Plug 'dracula/vim', { 'as': 'dracula' } " The main theme that is used.
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " Used for autocompleting and linting
 " Plug 'sheerun/vim-polyglot'			" Used for better syntax highlighting
 " Note that this plugin only works for version 0.5 and to change the branch
@@ -56,13 +58,15 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 	"packadd! vim-signature
 "endif
 
+let g:vscode_style = "dark"
+colorscheme vscode
 
 " ### Dracula Colorscheme theme ###
-let g:dracula_italic = 0 " Fixes issue with random types highlighting randomly
-packadd! dracula
-colorscheme dracula
+" let g:dracula_italic = 0 " Fixes issue with random types highlighting randomly
+" packadd! dracula
+" colorscheme dracula
 " Allows the colorscheme to have a transparent background
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
 
 " ### Autocmd commands ###
 " Turn off the error matching for markdown files.
