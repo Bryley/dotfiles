@@ -1,0 +1,88 @@
+" ##############
+" Bryley's vimrc
+" ##############
+
+" ### Basic must have settings ###
+syntax enable						" Enable Syntax
+set number relativenumber			" Haves relative line numbers on the side of the screen in hybrid mode
+filetype indent on					" Will enable automatic indentation detection based on the filetype
+set lazyredraw						" Will stop redrawing the screen in times it doesn't need to like macros
+set showmatch						" Will show matching parenthesises when hovering over one.
+match Error /\%81v.\+/				" Highlights characters over 80 columns long
+set spelllang=en_au					" Sets spelling to Australian spelling.
+set mouse=a							" Enables mouse
+
+" Tabs
+set cindent
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
+
+" Change the leader to space by remapping it then changing it
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+
+" ### Fuzzy finder settings ###
+set wildignore+=node_modules/*		" Will ignore node_modules folder when searching
+set path+=**						" When searching for files it will check subfolders
+set wildmenu						" Will show a box of different suggestions when typing commands
+
+
+" ### Plugins ###
+call plug#begin('~/.config/nvim/plugged')
+
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Used for autocompleting and linting
+" Plug 'sheerun/vim-polyglot'			" Used for better syntax highlighting
+" Note that this plugin only works for version 0.5 and to change the branch
+" when 0.6 comes out:
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'} " This is used for code parsing and better syntax highlighting, note wait for version 0.6 of neovim
+
+Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
+Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
+Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
+
+call plug#end()
+
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
+"let allowPlugins = 1
+
+"if (allowPlugins)
+	"packadd! coc.nvim
+	"packadd! vim-polyglot
+	"packadd! nerdtree
+	"packadd! vim-smoothie
+	"packadd! vim-signature
+"endif
+
+
+" ### Dracula Colorscheme theme ###
+let g:dracula_italic = 0 " Fixes issue with random types highlighting randomly
+packadd! dracula
+colorscheme dracula
+" Allows the colorscheme to have a transparent background
+hi Normal guibg=NONE ctermbg=NONE
+
+" ### Autocmd commands ###
+" Turn off the error matching for markdown files.
+autocmd BufNewFile,BufRead *.md match none
+" Enable spelling by default for markdown files.
+autocmd BufNewFile,BufRead *.md set spell
+
+
+" Line numbers for NerdTree
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
+
+" ### Mappings ###
+" Makes control-backspace delete a word
+imap <C-H> <C-W>
+" Toggles spelling
+nnoremap <leader>s :set spell!<CR>
+
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F3> :noh<CR>
