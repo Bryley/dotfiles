@@ -45,10 +45,13 @@ Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'} " This is used 
 Plug 'neovim/nvim-lspconfig'		" Used for autocompleting and reference finding
 Plug 'williamboman/nvim-lsp-installer' " This is an easy Language Server installer for lspconfig
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " Uses LSP for autocomplete
+Plug 'glepnir/lspsaga.nvim'			" Creates better dropdown menus with LSP
 
+Plug 'liuchengxu/vim-which-key'		" Displays help when pressing leader key (space)
 Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
 Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
 Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
+Plug 'ryanoasis/vim-devicons'		" Adds icons to NerdTree and other plugins
 
 call plug#end()
 
@@ -98,3 +101,8 @@ nnoremap <leader>s :set spell!<CR>
 
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :noh<CR>
+
+" This is essential for 'vim which key' plugin
+" TODO this not working correctly
+set notimeout
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
