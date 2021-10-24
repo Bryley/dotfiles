@@ -29,16 +29,22 @@ set path+=**						" When searching for files it will check subfolders
 set wildmenu						" Will show a box of different suggestions when typing commands
 
 
+" Make COQ autocomplete start by default
+let g:coq_settings = { 'auto_start': v:true }
+
+
 " ### Plugins ###
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Mofiqul/vscode.nvim'
 " Plug 'dracula/vim', { 'as': 'dracula' } " The main theme that is used.
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Used for autocompleting and linting
-" Plug 'sheerun/vim-polyglot'			" Used for better syntax highlighting
+
 " Note that this plugin only works for version 0.5 and to change the branch
 " when 0.6 comes out:
 Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'} " This is used for code parsing and better syntax highlighting, note wait for version 0.6 of neovim
+Plug 'neovim/nvim-lspconfig'		" Used for autocompleting and reference finding
+Plug 'williamboman/nvim-lsp-installer' " This is an easy Language Server installer for lspconfig
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " Uses LSP for autocomplete
 
 Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
 Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
@@ -46,6 +52,7 @@ Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
 
 call plug#end()
 
+" Enable syntax highlighting for treesitter
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 "let allowPlugins = 1

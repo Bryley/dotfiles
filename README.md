@@ -8,6 +8,25 @@ Below is a list of all the programs this is setup for and a short description:
 To setup simply make this repo your .config file and pull with new changes.
 When you start vim for the first time make sure you type `:PlugInstall` to install all the plugins.
 
+Also note that you will have to install all the Language Parsers and Language Servers for Tree Sitter and LSP-Config.
+
+Also make sure to download all the variations of the "Hack" font from:
+[Hack Nerd Font Github](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
+
+Here's a list you can copy into vim
+
+`:TSInstall css html javascript json5 python typescript`
+
+`:LspInstall pyright tsserver`
+
+To set up autocomplete type the following commands in:
+
+`COQdeps` to install dependencies.
+
+Then:
+
+`COQnow` to start auto completion
+
 
 ## Neovim
 
