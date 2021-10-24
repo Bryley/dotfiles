@@ -17,7 +17,7 @@ Here's a list you can copy into vim
 
 `:TSInstall css html javascript json5 python typescript`
 
-`:LspInstall pyright tsserver`
+`:LspInstall pylsp tsserver`
 
 To set up autocomplete type the following commands in:
 
@@ -25,7 +25,11 @@ To set up autocomplete type the following commands in:
 
 Then:
 
-`COQnow` to start auto completion
+`COQnow` to start auto completion in a session if it is not automatically working out of the box.
+
+For the python language server install the type checker with the following in the cmd line
+
+`~/.local/share/nvim/lsp_servers/pylsp/venv/bin/pip install pylsp-mypy`
 
 
 ## Neovim
