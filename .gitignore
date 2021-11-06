@@ -1,0 +1,15 @@
+# Ignore everything
+/*
+/*/
+
+# Except
+!README.md
+!.gitignore
+!.gitmodules
+!alacritty.yml
+!fish/
+!nvim/
+!tmux/
+
+# Nvim plugins, make sure to run :PlugInstall to create this folder
+nvim/plugged/
