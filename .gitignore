@@ -2,3 +2,4 @@
 nvim.appimage
 # Nvim plugins, make sure to run :PlugInstall to create this folder
 nvim/plugged/
+nvim/pack/
