@@ -1,10 +1,12 @@
 local lsp_installer = require("nvim-lsp-installer")
-local coq = require "coq"
+--local coq = require "coq"
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local map = vim.api.nvim_set_keymap
 
 lsp_installer.on_server_ready(function(server)
-    local opts = {coq.lsp_ensure_capabilities()}
+    --local opts = {coq.lsp_ensure_capabilities()}
+    local opts = {capabilities = capabilities}
 
     -- (optional) Customize the options passed to the server
     -- if server.name == "tsserver" then
@@ -20,6 +22,8 @@ end)
 -- LSP saga --
 
 -- Show line diagnostics with <Space>cc
+--[[
 map('n', '<leader>cc',
 '<cmd>lua require\'lspsaga.diagnostic\'.show_cursor_diagnostics()<CR>',
 {noremap = true, silent = true})
+--]]

@@ -8,7 +8,8 @@ set number relativenumber			" Haves relative line numbers on the side of the scr
 filetype indent on					" Will enable automatic indentation detection based on the filetype
 set lazyredraw						" Will stop redrawing the screen in times it doesn't need to like macros
 set showmatch						" Will show matching parenthesises when hovering over one.
-match Error /\%81v.\+/				" Highlights characters over 80 columns long
+"match Error /\%81v.\+/				" Highlights characters over 80 columns long
+set colorcolumn=80
 set spelllang=en_au					" Sets spelling to Australian spelling.
 set mouse=a							" Enables mouse
 
@@ -30,24 +31,34 @@ set wildmenu						" Will show a box of different suggestions when typing command
 
 
 " Make COQ autocomplete start by default
-let g:coq_settings = { 'auto_start': 'shut-up' }
+" let g:coq_settings = { 'auto_start': 'shut-up' }
 
 
 " ### Plugins ###
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'Mofiqul/vscode.nvim'
-" Plug 'dracula/vim', { 'as': 'dracula' } " The main theme that is used.
-
+Plug 'Mofiqul/vscode.nvim'			" The VS Code like theme
 " Note that this plugin only works for version 0.5 and to change the branch
 " when 0.6 comes out:
-Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'} " This is used for code parsing and better syntax highlighting, note wait for version 0.6 of neovim
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'} " This is used for code parsing and better syntax highlighting, note this should be included in neovim 0.6
 Plug 'neovim/nvim-lspconfig'		" Used for autocompleting and reference finding
 Plug 'williamboman/nvim-lsp-installer' " This is an easy Language Server installer for lspconfig
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " Uses LSP for autocomplete
-Plug 'glepnir/lspsaga.nvim'			" Creates better dropdown menus with LSP
+Plug 'L3MON4D3/LuaSnip'				" Snippets plugin
+Plug 'onsails/lspkind-nvim'			" Adds icons to autocomplete menu
 
-Plug 'liuchengxu/vim-which-key'		" Displays help when pressing leader key (space)
+" nvim-cmp plugins
+Plug 'hrsh7th/nvim-cmp'				" Base code for autocompleting
+Plug 'hrsh7th/cmp-nvim-lsp'			" Used for LSP autocomplete
+Plug 'hrsh7th/cmp-buffer'			" Autocompleting within buffer
+Plug 'hrsh7th/cmp-path'				" Autocompleting paths
+Plug 'hrsh7th/cmp-cmdline'			" Autocomplete vim commands
+Plug 'hrsh7th/cmp-nvim-lua'			" Autocompleting neovim lua code
+Plug 'saadparwaiz1/cmp_luasnip'		" Lets cmp work with LuaSnip plugin
+
+"Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " Uses LSP for autocomplete
+"Plug 'glepnir/lspsaga.nvim'			" Creates better dropdown menus with LSP
+
+"Plug 'liuchengxu/vim-which-key'		" Displays help when pressing leader key (space)
 Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
 Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
 Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
@@ -55,8 +66,6 @@ Plug 'ryanoasis/vim-devicons'		" Adds icons to NerdTree and other plugins
 
 call plug#end()
 
-" Enable syntax highlighting for treesitter
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 "let allowPlugins = 1
 
@@ -69,7 +78,10 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 "endif
 
 let g:vscode_style = "dark"
-colorscheme vscode
+try
+    colorscheme vscode
+catch
+endtry
 
 " ### Dracula Colorscheme theme ###
 " let g:dracula_italic = 0 " Fixes issue with random types highlighting randomly
@@ -89,8 +101,6 @@ autocmd BufNewFile,BufRead *.md set spell
 let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
-
-
 
 
 " ### Mappings ###
