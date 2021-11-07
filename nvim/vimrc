@@ -12,6 +12,9 @@ set showmatch						" Will show matching parenthesises when hovering over one.
 set colorcolumn=80
 set spelllang=en_au					" Sets spelling to Australian spelling.
 set mouse=a							" Enables mouse
+set splitbelow						" Makes vim automatically open new split windows below instead of above
+set splitright						" Makes vim automatically open new vsplit windows to the right instead of left
+set termguicolors					" Enables all colors.
 
 " Tabs
 set cindent
@@ -33,6 +36,8 @@ set wildmenu						" Will show a box of different suggestions when typing command
 " Make COQ autocomplete start by default
 " let g:coq_settings = { 'auto_start': 'shut-up' }
 
+" TODO customise lualine to have python env
+" TODO create custom plugin to select python env.
 
 " ### Plugins ###
 call plug#begin('~/.config/nvim/plugged')
@@ -55,27 +60,18 @@ Plug 'hrsh7th/cmp-cmdline'			" Autocomplete vim commands
 Plug 'hrsh7th/cmp-nvim-lua'			" Autocompleting neovim lua code
 Plug 'saadparwaiz1/cmp_luasnip'		" Lets cmp work with LuaSnip plugin
 
-"Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " Uses LSP for autocomplete
 "Plug 'glepnir/lspsaga.nvim'			" Creates better dropdown menus with LSP
 
 "Plug 'liuchengxu/vim-which-key'		" Displays help when pressing leader key (space)
 Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
 Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
 Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
-Plug 'ryanoasis/vim-devicons'		" Adds icons to NerdTree and other plugins
+"Plug 'ryanoasis/vim-devicons'		" Adds icons to NerdTree and other plugins
+Plug 'nvim-lualine/lualine.nvim'	" Fancy bottom bar
+Plug 'kyazdani42/nvim-web-devicons' " Adds icons to NerdTree and other plugins
+Plug 'romgrk/barbar.nvim'			" Adds fancy new tabs like VS Code
 
 call plug#end()
-
-
-"let allowPlugins = 1
-
-"if (allowPlugins)
-	"packadd! coc.nvim
-	"packadd! vim-polyglot
-	"packadd! nerdtree
-	"packadd! vim-smoothie
-	"packadd! vim-signature
-"endif
 
 let g:vscode_style = "dark"
 try
@@ -111,6 +107,7 @@ nnoremap <leader>s :set spell!<CR>
 
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :noh<CR>
+nnoremap <F5> :15split<CR>:term python3 %<CR>
 
 " This is essential for 'vim which key' plugin
 " TODO this not working correctly

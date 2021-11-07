@@ -48,7 +48,7 @@ printf "\n%b\n" "\e[32mSetting up neovim\e[0m"
 nvim --headless -u ./nvim/setup_init.vim +PlugInstall +qall
 # Remove current Treesitter parsers
 rm $(pwd)/nvim/plugged/nvim-treesitter/parser/*.so
-nvim --headless +"TSInstallSync css html javascript json5 python typescript" +qall
+nvim --headless +"TSInstallSync css html javascript json5 python typescript lua" +qall
 nvim --headless +"LspInstall pyright sumneko_lua tsserver" +qall
 
 printf "\n%b\n" "\e[32mAll done you might want to close and reopen your shell for changes to take place\e[0m"

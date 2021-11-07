@@ -8,4 +8,5 @@ source ~/.config/nvim/vimrc
 luafile ~/.config/nvim/pluginconfigs/treesitter.lua
 luafile ~/.config/nvim/pluginconfigs/nvim-cmp.lua
 luafile ~/.config/nvim/pluginconfigs/lspsetup.lua
+luafile ~/.config/nvim/pluginconfigs/lualine.lua
 
