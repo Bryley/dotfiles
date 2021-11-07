@@ -50,6 +50,7 @@ Plug 'neovim/nvim-lspconfig'		" Used for autocompleting and reference finding
 Plug 'williamboman/nvim-lsp-installer' " This is an easy Language Server installer for lspconfig
 Plug 'L3MON4D3/LuaSnip'				" Snippets plugin
 Plug 'onsails/lspkind-nvim'			" Adds icons to autocomplete menu
+"Plug 'antoinemadec/FixCursorHold.nvim' " Used to fix issues with lspsaga
 
 " nvim-cmp plugins
 Plug 'hrsh7th/nvim-cmp'				" Base code for autocompleting
@@ -61,15 +62,12 @@ Plug 'hrsh7th/cmp-nvim-lua'			" Autocompleting neovim lua code
 Plug 'saadparwaiz1/cmp_luasnip'		" Lets cmp work with LuaSnip plugin
 
 "Plug 'glepnir/lspsaga.nvim'			" Creates better dropdown menus with LSP
-
-"Plug 'liuchengxu/vim-which-key'		" Displays help when pressing leader key (space)
 Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
 Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
 Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
-"Plug 'ryanoasis/vim-devicons'		" Adds icons to NerdTree and other plugins
 Plug 'nvim-lualine/lualine.nvim'	" Fancy bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " Adds icons to NerdTree and other plugins
-Plug 'romgrk/barbar.nvim'			" Adds fancy new tabs like VS Code
+"Plug 'romgrk/barbar.nvim'			" Adds fancy new tabs like VS Code
 
 call plug#end()
 
