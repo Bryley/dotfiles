@@ -37,8 +37,8 @@ map('n', 'gr'	, '<cmd>lua vim.lsp.buf.references()<CR>',		{ noremap=true, silent
 map('n', 'gi'	, '<cmd>lua vim.lsp.buf.implementation()<CR>',	{ noremap=true, silent=true })
 map('n', 'K'	, '<cmd>lua vim.lsp.buf.hover()<CR>',			{ noremap=true, silent=true })
 map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',	{ noremap=true, silent=true })
-map('n', '<C-n>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',{ noremap=true, silent=true })
-map('n', '<C-p>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',{ noremap=true, silent=true })
+map('n', '<C-p>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',{ noremap=true, silent=true })
+map('n', '<C-n>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',{ noremap=true, silent=true })
 
 
 -- LSP saga --

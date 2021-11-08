@@ -32,13 +32,6 @@ set wildignore+=node_modules/*		" Will ignore node_modules folder when searching
 set path+=**						" When searching for files it will check subfolders
 set wildmenu						" Will show a box of different suggestions when typing commands
 
-
-" Make COQ autocomplete start by default
-" let g:coq_settings = { 'auto_start': 'shut-up' }
-
-" TODO customise lualine to have python env
-" TODO create custom plugin to select python env.
-
 " ### Plugins ###
 call plug#begin('~/.config/nvim/plugged')
 
@@ -64,7 +57,8 @@ Plug 'saadparwaiz1/cmp_luasnip'		" Lets cmp work with LuaSnip plugin
 "Plug 'glepnir/lspsaga.nvim'			" Creates better dropdown menus with LSP
 Plug 'psliwka/vim-smoothie'			" Used for smooth scrolling when using Ctrl-D and Ctrl-U
 Plug 'kshenoy/vim-signature' 		" A simple plugin for displaying markers
-Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
+"Plug 'preservim/nerdtree'			" A sidebar file navagator (Shortcut set to F2)
+Plug 'kyazdani42/nvim-tree.lua'		" A sidebar file navigation plugin like NERDTree
 Plug 'nvim-lualine/lualine.nvim'	" Fancy bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " Adds icons to NerdTree and other plugins
 "Plug 'romgrk/barbar.nvim'			" Adds fancy new tabs like VS Code
@@ -103,7 +97,7 @@ imap <C-H> <C-W>
 " Toggles spelling
 nnoremap <leader>s :set spell!<CR>
 
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F2> :NvimTreeToggle<CR>
 nnoremap <F3> :noh<CR>
 nnoremap <F5> :15split<CR>:term python3 %<CR>
 
