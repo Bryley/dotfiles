@@ -8,3 +8,5 @@ require'nvim-tree'.setup(
 	}
 )
 
+-- Turn on relative line numbers
+require'nvim-tree.view'.View.winopts.relativenumber = true

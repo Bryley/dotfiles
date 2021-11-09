@@ -100,6 +100,9 @@ nnoremap <leader>s :set spell!<CR>
 nnoremap <F2> :NvimTreeToggle<CR>
 nnoremap <F3> :noh<CR>
 nnoremap <F5> :15split<CR>:term python3 %<CR>
+nnoremap <F4> :15split<CR>:term<CR>
+" Shortcut to go into normal mode in terminal
+tnoremap <Esc> <C-\><C-n>
 
 " This is essential for 'vim which key' plugin
 " TODO this not working correctly
