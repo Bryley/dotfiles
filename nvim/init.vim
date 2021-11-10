@@ -10,4 +10,5 @@ luafile ~/.config/nvim/pluginconfigs/nvim-cmp.lua
 luafile ~/.config/nvim/pluginconfigs/lspsetup.lua
 luafile ~/.config/nvim/pluginconfigs/lualine.lua
 luafile ~/.config/nvim/pluginconfigs/nvimtree.lua
+source ~/.config/nvim/pluginconfigs/doge-setup.vim
 

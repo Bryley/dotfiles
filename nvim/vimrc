@@ -16,11 +16,14 @@ set splitbelow						" Makes vim automatically open new split windows below inste
 set splitright						" Makes vim automatically open new vsplit windows to the right instead of left
 set termguicolors					" Enables all colors.
 
-" Tabs
-set cindent
-set noexpandtab
+" Tabs (OLD)
+" set cindent
+" set noexpandtab
+" set tabstop=4
+" set shiftwidth=4
 set tabstop=4
 set shiftwidth=4
+set expandtab
 
 " Change the leader to space by remapping it then changing it
 nnoremap <SPACE> <Nop>
@@ -43,6 +46,7 @@ Plug 'neovim/nvim-lspconfig'		" Used for autocompleting and reference finding
 Plug 'williamboman/nvim-lsp-installer' " This is an easy Language Server installer for lspconfig
 Plug 'L3MON4D3/LuaSnip'				" Snippets plugin
 Plug 'onsails/lspkind-nvim'			" Adds icons to autocomplete menu
+"Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " Documentation Generator
 "Plug 'antoinemadec/FixCursorHold.nvim' " Used to fix issues with lspsaga
 
 " nvim-cmp plugins
@@ -90,6 +94,8 @@ let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
+
+" TODO make plugin for autogenerating python docs using TreeSitter playground
 
 " ### Mappings ###
 " Makes control-backspace delete a word
