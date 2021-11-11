@@ -66,6 +66,8 @@ Plug 'kyazdani42/nvim-tree.lua'     " A sidebar file navigation plugin like NERD
 Plug 'nvim-lualine/lualine.nvim'    " Fancy bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " Adds icons to NerdTree and other plugins
 Plug 'romgrk/barbar.nvim'           " Adds fancy new tabs like VS Code
+Plug 'nvim-lua/plenary.nvim'        " Adds library functionality to Neovim (required for telescope)
+Plug 'nvim-telescope/telescope.nvim' " A neovim fuzzy finder.
 
 call plug#end()
 
