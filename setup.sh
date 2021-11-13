@@ -14,13 +14,16 @@ fi
 
 
 # Add Simlinks
+ln -sf $(pwd)/zshenv ~/.zshenv
 ln -sf $(pwd)/alacritty.yml ~/.config/alacritty.yml
 rm -rf ~/.config/nvim
 rm -rf ~/.config/fish
 rm -rf ~/.config/tmux
+rm -rf ~/.config/zsh
 ln -sf $(pwd)/nvim ~/.config/nvim
 ln -sf $(pwd)/fish ~/.config/fish
 ln -sf $(pwd)/tmux ~/.config/tmux
+ln -sf $(pwd)/zsh ~/.config/zsh
 
 printf "\n%b\n" "\e[32mFinished creating simlinks\e[0m"
 
