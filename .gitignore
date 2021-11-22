@@ -4,4 +4,4 @@ nvim.appimage
 nvim/plugged/
 nvim/pack/
 
-fish/fish_variables/
+fish/fish_variables
