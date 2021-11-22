@@ -15,6 +15,7 @@ HISTFILE=~/.zsh_history
 source "$ZDOTDIR/zsh-functions"
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-aliases"
+zsh_add_file "zsh-vim"
 # zsh-machine-custom can be created, it includeds zsh configs that should not be shared, eg. custom extra paths
 zsh_add_file "zsh-machine-custom"
 

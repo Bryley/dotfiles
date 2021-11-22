@@ -1,4 +1,6 @@
 # File contains aliases crated by me
 
+alias vim="nvim"
+alias vimdiff="nvim -d"
 alias ls="ls --color=always"
 alias t="tmux -2"
