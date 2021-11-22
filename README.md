@@ -21,6 +21,13 @@ To setup this repo simply clone this repo somewhere on your computer (I chose in
 `~/.local/share/nvim/lsp_servers/pylsp/venv/bin/pip install pylsp-mypy`
 
 
+TODO - How to create and activate python env
+1. Type `python3 -m venv .venv` to create venv inside current project. (Replace `python3` with `python3.8` for python 3.8)
+1. This will create a folder called `.venv` inside project (Make sure to add this to `.gitignore` before continuing)
+1. To activate type `source .venv/bin/activate.fish`
+1. To deactivate type `deactivate`
+
+
 ## Neovim
 
 The most useful of the bunch, this includes my vimrc with a built-in version of the vim-plug plugin manager.
