@@ -3,3 +3,10 @@ export EDITOR="nvim"
 export TERMINAL="alacritty"
 export CLICOLOR=1                   # Adds colored output
 export LSCOLORS=ExFxCxDxBxegedabagacad # ls command colored output
+
+# Setup syntax highlighting colors
+typeset -Ag ZSH_HIGHLIGHT_STYLES
+
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[command]='fg=blue'

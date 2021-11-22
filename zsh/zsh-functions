@@ -17,3 +17,8 @@ function zsh_add_plugin() {
         git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
     fi
 }
+
+# Prints terminal colors good debug tool
+function print256colours() {
+    $ZDOTDIR/scripts/print256colours.sh
+}
