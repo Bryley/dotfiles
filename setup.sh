@@ -14,13 +14,16 @@ fi
 
 
 # Add Simlinks
+ln -sf $(pwd)/zshenv ~/.zshenv
 ln -sf $(pwd)/alacritty.yml ~/.config/alacritty.yml
 rm -rf ~/.config/nvim
 rm -rf ~/.config/fish
 rm -rf ~/.config/tmux
+rm -rf ~/.config/zsh
 ln -sf $(pwd)/nvim ~/.config/nvim
 ln -sf $(pwd)/fish ~/.config/fish
 ln -sf $(pwd)/tmux ~/.config/tmux
+ln -sf $(pwd)/zsh ~/.config/zsh
 
 printf "\n%b\n" "\e[32mFinished creating simlinks\e[0m"
 
@@ -33,6 +36,17 @@ curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fo
 fc-cache -f
 
 # Install packages
+
+# TODO install zsh
+
+# Install zsh-autocompletions (For latest Ubuntu distrobutions)
+# TODO possibly remoe this:
+printf "\n%b\n" "\e[32mInstalling zsh-autocompletions\e[0m"
+echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_19.10/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
+curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_19.10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
+sudo apt update
+sudo apt install zsh-autosuggestions
+
 printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
 sudo apt remove neovim
 sudo apt remove vim
@@ -48,7 +62,7 @@ printf "\n%b\n" "\e[32mSetting up neovim\e[0m"
 nvim --headless -u ./nvim/setup_init.vim +PlugInstall +qall
 # Remove current Treesitter parsers
 rm $(pwd)/nvim/plugged/nvim-treesitter/parser/*.so
-nvim --headless +"TSInstallSync css html javascript json5 python typescript lua" +qall
+nvim --headless +"TSInstallSync bash css html javascript json5 python typescript lua" +qall
 nvim --headless +"LspInstall --sync pyright sumneko_lua tsserver" +qall
 
 printf "\n%b\n" "\e[32mAll done you might want to close and reopen your shell for changes to take place\e[0m"

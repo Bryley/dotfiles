@@ -9,7 +9,10 @@ To setup this repo simply clone this repo somewhere on your computer (I chose in
 
 1. Go into the repo dir `cd dotfiles`
 1. Next retrieve all the submodules `git submodule update --init --recursive`.
-1. Run `setup.sh` script with `bash ./setup.sh`, WARNING this may delete files/directories within `~/.config` so if there are any configurations in neovim, fish, alacritty or tmux you may want to keep make sure you create backups first.
+1. You need to follow the instructions to install the following packages:
+[ZSH-Syntax-Highlighting](https://software.opensuse.org/download.html?project=shells%3Azsh-users%3Azsh-syntax-highlighting&package=zsh-syntax-highlighting)
+[ZSH-Autosuggestions](https://software.opensuse.org/download.html?project=shells%3Azsh-users%3Azsh-autosuggestions&package=zsh-autosuggestions)
+4. Run `setup.sh` script with `bash ./setup.sh`, WARNING this may delete files/directories within `~/.config` so if there are any configurations in neovim, fish, alacritty or tmux you may want to keep make sure you create backups first.
 1. This script will do the following things:
 	1. Create simlinks with `~/./config` directiories linking them to this directory.
 	1. Install all the required fonts used by my terminal emulator (Hack Nerd Font)
@@ -19,6 +22,13 @@ To setup this repo simply clone this repo somewhere on your computer (I chose in
 1. TODO maybe remove: For the python language server install the type checker with the following in the cmd line:
 
 `~/.local/share/nvim/lsp_servers/pylsp/venv/bin/pip install pylsp-mypy`
+
+
+TODO - How to create and activate python env
+1. Type `python3 -m venv .venv` to create venv inside current project. (Replace `python3` with `python3.8` for python 3.8)
+1. This will create a folder called `.venv` inside project (Make sure to add this to `.gitignore` before continuing)
+1. To activate type `source .venv/bin/activate.fish`
+1. To deactivate type `deactivate`
 
 
 ## Neovim
