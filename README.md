@@ -9,7 +9,10 @@ To setup this repo simply clone this repo somewhere on your computer (I chose in
 
 1. Go into the repo dir `cd dotfiles`
 1. Next retrieve all the submodules `git submodule update --init --recursive`.
-1. Run `setup.sh` script with `bash ./setup.sh`, WARNING this may delete files/directories within `~/.config` so if there are any configurations in neovim, fish, alacritty or tmux you may want to keep make sure you create backups first.
+1. You need to follow the instructions to install the following packages:
+[ZSH-Syntax-Highlighting](https://software.opensuse.org/download.html?project=shells%3Azsh-users%3Azsh-syntax-highlighting&package=zsh-syntax-highlighting)
+[ZSH-Autosuggestions](https://software.opensuse.org/download.html?project=shells%3Azsh-users%3Azsh-autosuggestions&package=zsh-autosuggestions)
+4. Run `setup.sh` script with `bash ./setup.sh`, WARNING this may delete files/directories within `~/.config` so if there are any configurations in neovim, fish, alacritty or tmux you may want to keep make sure you create backups first.
 1. This script will do the following things:
 	1. Create simlinks with `~/./config` directiories linking them to this directory.
 	1. Install all the required fonts used by my terminal emulator (Hack Nerd Font)

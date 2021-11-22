@@ -36,6 +36,14 @@ curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fo
 fc-cache -f
 
 # Install packages
+
+# Install zsh-autocompletions (For latest Ubuntu distrobutions)
+printf "\n%b\n" "\e[32mInstalling zsh-autocompletions\e[0m"
+echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_19.10/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
+curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_19.10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
+sudo apt update
+sudo apt install zsh-autosuggestions
+
 printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
 sudo apt remove neovim
 sudo apt remove vim

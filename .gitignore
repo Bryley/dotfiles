@@ -4,4 +4,7 @@ nvim.appimage
 nvim/plugged/
 nvim/pack/
 
+zsh/plugins/
+zsh/zsh-machine-custom
+
 fish/fish_variables

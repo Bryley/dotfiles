@@ -1,0 +1,5 @@
+
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export CLICOLOR=1                   # Adds colored output
+export LSCOLORS=ExFxCxDxBxegedabagacad # ls command colored output

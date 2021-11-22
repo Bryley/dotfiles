@@ -1,0 +1,4 @@
+# File contains aliases crated by me
+
+alias ls="ls --color=always"
+alias t="tmux -2"
