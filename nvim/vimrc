@@ -70,6 +70,7 @@ Plug 'kyazdani42/nvim-web-devicons' " Adds icons to NerdTree and other plugins
 Plug 'romgrk/barbar.nvim'           " Adds fancy new tabs like VS Code
 Plug 'nvim-lua/plenary.nvim'        " Adds library functionality to Neovim (required for telescope)
 Plug 'nvim-telescope/telescope.nvim' " A neovim fuzzy finder.
+Plug 'simrat39/symbols-outline.nvim' " Creates and outline window
 
 call plug#end()
 
@@ -98,9 +99,6 @@ let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
-
-" TODO make plugin for autogenerating python docs using TreeSitter playground
-
 " ### Mappings ###
 " Makes control-backspace delete a word
 imap <C-H> <C-W>
@@ -109,9 +107,12 @@ nnoremap <leader>s :set spell!<CR>
 
 nnoremap <F2> :NvimTreeToggle<CR>
 nnoremap <F3> :noh<CR>
+nnoremap <F4> :15split<CR>:term<CR>
 " Temp running python in vscode using python3_9 virtenv
 nnoremap <F5> :15split<CR>:term conda activate python3_9;python3 %<CR>
-nnoremap <F4> :15split<CR>:term<CR>
+nnoremap <F6> :SymbolsOutline<CR>
+
+
 " Shortcut to go into normal mode in terminal
 tnoremap <Esc> <C-\><C-n>
 
