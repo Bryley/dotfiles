@@ -51,6 +51,8 @@ printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
 sudo apt remove neovim
 sudo apt remove vim
 
+sudo apt install ripgrep # Needed for telescope plugin for neovim
+
 # Install neovim 0.5
 printf "\n%b\n" "\e[32mInstalling latest version of neovim\e[0m"
 curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
