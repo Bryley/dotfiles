@@ -15,6 +15,7 @@ set mouse=a                         " Enables mouse
 set splitbelow                      " Makes vim automatically open new split windows below instead of above
 set splitright                      " Makes vim automatically open new vsplit windows to the right instead of left
 set termguicolors                   " Enables all colors.
+set scrolloff=5                     " Keeps 5 lines at top and bottom of page when jumping around.
 
 " Tabs (OLD)
 " set cindent
