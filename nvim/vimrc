@@ -42,6 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Mofiqul/vscode.nvim'          " The VS Code like theme
 Plug 'tpope/vim-surround'           " Adds the surround functionality eg 'cs({'
 Plug 'tpope/vim-repeat'             " Lets surround commands repeatable
+Plug 'goolord/alpha-nvim'           " Start page for neovim
 " Note that this plugin only works for version 0.5 and to change the branch
 " when 0.6 comes out:
 Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'} " This is used for code parsing and better syntax highlighting, note this should be included in neovim 0.6

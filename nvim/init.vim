@@ -14,4 +14,4 @@ source ~/.config/nvim/pluginconfigs/doge-setup.vim
 luafile ~/.config/nvim/pluginconfigs/barbar.lua
 luafile ~/.config/nvim/pluginconfigs/telescope.lua
 luafile ~/.config/nvim/pluginconfigs/symbols_outline.lua
-
+luafile ~/.config/nvim/pluginconfigs/alpha-nvim.lua
