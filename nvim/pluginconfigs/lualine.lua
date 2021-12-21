@@ -13,7 +13,7 @@ require'lualine'.setup({
 	options = {
 		theme = 'auto'
 	},
-	sections = {
-		lualine_c = {'filename', virtualenv}
-	}
+--	sections = {
+--		lualine_c = {'filename', virtualenv}
+--	}
 })
