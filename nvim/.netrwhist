@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =7
-let g:netrw_dirhist_7='/home/bryley/Documents/coding/nodejs/BubblesApp/server/dev'
-let g:netrw_dirhist_6='/home/bryley/Documents/coding/nodejs/BubblesApp/client/node_modules/react-native-sha256'
-let g:netrw_dirhist_5='/home/bryley/Documents/coding/nodejs/BubblesApp/client'
-let g:netrw_dirhist_4='/home/bryley/.tmux'
-let g:netrw_dirhist_3='/home/bryley/.config'
-let g:netrw_dirhist_2='/home/bryley/.config/fish'
-let g:netrw_dirhist_1='/home/bryley/.nv'

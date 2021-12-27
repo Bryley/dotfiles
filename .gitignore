@@ -8,3 +8,5 @@ zsh/plugins/
 zsh/zsh-machine-custom
 
 fish/fish_variables
+
+*.old
