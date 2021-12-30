@@ -88,7 +88,8 @@ return packer.startup(function(use)
 
     -- Colorschemes
     -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-    use "lunarvim/darkplus.nvim"            -- Dark plus colorscheme
+    --use "lunarvim/darkplus.nvim"            -- Dark plus colorscheme
+    use "martinsione/darkplus.nvim"         -- Darkplus vscode like colorscheme
 
 
 

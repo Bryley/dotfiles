@@ -37,15 +37,37 @@ fc-cache -f
 
 # Install packages
 
-# TODO install zsh
+printf "\n%b\n" "\e[32mInstalling Packages\e[0m"
+
+sudo apt install zsh
+sudo apt install python
+sudo apt install python3.9
+
+# Node version manager
+sudo apt remove node
+sudo apt remove npm
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install node
+nvm install-latest-npm
+
+# Change default shell
+chsh -s /bin/zsh
+
+# tmux
+printf "\n%b\n" "\e[32mInstalling tmux latest version\e[0m"
+
+sudo apt remove tmux
+sh ./tmux_install.sh
 
 # Install zsh-autocompletions (For latest Ubuntu distrobutions)
-# TODO possibly remoe this:
-printf "\n%b\n" "\e[32mInstalling zsh-autocompletions\e[0m"
-echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_19.10/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
-curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_19.10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
-sudo apt update
-sudo apt install zsh-autosuggestions
+# TODO possibly remove this:
+#printf "\n%b\n" "\e[32mInstalling zsh-autocompletions\e[0m"
+#sudo add-apt-repository ppa:(Your ppa here) -y
+#echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_19.10/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
+#curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_19.10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
+#sudo apt update
+#sudo apt install zsh-autosuggestions
 
 printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
 sudo apt remove neovim
@@ -55,16 +77,17 @@ sudo apt install ripgrep # Needed for telescope plugin for neovim
 
 # Install neovim 0.5
 printf "\n%b\n" "\e[32mInstalling latest version of neovim\e[0m"
+rm ./nvim.appimage
 curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod +x ./nvim.appimage
 ln -sf $(pwd)/nvim.appimage $HOME/.local/bin/nvim
 
 
 printf "\n%b\n" "\e[32mSetting up neovim\e[0m"
-nvim --headless -u ./nvim/setup_init.vim +PlugInstall +qall
+#nvim --headless -u ./nvim/setup_init.vim +PlugInstall +qall
 # Remove current Treesitter parsers
-rm $(pwd)/nvim/plugged/nvim-treesitter/parser/*.so
-nvim --headless +"TSInstallSync bash css html javascript json5 python typescript lua" +qall
-nvim --headless +"LspInstall --sync pyright sumneko_lua tsserver" +qall
+#rm $(pwd)/nvim/plugged/nvim-treesitter/parser/*.so
+#nvim --headless +"TSInstallSync bash css html javascript json5 python typescript lua" +qall
+#nvim --headless +"LspInstall --sync pyright sumneko_lua tsserver" +qall
 
 printf "\n%b\n" "\e[32mAll done you might want to close and reopen your shell for changes to take place\e[0m"

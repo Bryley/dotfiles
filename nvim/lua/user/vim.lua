@@ -27,6 +27,9 @@ opt.lazyredraw = true                       -- Prevents vim from redrawing in ti
 
 opt.colorcolumn = '80'                      -- 80 character limit on line
 
+opt.completeopt = { "menuone", "noselect" } -- For better selection with cmp
+
+
 
 -- Searching
 opt.hlsearch = true                         -- highlight all matches on previous search pattern
@@ -41,7 +44,6 @@ opt.tabstop = 4                             -- Insert 4 spaces for a tab
 
 -- Enable later
 --opt.showtabline = 4                         -- always show tabs
---opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 --opt.conceallevel = 0                        -- so that `` is visible in markdown files
 --opt.fileencoding = "utf-8"                  -- the encoding written to a file
 --opt.signcolumn = "yes"                      -- always show the sign column, otherwise it would shift the text each time
