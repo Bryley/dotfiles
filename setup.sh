@@ -31,6 +31,9 @@ printf "\n%b\n" "\e[32mFinished creating simlinks\e[0m"
 
 printf "\n%b\n" "\e[32mInstalling Packages\e[0m"
 
+sudo add-apt-repository ppa:mmstick76/alacritty
+sudo apt-get update
+
 sudo apt install curl -y
 sudo apt install alacritty -y
 sudo apt install zsh -y
