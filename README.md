@@ -31,6 +31,15 @@ TODO - How to create and activate python env
 1. To deactivate type `deactivate`
 
 
+TODO need to automatically setup debugpy virtual env with:
+```
+mkdir .virtualenvs
+cd .virtualenvs
+python -m venv debugpy
+debugpy/bin/python -m pip install debugpy
+```
+
+
 ## Neovim
 
 The most useful of the bunch, this includes my vimrc with a built-in version of the vim-plug plugin manager.

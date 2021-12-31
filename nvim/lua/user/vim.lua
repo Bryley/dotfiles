@@ -7,7 +7,7 @@ local opt = vim.opt
 -- Must have options
 opt.backup = false      -- Disables creating backup files
 opt.swapfile = false                        -- creates a swapfile
-opt.clipboard = "unnamedplus"           -- allows neovim to access the system clipboard
+--opt.clipboard = "unnamedplus"           -- allows neovim to access the system clipboard
 opt.mouse = "a"                             -- allow the mouse to be used in neovim
 
 opt.splitbelow = true                       -- force all horizontal splits to go below current window
