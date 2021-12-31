@@ -55,6 +55,7 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
     }
+    use "moll/vim-bbye"                     -- Creates better buffer deleting
 
     -- Essentials
     use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
@@ -65,7 +66,8 @@ return packer.startup(function(use)
 
     -- IDE like
     use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side
-    use "romgrk/barbar.nvim"                -- Makes vim buffers more like VSCode
+    --use "romgrk/barbar.nvim"                -- Makes vim buffers more like VSCode
+    use "akinsho/bufferline.nvim"           -- Adds buffer line to top bar
     use "nvim-telescope/telescope.nvim"     -- Fuzzy finder plugin
 
     -- LSP

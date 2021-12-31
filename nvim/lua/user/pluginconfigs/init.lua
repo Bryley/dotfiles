@@ -1,6 +1,6 @@
 
 require "user.pluginconfigs.nvim_tree"
-require "user.pluginconfigs.barbar"
+require "user.pluginconfigs.bufferline"
 require "user.pluginconfigs.cmp"
 require "user.pluginconfigs.treesitter"
 

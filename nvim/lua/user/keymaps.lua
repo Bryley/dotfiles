@@ -24,6 +24,11 @@ keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', opts)
 keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
 keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
 
+-- Buffers
+keymap('n', '<A-,>', '<cmd>bprev<CR>', opts)
+keymap('n', '<A-.>', '<cmd>bnext<CR>', opts)
+keymap('n', '<A-c>', '<cmd>Bdelete<CR>', opts)
+
 
 
 -- Insert --
