@@ -1,6 +1,6 @@
 VERSION=3.2a
 sudo apt-get -y remove tmux
-sudo apt-get -y install wget make tar libevent-dev libncurses-dev
+sudo apt-get -y install wget gcc make tar libevent-dev libncurses-dev
 wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
 tar xf tmux-${VERSION}.tar.gz
 rm -f tmux-${VERSION}.tar.gz

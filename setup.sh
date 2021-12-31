@@ -35,10 +35,16 @@ sudo add-apt-repository ppa:mmstick76/alacritty
 sudo apt-get update
 
 sudo apt install curl -y
+sudo apt install g++ -y         # This is for some nvim plugins to compile
 sudo apt install alacritty -y
 sudo apt install zsh -y
-sudo apt install python -y
 sudo apt install python3.9 -y
+sudo apt install python3-pip -y
+
+pip install loguru              # Install random python package to gen bin folder
+
+# Change default shell
+chsh -s /bin/zsh
 
 # Node version manager
 printf "\n%b\n" "\e[32mInstalling NVM, Node and NPM\e[0m"
@@ -46,17 +52,15 @@ sudo apt remove node -y
 sudo apt remove npm -y
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install node
-nvm install-latest-npm
-
-# Change default shell
-chsh -s /bin/zsh
+nvm install node # TODO for some reason this didn't work
 
 # tmux
 printf "\n%b\n" "\e[32mInstalling tmux latest version\e[0m"
 
 sudo apt remove tmux
 bash ./tmux_install.sh
+
+printf "\n%b\n" "\e[32mFinished Installing tmux\e[0m"
 
 # Install zsh-autocompletions (For latest Ubuntu distrobutions)
 # TODO possibly remove this:
@@ -87,6 +91,7 @@ printf "\n%b\n" "\e[32mInstalling latest version of neovim\e[0m"
 rm ./nvim.appimage
 curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod +x ./nvim.appimage
+mkdir $HOME/.local/bin
 ln -sf $(pwd)/nvim.appimage $HOME/.local/bin/nvim
 
 
