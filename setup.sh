@@ -27,25 +27,20 @@ ln -sf $(pwd)/zsh ~/.config/zsh
 
 printf "\n%b\n" "\e[32mFinished creating simlinks\e[0m"
 
-printf "\n%b\n" "\e[32mInstalling Nerd Fonts\e[0m"
-mkdir ~/.local/share/fonts
-curl -L -o ~/.local/share/fonts/HackBold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Bold/complete/Hack%20Bold%20Nerd%20Font%20Complete.ttf
-curl -L -o ~/.local/share/fonts/HackBoldItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/BoldItalic/complete/Hack%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
-curl -L -o ~/.local/share/fonts/HackItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Italic/complete/Hack%20Italic%20Nerd%20Font%20Complete.ttf
-curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
-fc-cache -f
-
 # Install packages
 
 printf "\n%b\n" "\e[32mInstalling Packages\e[0m"
 
-sudo apt install zsh
-sudo apt install python
-sudo apt install python3.9
+sudo apt install curl -y
+sudo apt install alacritty -y
+sudo apt install zsh -y
+sudo apt install python -y
+sudo apt install python3.9 -y
 
 # Node version manager
-sudo apt remove node
-sudo apt remove npm
+printf "\n%b\n" "\e[32mInstalling NVM, Node and NPM\e[0m"
+sudo apt remove node -y 
+sudo apt remove npm -y
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 nvm install node
@@ -68,6 +63,15 @@ sh ./tmux_install.sh
 #curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_19.10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
 #sudo apt update
 #sudo apt install zsh-autosuggestions
+
+printf "\n%b\n" "\e[32mInstalling Nerd Fonts\e[0m"
+mkdir ~/.local/share/fonts
+curl -L -o ~/.local/share/fonts/HackBold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Bold/complete/Hack%20Bold%20Nerd%20Font%20Complete.ttf
+curl -L -o ~/.local/share/fonts/HackBoldItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/BoldItalic/complete/Hack%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
+curl -L -o ~/.local/share/fonts/HackItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Italic/complete/Hack%20Italic%20Nerd%20Font%20Complete.ttf
+curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
+fc-cache -f
+
 
 printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
 sudo apt remove neovim
