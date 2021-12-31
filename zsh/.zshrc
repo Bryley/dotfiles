@@ -19,8 +19,8 @@ select-word-style bash
 
 # Include files
 source "$ZDOTDIR/zsh-functions"
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
 # Include the generated .profile if exists
-zsh_add_file "$HOME/.profile"
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-vim"
