@@ -50,6 +50,9 @@ keymap('n', '<leader>dc', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("
 -- Insert --
 keymap("i", "<C-H>", "<C-W>", opts)
 
+-- Command Mode --
+keymap("c", "<C-BS>", "<C-W>", opts)
+
 
 -- Visual --
 -- Stay in indent mode

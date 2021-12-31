@@ -64,6 +64,7 @@ return packer.startup(function(use)
     use "p00f/nvim-ts-rainbow"              -- Adds rainbow brackets
     use "nvim-treesitter/playground"        -- Shows AST for current code using treesitter
     use "folke/which-key.nvim"              -- When pressing leader gives hints for remembering
+    use "terrortylor/nvim-comment"          -- Commenting plugin
 
     -- IDE like
     use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side
@@ -71,6 +72,7 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope.nvim"     -- Fuzzy finder plugin
     use 'mfussenegger/nvim-dap'             -- Base debugger
     use 'rcarriga/nvim-dap-ui'              -- Handy UI for nvim-dap debugger
+    use 'goolord/alpha-nvim'                -- Cool looking start page
 
     -- LSP
     use 'neovim/nvim-lspconfig'             -- LSP setup

@@ -1,3 +1,4 @@
+-- TODO look into the plugin 'nvim-lsputils'
 
 require "user.vim"
 require "user.keymaps"

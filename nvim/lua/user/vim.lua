@@ -18,7 +18,7 @@ opt.relativenumber = true                   -- set relative numbered lines
 opt.wrap = false                            -- display lines as one long line
 
 opt.undofile = true                         -- Keeps undo history even on close
-opt.timeoutlen = 100                        -- Time to wait for a mapped sequence to complete (in milliseconds)
+opt.timeoutlen = 1000                       -- Time to wait for a mapped sequence to complete (in milliseconds)
 opt.updatetime = 300                        -- Vim should update more frequently
 opt.cursorline = true                       -- highlight the current line
 opt.writebackup = false                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
