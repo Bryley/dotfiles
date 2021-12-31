@@ -63,6 +63,7 @@ return packer.startup(function(use)
     use "psliwka/vim-smoothie"              -- Adds smooth scrolling
     use "p00f/nvim-ts-rainbow"              -- Adds rainbow brackets
     use "nvim-treesitter/playground"        -- Shows AST for current code using treesitter
+    use "folke/which-key.nvim"              -- When pressing leader gives hints for remembering
 
     -- IDE like
     use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side
