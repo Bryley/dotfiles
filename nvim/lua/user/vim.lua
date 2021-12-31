@@ -24,6 +24,7 @@ opt.writebackup = false                     -- if a file is being edited by anot
 opt.scrolloff = 5                           -- Keep 5 lines above and below when scrolling
 opt.sidescrolloff = 8                       -- Same as 'scrolloff' but for horisontal scrolling
 opt.lazyredraw = true                       -- Prevents vim from redrawing in times it doesn't need too.
+opt.showmode = true                         -- Adds the '-- INSERT --' at the bottom bar
 
 opt.colorcolumn = '80'                      -- 80 character limit on line
 

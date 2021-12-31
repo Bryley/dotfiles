@@ -17,6 +17,7 @@ vim.g.maplocalleader = " "
 keymap("n", "<F2>", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<F3>", ":noh<CR>", opts)
 keymap("n", "<F5>", ":source $MYVIMRC<CR>", opts)
+keymap("n", "<C-Q>", "<Nop>", opts)                 -- Stop from quitting
 
 -- Telescope
 keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', opts)

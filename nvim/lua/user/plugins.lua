@@ -88,9 +88,9 @@ return packer.startup(function(use)
     use "L3MON4D3/LuaSnip"                  -- Snippet engine
     use "rafamadriz/friendly-snippets"      -- A bunch of snippets to use
 
-    -- Colorschemes
+    -- Colorschemes and Styling plugins
     -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-    --use "lunarvim/darkplus.nvim"            -- Dark plus colorscheme
+    use 'nvim-lualine/lualine.nvim'         -- Adds better bottom bar
     use "martinsione/darkplus.nvim"         -- Darkplus vscode like colorscheme
 
 
