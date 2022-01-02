@@ -65,6 +65,8 @@ return packer.startup(function(use)
     use "nvim-treesitter/playground"        -- Shows AST for current code using treesitter
     use "folke/which-key.nvim"              -- When pressing leader gives hints for remembering
     use "terrortylor/nvim-comment"          -- Commenting plugin
+    use "iamcco/markdown-preview.nvim"      -- Plugin for previewing markdown
+    use "Bryley/docstr.nvim"                -- My custom docstring plugin
 
     -- IDE like
     use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side

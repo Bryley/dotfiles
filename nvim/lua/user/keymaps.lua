@@ -20,6 +20,8 @@ keymap("n", "<F3>", ":noh<CR>", opts)
 keymap("n", "<F5>", ":source $MYVIMRC<CR>", verbose)
 keymap("n", "<C-Q>", "<Nop>", opts)                 -- Stop from quitting
 
+keymap("n", "<leader>c", "<cmd>lua require'docstr'.docstr()<CR>", verbose)
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -33,13 +35,14 @@ keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
 keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
 
 -- Buffers
-keymap('n', '<A-,>', '<cmd>bprev<CR>', opts)
-keymap('n', '<A-.>', '<cmd>bnext<CR>', opts)
+keymap('n', '<A-h>', '<cmd>bprev<CR>', opts)
+keymap('n', '<A-l>', '<cmd>bnext<CR>', opts)
 keymap('n', '<A-c>', '<cmd>Bdelete!<CR>', opts)
 
 -- nvim-dap debugging
 keymap('n', '<leader>dd', '<cmd>lua require("dapui").toggle()<CR>', opts)
 keymap('n', '<leader>d<space>', '<cmd>lua require("dap").continue()<CR>', opts)
+keymap('n', '<leader>dt', '<cmd>lua require("dap").terminate()<CR>', opts)
 keymap('n', '<leader>dj', '<cmd>lua require("dap").step_over()<CR>', opts)
 keymap('n', '<leader>di', '<cmd>lua require("dap").step_into()<CR>', opts)
 keymap('n', '<leader>do', '<cmd>lua require("dap").step_out()<CR>', opts)

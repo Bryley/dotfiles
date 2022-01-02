@@ -17,6 +17,7 @@ local mappings = {
         name = "debug",
         d = {'<cmd>lua require("dapui").toggle()<CR>', 'Debug view'},
         space = {'<cmd>lua require("dap").continue()<CR>', 'Continue'},
+        t = {'<cmd>lua require("dap").terminate()<CR>', 'Terminate'},
         j = {'<cmd>lua require("dap").step_over()<CR>', 'Step Over'},
         i = {'<cmd>lua require("dap").step_into()<CR>', 'Step Into'},
         o = {'<cmd>lua require("dap").step_out()<CR>', 'Step Out'},
