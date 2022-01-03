@@ -75,6 +75,7 @@ return packer.startup(function(use)
     use 'mfussenegger/nvim-dap'             -- Base debugger
     use 'rcarriga/nvim-dap-ui'              -- Handy UI for nvim-dap debugger
     use 'goolord/alpha-nvim'                -- Cool looking start page
+    use "akinsho/toggleterm.nvim"           -- Better terminals inside nvim
 
     -- LSP
     use 'neovim/nvim-lspconfig'             -- LSP setup

@@ -38,6 +38,7 @@ sudo apt install curl -y
 sudo apt install g++ -y         # This is for some nvim plugins to compile
 sudo apt install alacritty -y
 sudo apt install zsh -y
+sudo apt install jq -y
 sudo apt install python3.9 -y
 sudo apt install python3-pip -y
 
