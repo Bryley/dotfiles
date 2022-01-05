@@ -70,8 +70,8 @@ local function lsp_keymaps(bufnr)
     map(bufnr, 'n', 'gi'	, '<cmd>lua vim.lsp.buf.implementation()<CR>',	opts)
     map(bufnr, 'n', 'K'	, '<cmd>lua vim.lsp.buf.hover()<CR>',			opts)
     map(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',	opts)
-    map(bufnr, 'n', '<C-p>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',opts)
-    map(bufnr, 'n', '<C-n>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',opts)
+    map(bufnr, 'n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev()<CR>',opts)
+    map(bufnr, 'n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>',opts)
 end
 
 M.on_attach = function(client, bufnr)
