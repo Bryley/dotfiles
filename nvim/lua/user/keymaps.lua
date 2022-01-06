@@ -28,6 +28,10 @@ keymap("n", "<C-Q>", "<Nop>", opts)                 -- Stop from quitting
 
 keymap("n", "<leader>c", "<cmd>lua require'docstr'.docstr()<CR>", verbose)
 
+-- Terminal --
+keymap("t", "<Esc>", "<C-\\><C-n>", opts)    -- Esc goes to normal mode in term
+
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
