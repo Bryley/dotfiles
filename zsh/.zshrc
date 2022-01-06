@@ -34,7 +34,7 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting" # Fish like syntax (Requires 
 # End of plugins
 
 
-. /etc/zsh_command_not_found # Adds command suggestions when a wrong command occurs
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # For the powerlevel10k theme
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.

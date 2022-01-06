@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "This script will install and setup all the simlinks and install any apt dependencies"
+echo "This script will install and setup all the simlinks and install any arch dependencies"
 echo "Note that this will remove some files and folders you have in ~/.config,"
 echo "If you want to be careful make a backup."
 echo ""
@@ -12,66 +12,17 @@ then
 	exit 0
 fi
 
+# Installing software
 
-# Add Simlinks
-ln -sf $(pwd)/zshenv ~/.zshenv
-ln -sf $(pwd)/alacritty.yml ~/.config/alacritty.yml
-rm -rf ~/.config/nvim
-#rm -rf ~/.config/fish
-rm -rf ~/.config/tmux
-rm -rf ~/.config/zsh
-ln -sf $(pwd)/nvim ~/.config/nvim
-#ln -sf $(pwd)/fish ~/.config/fish
-ln -sf $(pwd)/tmux ~/.config/tmux
-ln -sf $(pwd)/zsh ~/.config/zsh
+# Installing yay
+#git clone https://aur.archlinux.org/yay.git
+#cd yay
+#makepkg -si
 
-printf "\n%b\n" "\e[32mFinished creating simlinks\e[0m"
+# Installing other packages
+# TODO do nitrogen, compton, awesome, xorg, etc.
 
-# Install packages
-
-printf "\n%b\n" "\e[32mInstalling Packages\e[0m"
-
-sudo add-apt-repository ppa:mmstick76/alacritty
-sudo apt-get update
-
-sudo apt install curl -y
-sudo apt install g++ -y         # This is for some nvim plugins to compile
-sudo apt install alacritty -y
-sudo apt install zsh -y
-sudo apt install jq -y
-sudo apt install python3.9 -y
-sudo apt install python3-pip -y
-
-pip install loguru              # Install random python package to gen bin folder
-
-# Change default shell
-chsh -s /bin/zsh
-
-# Node version manager
-printf "\n%b\n" "\e[32mInstalling NVM, Node and NPM\e[0m"
-sudo apt remove node -y 
-sudo apt remove npm -y
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install node # TODO for some reason this didn't work
-
-# tmux
-printf "\n%b\n" "\e[32mInstalling tmux latest version\e[0m"
-
-sudo apt remove tmux
-bash ./tmux_install.sh
-
-printf "\n%b\n" "\e[32mFinished Installing tmux\e[0m"
-
-# Install zsh-autocompletions (For latest Ubuntu distrobutions)
-# TODO possibly remove this:
-#printf "\n%b\n" "\e[32mInstalling zsh-autocompletions\e[0m"
-#sudo add-apt-repository ppa:(Your ppa here) -y
-#echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_19.10/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
-#curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_19.10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
-#sudo apt update
-#sudo apt install zsh-autosuggestions
-
+# Install Nerd fonts
 printf "\n%b\n" "\e[32mInstalling Nerd Fonts\e[0m"
 mkdir ~/.local/share/fonts
 curl -L -o ~/.local/share/fonts/HackBold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Bold/complete/Hack%20Bold%20Nerd%20Font%20Complete.ttf
@@ -81,19 +32,50 @@ curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fo
 fc-cache -f
 
 
-printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
-sudo apt remove neovim
-sudo apt remove vim
+# Add Simlinks
+ln -sf $(pwd)/zshenv ~/.zshenv
+ln -sf $(pwd)/alacritty.yml ~/.config/alacritty.yml
+rm -rf ~/.config/nvim
+rm -rf ~/.config/tmux
+rm -rf ~/.config/zsh
+ln -sf $(pwd)/nvim ~/.config/nvim
+ln -sf $(pwd)/tmux ~/.config/tmux
+ln -sf $(pwd)/zsh ~/.config/zsh
 
-sudo apt install ripgrep # Needed for telescope plugin for neovim
+printf "\n%b\n" "\e[32mFinished creating simlinks\e[0m"
+
+# Install packages
+
+printf "\n%b\n" "\e[32mInstalling Packages\e[0m"
+
+# Change default shell
+# chsh -s /bin/zsh
+
+# Node version manager
+printf "\n%b\n" "\e[32mInstalling NVM, Node and NPM\e[0m"
+
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+#nvm install node # TODO for some reason this didn't work
+
+# tmux
+printf "\n%b\n" "\e[32mInstalling tmux latest version\e[0m"
+
+#bash ./tmux_install.sh
+
+printf "\n%b\n" "\e[32mFinished Installing tmux\e[0m"
+
+
+
+printf "\n%b\n" "\e[32mRemoving vim packages\e[0m"
+#sudo apt install ripgrep # Needed for telescope plugin for neovim
 
 # Install neovim 0.5
-printf "\n%b\n" "\e[32mInstalling latest version of neovim\e[0m"
-rm ./nvim.appimage
-curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-chmod +x ./nvim.appimage
-mkdir $HOME/.local/bin
-ln -sf $(pwd)/nvim.appimage $HOME/.local/bin/nvim
+#printf "\n%b\n" "\e[32mInstalling latest version of neovim\e[0m"
+#rm ./nvim.appimage
+#curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+#chmod +x ./nvim.appimage
+#mkdir $HOME/.local/bin
+#ln -sf $(pwd)/nvim.appimage $HOME/.local/bin/nvim
 
 
 printf "\n%b\n" "\e[32mSetting up neovim\e[0m"
