@@ -9,5 +9,6 @@ require "user.pluginconfigs.whichkey"
 require "user.pluginconfigs.alpha"
 require "user.pluginconfigs.comment"
 require "user.pluginconfigs.toggleterm"
+require "user.pluginconfigs.colorizer"
 
 require "user.pluginconfigs.lsp"

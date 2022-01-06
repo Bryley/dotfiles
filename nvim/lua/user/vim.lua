@@ -26,6 +26,7 @@ opt.scrolloff = 5                           -- Keep 5 lines above and below when
 opt.sidescrolloff = 8                       -- Same as 'scrolloff' but for horisontal scrolling
 opt.lazyredraw = true                       -- Prevents vim from redrawing in times it doesn't need too.
 opt.showmode = true                         -- Adds the '-- INSERT --' at the bottom bar
+opt.termguicolors = true                    -- set term gui colors (most terminals support this)
 
 opt.colorcolumn = '80'                      -- 80 character limit on line
 
@@ -49,4 +50,3 @@ opt.tabstop = 4                             -- Insert 4 spaces for a tab
 --opt.conceallevel = 0                        -- so that `` is visible in markdown files
 --opt.fileencoding = "utf-8"                  -- the encoding written to a file
 --opt.signcolumn = "yes"                      -- always show the sign column, otherwise it would shift the text each time
---opt.termguicolors = true                    -- set term gui colors (most terminals support this)

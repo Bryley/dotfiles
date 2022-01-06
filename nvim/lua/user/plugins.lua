@@ -67,6 +67,7 @@ return packer.startup(function(use)
     use "terrortylor/nvim-comment"          -- Commenting plugin
     use "iamcco/markdown-preview.nvim"      -- Plugin for previewing markdown
     use "Bryley/docstr.nvim"                -- My custom docstring plugin
+    use 'norcalli/nvim-colorizer.lua'       -- Color preview
 
     -- IDE like
     use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side
