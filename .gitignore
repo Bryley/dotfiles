@@ -7,6 +7,6 @@ nvim/pack/
 zsh/plugins/
 zsh/zsh-machine-custom
 
-fish/fish_variables
+yay/
 
 *.old
