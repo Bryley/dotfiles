@@ -39,11 +39,10 @@ sudo pacman --noconfirm -S ripgrep       # A better grep alternative used by neo
 
 
 # AUR programs
-sudo yay -S nvm brave
+yay -S nvm brave
 # TODO command not found package
 
-nvm install node
-
+# nvm install node # TODO not gonna work as zsh is not active
 
 # TODO set zsh as default shell with 'chsh -s <path-to-zsh>'
 
