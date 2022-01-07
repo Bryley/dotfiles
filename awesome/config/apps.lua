@@ -2,7 +2,8 @@
 local apps = {
     terminal = "alacritty",
     editor = os.getenv("EDITOR") or "neovim",
-    editor_cmd = "alacritty" .. " -e " .. "neovim"
 }
+
+apps.editor_cmd = apps.terminal .. " -e " .. apps.editor
 
 return apps
