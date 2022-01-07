@@ -3,6 +3,9 @@
 This is a collection of my dotfiles that I use on my Unix setup.
 Below is a list of all the programs.
 
+
+- Assumes drivers have already been installed, look into [Xorg](https://wiki.archlinux.org/title/Xorg) page.
+
 ## Setup
 
 To setup this repo simply clone this repo somewhere on your computer (I chose in my home dir) and follow these steps.

@@ -34,7 +34,9 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting" # Fish like syntax (Requires 
 # End of plugins
 
 
+# Sourcing extra files
 source /usr/share/doc/pkgfile/command-not-found.zsh
+[ -f "/usr/share/nvm/init-nvm.sh" ] && source "/usr/share/nvm/init-nvm.sh"
 
 # For the powerlevel10k theme
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
