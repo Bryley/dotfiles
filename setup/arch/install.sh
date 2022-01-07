@@ -19,23 +19,22 @@ fi
 sudo pacman -Syu --noconfirm && yay -Sua
 
 # GUI stuff
-sudo pacman --noconfirm -S      xorg        \ # Contains usuful packages for xorg display server
-                                picom       \ # A compositor for xorg (Useful for animations, opaque windows and more)
-                                awesome     \ # The lua based window manager
-                                alacritty   \ # Terminal emulator
-                                #rofi        \ # A better application search menu       # TODO add later
-                                xorg-xinit    # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
+sudo pacman --noconfirm -S xorg         # Contains usuful packages for xorg display server
+sudo pacman --noconfirm -S picom        # A compositor for xorg (Useful for animations, opaque windows and more)
+sudo pacman --noconfirm -S awesome      # The lua based window manager
+sudo pacman --noconfirm -S alacritty    # Terminal emulator
+sudo pacman --noconfirm -S rofi         # A better application search menu # TODO add later
+sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
 
 # TODO display manager for login screen
 
-
 # Essential programs
-sudo pacman --noconfirm -Su     wget        \ # A basic commandline tool for sending requests on the internet
-                                unzip       \ # Unzips files (This and wget required for LSP servers for neovim)
-                                tmux        \ # Terminal multiplexer
-                                zsh         \ # Z shell modern alternate to bash
-                                neovim      \ # The latest version of neovim text editor
-                                ripgrep       # A better grep alternative used by neovim plugin telescope
+sudo pacman --noconfirm -S wget         # A basic commandline tool for sending requests on the internet
+sudo pacman --noconfirm -S unzip        # Unzips files (This and wget required for LSP servers for neovim)
+sudo pacman --noconfirm -S tmux         # Terminal multiplexer
+sudo pacman --noconfirm -S zsh          # Z shell modern alternate to bash
+sudo pacman --noconfirm -S neovim       # The latest version of neovim text editor
+sudo pacman --noconfirm -S ripgrep       # A better grep alternative used by neovim plugin telescope
 
 
 
