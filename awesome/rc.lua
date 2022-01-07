@@ -22,9 +22,7 @@ require("config.errorhandling")
 -- Theme Set --
 beautiful.init("/home/bryley/.config/awesome/theme.lua")
 
-local apps = require("config.apps")
-
-modkey = "Mod4"
+local options = require("config.options")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -51,13 +49,13 @@ awful.layout.layouts = {
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "edit config", apps.editor_cmd .. " " .. awesome.conffile },
+   { "edit config", options.editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
 }
 
 local mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", apps.terminal }
+                                    { "open terminal", options.terminal }
                                   }
                         })
 
@@ -65,26 +63,26 @@ local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
-menubar.utils.terminal = apps.terminal -- Set the terminal for applications that require it
+menubar.utils.terminal = options.terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
-                    awful.button({ modkey }, 1, function(t)
+                    awful.button({ options.modkey }, 1, function(t)
                                               if client.focus then
                                                   client.focus:move_to_tag(t)
                                               end
                                           end),
                     awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, function(t)
+                    awful.button({ options.modkey }, 3, function(t)
                                               if client.focus then
                                                   client.focus:toggle_tag(t)
                                               end
