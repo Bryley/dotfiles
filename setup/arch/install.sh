@@ -44,7 +44,9 @@ yay -S nvm brave
 
 # nvm install node # TODO not gonna work as zsh is not active
 
-# TODO set zsh as default shell with 'chsh -s <path-to-zsh>'
+printf "\n%b\n" "\e[32m Changing default shell to zsh \e[0m"
+
+chsh -s /usr/bin/zsh
 
 # TODO install node version manager and node
 
