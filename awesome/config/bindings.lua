@@ -24,48 +24,117 @@ keys.globalkeys = gears.table.join(
     awful.key({ options.modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
-    awful.key({ options.modkey,           }, "j",
+    ---------------------------
+    -- Start my key bindings --
+    ---------------------------
+
+    -- Focusing windows
+    awful.key(
+        {options.modkey}, "h",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.bydirection("left")
         end,
-        {description = "focus next by index", group = "client"}
+        {description = "Focus to the left", group = "client"}
     ),
-    awful.key({ options.modkey,           }, "k",
+    awful.key(
+        {options.modkey}, "j",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.bydirection("down")
         end,
-        {description = "focus previous by index", group = "client"}
+        {description = "Focus downwards", group = "client"}
     ),
+    awful.key(
+        {options.modkey}, "k",
+        function ()
+            awful.client.focus.bydirection("up")
+        end,
+        {description = "Focus upwards", group = "client"}
+    ),
+    awful.key(
+        {options.modkey}, "l",
+        function ()
+            awful.client.focus.bydirection("right")
+        end,
+        {description = "Focus to the right", group = "client"}
+    ),
+
+    -- Moving windows
+    awful.key(
+        {options.modkey, "Shift"}, "h",
+        function ()
+            awful.client.swap.bydirection("left")
+        end,
+        {description = "Swap with the left", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift"}, "j",
+        function ()
+            awful.client.swap.bydirection("down")
+        end,
+        {description = "Swap downwards", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift"}, "k",
+        function ()
+            awful.client.swap.bydirection("up")
+        end,
+        {description = "Swap upwards", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift"}, "l",
+        function ()
+            awful.client.swap.bydirection("right")
+        end,
+        {description = "Swap with the right", group = "client"}
+    ),
+
+
+    ---------------------------
+    -- END of my keybindings --
+    ---------------------------
+
+    -- TODO old keybindings please remove
+    -- awful.key({ options.modkey,           }, "j",
+    --     function ()
+    --         awful.client.focus.byidx( 1)
+    --     end,
+    --     {description = "focus next by index", group = "client"}
+    -- ),
+    -- awful.key({ options.modkey,           }, "k",
+    --     function ()
+    --         awful.client.focus.byidx(-1)
+    --     end,
+    --     {description = "focus previous by index", group = "client"}
+    -- ),
     -- awful.key({ options.modkey,           }, "w", function () mymainmenu:show() end,
     --           {description = "show main menu", group = "awesome"}),
-
     -- Layout manipulation
-    awful.key({ options.modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
-              {description = "swap with next client by index", group = "client"}),
-    awful.key({ options.modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
-              {description = "swap with previous client by index", group = "client"}),
-    awful.key({ options.modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ options.modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the previous screen", group = "screen"}),
-    awful.key({ options.modkey,           }, "u", awful.client.urgent.jumpto,
-              {description = "jump to urgent client", group = "client"}),
-    awful.key({ options.modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
+    -- awful.key({ options.modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+    --           {description = "swap with next client by index", group = "client"}),
+    -- awful.key({ options.modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+    --           {description = "swap with previous client by index", group = "client"}),
+    -- awful.key({ options.modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    --           {description = "focus the next screen", group = "screen"}),
+    -- awful.key({ options.modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    --           {description = "focus the previous screen", group = "screen"}),
+    -- awful.key({ options.modkey,           }, "u", awful.client.urgent.jumpto,
+    --           {description = "jump to urgent client", group = "client"}),
+    -- awful.key({ options.modkey,           }, "Tab",
+    --     function ()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --         end
+    --     end,
+    --     {description = "go back", group = "client"}),
 
     -- Standard program
     awful.key({ options.modkey,           }, "Return", function () awful.spawn(options.terminal) end,
-              {description = "open a terminal", group = "launcher"}),
+              {description = "Open a terminal", group = "launcher"}),
     awful.key({ options.modkey, "Control" }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
+              {description = "Reload awesome", group = "awesome"}),
     awful.key({ options.modkey, "Shift"   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+              {description = "Quit awesome", group = "awesome"}),
 
     awful.key({ options.modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
