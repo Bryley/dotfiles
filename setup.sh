@@ -21,4 +21,4 @@ bash setup/$DISTRO/symlinks.sh
 # Installing software
 
 printf "\n%b\n" "\e[32m All done you might want to reboot your computer for some changes to take place \e[0m"
-printf "\n%b\n" "\e[32m Note if you are running on virtualbox please execute the script in 'scripts/vbox.sh' before rebooting \e[0m"
+printf "\n%b\n" "\e[32m Note if you are running on virtualbox please execute the script in 'setup/arch/vbox.sh' before rebooting \e[0m"

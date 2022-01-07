@@ -4,7 +4,7 @@
 
 # TODO if statement
 
-sudo pacman -S  virtual-box-utils       # Guest additions for vbox
+sudo pacman -S virtualbox-guest-utils       # Guest additions for vbox
 
 # Enable vbox service
 sudo systemctl enable vboxservice.service
