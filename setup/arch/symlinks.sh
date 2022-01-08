@@ -9,9 +9,11 @@ rm -rf ~/.config/nvim
 rm -rf ~/.config/tmux
 rm -rf ~/.config/zsh
 rm -rf ~/.config/awesome
+rm -rf ~/.config/rofi
 
 ln -sf $(pwd)/nvim ~/.config/nvim
 ln -sf $(pwd)/tmux ~/.config/tmux
 ln -sf $(pwd)/zsh ~/.config/zsh
 ln -sf $(pwd)/awesome ~/.config/awesome
+ln -sf $(pwd)/rofi ~/.config/rofi
 

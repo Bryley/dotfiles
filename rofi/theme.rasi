@@ -1,0 +1,41 @@
+// TODO expand this one day
+
+window {
+    padding: 30;
+    border: 0;
+    border-radius: 10;
+    border-color: white;
+    background-color: #3A3B3B;
+}
+
+/* Disable prompt */
+prompt, textbox-prompt-colon {
+    enabled: false;
+}
+
+entry {
+    text-color: #FAFFFD;
+}
+
+
+element {
+    padding: 10;
+    border-radius: 10;
+    margin: 3;
+}
+element-icon {
+    margin-right: 10;
+}
+
+element normal.normal,
+element normal.active,
+element alternate.normal,
+element alternate.active {
+    text-color: #ADAEAE;
+    background-color: #ADAEAE00;
+}
+element selected.normal {
+    text-color: #3A3B3B;
+    background-color: #ADAEAE;
+}
+

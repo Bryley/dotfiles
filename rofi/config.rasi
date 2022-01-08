@@ -1,0 +1,12 @@
+configuration {
+    modi: "combi";
+    combi-modi: [window,drun,run];
+    font: "RobotoMono Nerd Font 15";
+    show-icons: true;
+    icon-theme: "Papirus";
+    terminal: "alacritty";
+    run-command: "{cmd}";
+    run-shell-command: "{terminal} -e {cmd}";
+}
+
+@import "theme.rasi"
