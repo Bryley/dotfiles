@@ -17,16 +17,24 @@ root.buttons(gears.table.join(
 keys.globalkeys = gears.table.join(
     awful.key({ options.modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    -- awful.key({ options.modkey,           }, "Left",   awful.tag.viewprev,
-    --           {description = "view previous", group = "tag"}),
-    -- awful.key({ options.modkey,           }, "Right",  awful.tag.viewnext,
-    --           {description = "view next", group = "tag"}),
     awful.key({ options.modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
     ---------------------------
     -- Start my key bindings --
     ---------------------------
+
+    -- Tags
+    awful.key(
+        {options.modkey, "Control"}, "h",
+        awful.tag.viewprev,
+        {description = "Select previous tag", group = "tag"}
+    ),
+    awful.key(
+        {options.modkey, "Control"}, "l",
+        awful.tag.viewnext,
+        {description = "Select next tag", group = "tag"}
+    ),
 
     -- Focusing windows
     awful.key(
@@ -175,47 +183,104 @@ keys.globalkeys = gears.table.join(
 )
 
 keys.clientkeys = gears.table.join(
-    awful.key({ options.modkey,           }, "f",
+    -- MY KEYS --
+
+    -- Resizing
+    awful.key(
+        {options.modkey}, "Up",
         function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
+            if c.floating then
+                c:relative_move(0, 0, 0, -20)
+            else
+                awful.client.incwfact(0.025)
+            end
         end,
-        {description = "toggle fullscreen", group = "client"}),
-    awful.key({ options.modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
-              {description = "close", group = "client"}),
+        {description = "Resize window vertically", group = "client"}
+    ),
+    awful.key(
+        {options.modkey}, "Down",
+        function (c)
+            if c.floating then
+                c:relative_move(0, 0, 0, 20)
+            else
+                awful.client.incwfact(-0.025)
+            end
+        end,
+        {description = "Resize window vertically", group = "client"}
+    ),
+    awful.key(
+        {options.modkey}, "Left",
+        function (c)
+            if c.floating then
+                c:relative_move(0, 0, -20, 0)
+            else
+                awful.tag.incmwfact(-0.025)
+            end
+        end,
+        {description = "Resize window horizontally", group = "client"}
+    ),
+    awful.key(
+        {options.modkey}, "Right",
+        function (c)
+            if c.floating then
+                c:relative_move(0, 0, 20, 0)
+            else
+                awful.tag.incmwfact(0.025)
+            end
+        end,
+        {description = "Resize window horizontally", group = "client"}
+    ),
+    -- End of resizing
+
+    awful.key(
+        {options.modkey}, "q",
+        function (c)
+            c:kill()
+        end,
+        {description = "Quit application", group = "client"}
+    ),
+
+    -- END OF MY KEYS --
+
+    -- awful.key({ options.modkey,           }, "f",
+    --     function (c)
+    --         c.fullscreen = not c.fullscreen
+    --         c:raise()
+    --     end,
+    --     {description = "toggle fullscreen", group = "client"}),
     awful.key({ options.modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
-    awful.key({ options.modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-              {description = "move to master", group = "client"}),
-    awful.key({ options.modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
-    awful.key({ options.modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-              {description = "toggle keep on top", group = "client"}),
-    awful.key({ options.modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
+    -- awful.key({ options.modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+    --           {description = "move to master", group = "client"}),
+    -- awful.key({ options.modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    --           {description = "move to screen", group = "client"}),
+    -- awful.key({ options.modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+    --           {description = "toggle keep on top", group = "client"}),
+    -- awful.key({ options.modkey,           }, "n",
+    --     function (c)
+    --         -- The client currently has the input focus, so it cannot be
+    --         -- minimized, since minimized clients can't have the focus.
+    --         c.minimized = true
+    --     end ,
+    --     {description = "minimize", group = "client"}),
     awful.key({ options.modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "(un)maximize", group = "client"}),
-    awful.key({ options.modkey, "Control" }, "m",
-        function (c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end ,
-        {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ options.modkey, "Shift"   }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize", group = "client"})
+    -- awful.key({ options.modkey, "Control" }, "m",
+    --     function (c)
+    --         c.maximized_vertical = not c.maximized_vertical
+    --         c:raise()
+    --     end ,
+    --     {description = "(un)maximize vertically", group = "client"}),
+    -- awful.key({ options.modkey, "Shift"   }, "m",
+    --     function (c)
+    --         c.maximized_horizontal = not c.maximized_horizontal
+    --         c:raise()
+    --     end ,
+    --     {description = "(un)maximize horizontally", group = "client"})
 )
 
 -- Bind all key numbers to tags.

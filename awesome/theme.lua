@@ -12,10 +12,10 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 -- Fonts --
-theme.font          = "sans 8"
--- theme.font          = "Roboto Medium 9"
--- theme.titlefont          = "Roboto Bold 9"
--- theme.fontname          = "Roboto Medium 9"
+-- theme.font          = "sans 8"
+theme.font          = "RobotoMono Regular 11"
+theme.titlefont     = "RobotoMono Bold 11"
+theme.fontname      = "RobotoMono Regular 11"
 
 -- Colours --
 theme.bg_normal     = "#1C1E26"

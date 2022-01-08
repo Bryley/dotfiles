@@ -16,10 +16,10 @@ options.editor_cmd = options.terminal .. " -e " .. options.editor
 
 -- Table of layouts
 awful.layout.layouts = {
+    awful.layout.suit.tile,
+    awful.layout.suit.floating,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.floating,
-    awful.layout.suit.tile,
     awful.layout.suit.fair,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
