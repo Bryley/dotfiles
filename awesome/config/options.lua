@@ -6,7 +6,7 @@ local awful = require("awful")
 
 local options = {
     terminal = "alacritty",
-    browser = "firefox", -- TODO change to brave at a later time
+    browser = "brave",
     editor = os.getenv("EDITOR") or "neovim",
     search = "rofi -show",
     modkey = "Mod4" -- The windows key
