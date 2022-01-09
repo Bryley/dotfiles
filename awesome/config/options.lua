@@ -7,6 +7,7 @@ local awful = require("awful")
 local options = {
     terminal = "alacritty",
     browser = "brave",
+    lock_script = "lock",
     editor = os.getenv("EDITOR") or "neovim",
     search = "rofi -show",
     modkey = "Mod4" -- The windows key

@@ -5,6 +5,7 @@ Below is a list of all the programs.
 
 
 - Assumes drivers have already been installed, look into [Xorg](https://wiki.archlinux.org/title/Xorg) page.
+- Run `~/.config/awesome/wallpapers/generate_blurry.sh` whenever the wallpaper changes
 
 ## Setup
 

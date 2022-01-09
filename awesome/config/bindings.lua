@@ -46,12 +46,46 @@ root.buttons(gears.table.join(
 keys.globalkeys = gears.table.join(
     awful.key({ options.modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ options.modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    -- awful.key({ options.modkey,           }, "Escape", awful.tag.history.restore,
+    --           {description = "go back", group = "tag"}),
 
     ---------------------------
     -- Start my key bindings --
     ---------------------------
+
+    -- Volume control -- TODO not working in vm, try another day
+    awful.key(
+        { }, "XF86AudioRaiseVolume",
+        function ()
+            naughty.notify({text = "Okay"})
+            awful.spawn('sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"', false)
+        end,
+        {description = "Raise Volume", group = "awesome"}
+    ),
+    awful.key(
+        { }, "XF86AudioLowerVolume",
+        function ()
+            awful.spawn('sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"', false)
+        end,
+        {description = "Lower Volume", group = "awesome"}
+    ),
+    awful.key(
+        { }, "XF86AudioMute",
+        function ()
+            awful.spawn('pactl set-sink-mute 0 toggle', false)
+        end,
+        {description = "Mute/Unmute Volume", group = "awesome"}
+    ),
+
+
+    awful.key(
+        {options.modkey}, "Escape",
+        function ()
+            -- naughty.notify({text = options.lock_script})
+            awful.spawn.with_shell(options.lock_script)
+        end,
+        {description = "Locks computer", group = "awesome"}
+    ),
 
     -- Tags
     awful.key(

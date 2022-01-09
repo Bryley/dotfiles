@@ -34,12 +34,13 @@ sudo pacman --noconfirm -S unzip        # Unzips files (This and wget required f
 sudo pacman --noconfirm -S tmux         # Terminal multiplexer
 sudo pacman --noconfirm -S zsh          # Z shell modern alternate to bash
 sudo pacman --noconfirm -S neovim       # The latest version of neovim text editor
-sudo pacman --noconfirm -S ripgrep       # A better grep alternative used by neovim plugin telescope
+sudo pacman --noconfirm -S ripgrep      # A better grep alternative used by neovim plugin telescope
+sudo pacman --noconfirm -S imagemagick  # An image manipulation software that can be used to blur images
 
 
 
 # AUR programs
-yay -S nvm brave nerd-fonts-roboto-mono
+yay -S nvm brave nerd-fonts-roboto-mono i3lock-color
 # TODO command not found package
 
 # nvm install node # TODO not gonna work as zsh is not active
@@ -64,5 +65,8 @@ curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fo
 # curl -L -o ~/.local/share/fonts/RobotoItalic.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/RobotoMono/Italic/complete/Roboto%20Mono%20Italic%20Nerd%20Font%20Complete.ttf
 # curl -L -o ~/.local/share/fonts/RobotoRegular.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/RobotoMono/Regular/complete/Roboto%20Mono%20Nerd%20Font%20Complete.ttf
 fc-cache -f
+
+# Generate blurry wallpaper
+bash $HOME/.config/awesome/wallpapers/generate_blurry.sh
 
 printf "\n%b\n" "\e[32m Finished installing software \e[0m"
