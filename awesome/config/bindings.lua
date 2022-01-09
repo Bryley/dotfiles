@@ -2,9 +2,38 @@ local awful = require("awful")
 local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
+local naughty = require("naughty")
+
 local options = require("config.options")
 
 local keys = {}
+
+-- TODO this is a debug function so please remove
+-- Convert a lua table into a lua syntactically correct string
+function table_to_string(tbl)
+    local result = "{"
+    for k, v in pairs(tbl) do
+        -- Check the key type (ignore any numerical keys - assume its an array)
+        if type(k) == "string" then
+            result = result.."[\""..k.."\"]".."="
+        end
+
+        -- Check the value type
+        if type(v) == "table" then
+            result = result..table_to_string(v)
+        elseif type(v) == "boolean" then
+            result = result..tostring(v)
+        else
+            result = result.."\""..v.."\""
+        end
+        result = result..","
+    end
+    -- Remove leading commas from the result
+    if result ~= "" then
+        result = result:sub(1, result:len()-1)
+    end
+    return result.."}"
+end
 
 -- Mouse Bindings --
 root.buttons(gears.table.join(
@@ -129,34 +158,24 @@ keys.globalkeys = gears.table.join(
     awful.key({ options.modkey, "Shift"   }, "q", awesome.quit,
               {description = "Quit awesome", group = "awesome"}),
 
-    -- awful.key({ options.modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-    --           {description = "increase master width factor", group = "layout"}),
-    -- awful.key({ options.modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-    --           {description = "decrease master width factor", group = "layout"}),
-    -- awful.key({ options.modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
-    --           {description = "increase the number of master clients", group = "layout"}),
-    -- awful.key({ options.modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-    --           {description = "decrease the number of master clients", group = "layout"}),
-    -- awful.key({ options.modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-    --           {description = "increase the number of columns", group = "layout"}),
-    -- awful.key({ options.modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-    --           {description = "decrease the number of columns", group = "layout"}),
+
+    -- TODO look into this
     awful.key({ options.modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
     awful.key({ options.modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
-    awful.key({ options.modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                    c:emit_signal(
-                        "request::activate", "key.unminimize", {raise = true}
-                    )
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
+    -- awful.key({ options.modkey, "Control" }, "n",
+    --           function ()
+    --               local c = awful.client.restore()
+    --               -- Focus restored client
+    --               if c then
+    --                 c:emit_signal(
+    --                     "request::activate", "key.unminimize", {raise = true}
+    --                 )
+    --               end
+    --           end,
+    --           {description = "restore minimized", group = "client"}),
 
     -- Prompt
     awful.key(
@@ -177,9 +196,6 @@ keys.globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"})
-    -- Menubar
-    -- awful.key({ options.modkey }, "p", function() menubar.show() end,
-    --           {description = "show the menubar", group = "launcher"})
 )
 
 keys.clientkeys = gears.table.join(
@@ -232,6 +248,35 @@ keys.clientkeys = gears.table.join(
     ),
     -- End of resizing
 
+    -- Move client to next / prev tag
+    awful.key(
+        {options.modkey, "Shift", "Control"}, "h",
+        function (c)
+            local current_tag = c.first_tag or nil
+            if current_tag == nil then
+                return
+            end
+            local tag = c.screen.tags[(current_tag.index - 2) % 9 + 1]
+            awful.client.movetotag(tag)
+            awful.tag.viewprev()
+        end,
+        {description = "Move client to previous tag", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift", "Control"}, "l",
+        function (c)
+            local current_tag = c.first_tag or nil
+            if current_tag == nil then
+                return
+            end
+            local tag = c.screen.tags[current_tag.index % 9 + 1]
+            awful.client.movetotag(tag)
+            awful.tag.viewnext()
+        end,
+        {description = "Move client to next tag", group = "client"}
+    ),
+
+
     awful.key(
         {options.modkey}, "q",
         function (c)
@@ -256,13 +301,6 @@ keys.clientkeys = gears.table.join(
     --           {description = "move to screen", group = "client"}),
     -- awful.key({ options.modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
     --           {description = "toggle keep on top", group = "client"}),
-    -- awful.key({ options.modkey,           }, "n",
-    --     function (c)
-    --         -- The client currently has the input focus, so it cannot be
-    --         -- minimized, since minimized clients can't have the focus.
-    --         c.minimized = true
-    --     end ,
-    --     {description = "minimize", group = "client"}),
     awful.key({ options.modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized

@@ -2,16 +2,25 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 
-local options = require("config.options")
-
 local PADDING = 10
 
 
 -- Widgets
+local rofi_btn = require("widgets.topbar.search")
 local taglist = require("widgets.topbar.taglist")
 local date_display = require("widgets.topbar.date")
 local time_display = require("widgets.topbar.time")
 local layout_display = require("widgets.topbar.layoutbox")
+
+
+local margin = function (widget)
+    return {
+        layout = wibox.container.margin,
+        left = 5,
+        right = 5,
+        widget
+    }
+end
 
 
 awful.screen.connect_for_each_screen(function(s)
@@ -39,14 +48,15 @@ awful.screen.connect_for_each_screen(function(s)
                 layout = wibox.layout.align.horizontal,
                 { -- Left widgets
                     layout = wibox.layout.fixed.horizontal,
-                    taglist.init(s),
+                    margin(rofi_btn),
+                    margin(taglist.init(s)),
                 },
                 nil, -- Middle
                 { -- Right widgets
                     layout = wibox.layout.fixed.horizontal,
                     wibox.widget.systray(),
-                    date_display,
-                    layout_display.init(s)
+                    margin(date_display),
+                    margin(layout_display.init(s))
                 }
             }
         },

@@ -13,9 +13,9 @@ local theme = {}
 
 -- Fonts --
 -- theme.font          = "sans 8"
-theme.font          = "RobotoMono Regular 11"
-theme.titlefont     = "RobotoMono Bold 11"
-theme.fontname      = "RobotoMono Regular 11"
+theme.font          = "RobotoMono Nerd Font Mono Regular 11"
+theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"
+theme.fontname      = "RobotoMono Nerd Font Mono Regular 11"
 
 -- Colours --
 theme.bg_normal     = "#1C1E26"

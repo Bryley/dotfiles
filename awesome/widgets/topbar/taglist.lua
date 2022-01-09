@@ -3,6 +3,7 @@
 
 local gears  = require("gears")
 local awful = require("awful")
+local wibox = require("wibox")
 
 local options = require("config.options")
 
@@ -44,11 +45,33 @@ local taglist_buttons = gears.table.join(
     )
 )
 
+
+local template = {
+    layout = wibox.container.background,
+    id = 'background_role',
+    forced_width = 25,
+    forced_height = 25,
+    -- TODO this shape is not working
+    shape = function (cr, w, h)
+        return gears.shape.rounded_rect(cr, w, h, 3)
+    end,
+    {
+        layout = wibox.container.margin,
+        margins = 2,
+        {
+            layout = wibox.widget.textbox,
+            align = "center",
+            id = 'text_role'
+        }
+    }
+}
+
 M.init = function(s)
     return awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        widget_template = template
     }
 end
 

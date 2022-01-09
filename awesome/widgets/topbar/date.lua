@@ -1,23 +1,29 @@
 
 -- Basic date display widget
 
+local btn = require("widgets.comps.btn")
+
 local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
 
 local naughty = require("naughty")
 
-local btns = gears.table.join(
-    awful.button({}, 1,
-        function ()
-            naughty.notify({text="Oh I see"})
-        end
-    )
-)
+local click = function (_)
+    naughty.notify({text="TODO show calendar"})
+    -- month_calendar.toggle() -- TODO fix
+end
 
-return wibox.widget({
+local widget = {
     format = "%a %b %-d",
     align = "center",
-    buttons = btns,
     widget = wibox.widget.textclock,
-})
+}
+
+
+local btn_widget = btn(widget, click)
+
+-- local month_calendar = awful.widget.calendar_popup.month()
+-- month_calendar:attach( btn_widget, "tr" )
+
+return btn_widget
