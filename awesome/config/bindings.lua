@@ -8,33 +8,6 @@ local options = require("config.options")
 
 local keys = {}
 
--- TODO this is a debug function so please remove
--- Convert a lua table into a lua syntactically correct string
-function table_to_string(tbl)
-    local result = "{"
-    for k, v in pairs(tbl) do
-        -- Check the key type (ignore any numerical keys - assume its an array)
-        if type(k) == "string" then
-            result = result.."[\""..k.."\"]".."="
-        end
-
-        -- Check the value type
-        if type(v) == "table" then
-            result = result..table_to_string(v)
-        elseif type(v) == "boolean" then
-            result = result..tostring(v)
-        else
-            result = result.."\""..v.."\""
-        end
-        result = result..","
-    end
-    -- Remove leading commas from the result
-    if result ~= "" then
-        result = result:sub(1, result:len()-1)
-    end
-    return result.."}"
-end
-
 -- Mouse Bindings --
 root.buttons(gears.table.join(
     -- awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -129,45 +102,6 @@ keys.globalkeys = gears.table.join(
         {description = "Focus to the right", group = "client"}
     ),
 
-    -- Moving windows
-    awful.key(
-        {options.modkey, "Shift"}, "h",
-        function ()
-            awful.client.swap.bydirection("left")
-        end,
-        {description = "Swap with the left", group = "client"}
-    ),
-    awful.key(
-        {options.modkey, "Shift"}, "j",
-        function ()
-            awful.client.swap.bydirection("down")
-        end,
-        {description = "Swap downwards", group = "client"}
-    ),
-    awful.key(
-        {options.modkey, "Shift"}, "k",
-        function ()
-            awful.client.swap.bydirection("up")
-        end,
-        {description = "Swap upwards", group = "client"}
-    ),
-    awful.key(
-        {options.modkey, "Shift"}, "l",
-        function ()
-            awful.client.swap.bydirection("right")
-        end,
-        {description = "Swap with the right", group = "client"}
-    ),
-
-    -- Resizing windows TODO not working
-    -- awful.key(
-    --     {options.modkey}, "Right",
-    --     function ()
-    --         awful.client.incwfact(0.05)
-    --     end,
-    --     {description = "Resize window vertically", group = "client"}
-    -- ),
-
     ---------------------------
     -- END of my keybindings --
     ---------------------------
@@ -192,30 +126,16 @@ keys.globalkeys = gears.table.join(
     awful.key({ options.modkey, "Shift"   }, "q", awesome.quit,
               {description = "Quit awesome", group = "awesome"}),
 
-
     -- TODO look into this
     awful.key({ options.modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
     awful.key({ options.modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
-    -- awful.key({ options.modkey, "Control" }, "n",
-    --           function ()
-    --               local c = awful.client.restore()
-    --               -- Focus restored client
-    --               if c then
-    --                 c:emit_signal(
-    --                     "request::activate", "key.unminimize", {raise = true}
-    --                 )
-    --               end
-    --           end,
-    --           {description = "restore minimized", group = "client"}),
-
     -- Prompt
     awful.key(
         {options.modkey}, "r",
         function ()
-            -- awful.screen.focused().mypromptbox:run()
             awful.spawn(options.search)
         end,
         {description = "Run rofi app menu", group = "launcher"}),
@@ -234,6 +154,52 @@ keys.globalkeys = gears.table.join(
 
 keys.clientkeys = gears.table.join(
     -- MY KEYS --
+
+    -- Moving windows
+    awful.key(
+        {options.modkey, "Shift"}, "h",
+        function (c)
+            if c.floating then
+                c:relative_move(-20, 0, 0, 0)
+            else
+                awful.client.swap.bydirection("left")
+            end
+        end,
+        {description = "Swap with the left", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift"}, "j",
+        function (c)
+            if c.floating then
+                c:relative_move(0, 20, 0, 0)
+            else
+                awful.client.swap.bydirection("down")
+            end
+        end,
+        {description = "Swap downwards", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift"}, "k",
+        function (c)
+            if c.floating then
+                c:relative_move(0, -20, 0, 0)
+            else
+                awful.client.swap.bydirection("up")
+            end
+        end,
+        {description = "Swap upwards", group = "client"}
+    ),
+    awful.key(
+        {options.modkey, "Shift"}, "l",
+        function (c)
+            if c.floating then
+                c:relative_move(20, 0, 0, 0)
+            else
+                awful.client.swap.bydirection("right")
+            end
+        end,
+        {description = "Swap with the right", group = "client"}
+    ),
 
     -- Resizing
     awful.key(

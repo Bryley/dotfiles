@@ -14,7 +14,6 @@ local config_home = gfs.get_configuration_dir()
 local theme = {}
 
 -- Fonts --
--- theme.font          = "sans 8"
 theme.font          = "RobotoMono Nerd Font Mono Regular 11"
 theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"
 theme.fontname      = "RobotoMono Nerd Font Mono Regular 11"
@@ -122,8 +121,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
--- theme.wallpaper = "/home/bryley/.config/awesome/background.png"
-theme.wallpaper = config_home .. "awesome/wallpapers/wallpaper.png"
+theme.wallpaper = config_home .. "wallpapers/wallpaper.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"

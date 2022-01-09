@@ -9,6 +9,28 @@ local options = require("config.options")
 
 local M = {}
 
+
+-- TODO play around with this
+-- M.init = function (screen)
+-- 
+--     -- screen.tags[1].name
+--     local tag = screen.tags[1]
+-- 
+--     return {
+--         layout = wibox.layout.fixed.horizontal,
+--         {
+--             layout = wibox.widget.textbox,
+--             text = tag.name .. " " .. tostring(tag.selected)
+--         },
+--         {
+--             layout = wibox.widget.textbox,
+--             text = screen.tags[1].name
+--         },
+--     }
+-- end
+-- 
+-- return M
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1,
@@ -53,7 +75,7 @@ local template = {
     forced_height = 25,
     -- TODO this shape is not working
     shape = function (cr, w, h)
-        return gears.shape.rounded_rect(cr, w, h, 3)
+        return gears.shape.rounded_rect(cr, w, h, 15)
     end,
     {
         layout = wibox.container.margin,
