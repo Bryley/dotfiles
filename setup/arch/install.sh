@@ -20,10 +20,11 @@ sudo pacman -Syu --noconfirm && yay -Sua
 
 # GUI stuff
 sudo pacman --noconfirm -S xorg         # Contains usuful packages for xorg display server
+sudo pacman --noconfirm -S xsel         # Clipboard tool to enable + register in neovim
 sudo pacman --noconfirm -S picom        # A compositor for xorg (Useful for animations, opaque windows and more)
 sudo pacman --noconfirm -S awesome      # The lua based window manager
 sudo pacman --noconfirm -S alacritty    # Terminal emulator
-sudo pacman --noconfirm -S rofi         # A better application search menu # TODO add later
+sudo pacman --noconfirm -S rofi         # A better application search menu
 sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
 
 # TODO display manager for login screen
@@ -36,11 +37,14 @@ sudo pacman --noconfirm -S zsh          # Z shell modern alternate to bash
 sudo pacman --noconfirm -S neovim       # The latest version of neovim text editor
 sudo pacman --noconfirm -S ripgrep      # A better grep alternative used by neovim plugin telescope
 sudo pacman --noconfirm -S imagemagick  # An image manipulation software that can be used to blur images
+sudo pacman --noconfirm -S networkmanager # An easy to use network manager tool (use `nmtui` command)
 
 
+# Network Manager start
+sudo systemctl enable NetworkManager.service
 
 # AUR programs
-yay -S nvm brave nerd-fonts-roboto-mono i3lock-color
+yay -S nvm nerd-fonts-roboto-mono i3lock-color
 # TODO command not found package
 
 # nvm install node # TODO not gonna work as zsh is not active
