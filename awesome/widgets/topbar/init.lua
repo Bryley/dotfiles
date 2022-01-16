@@ -10,6 +10,7 @@ local rofi_btn = require("widgets.topbar.search")
 local taglist = require("widgets.topbar.taglist")
 local date_display = require("widgets.topbar.date")
 local time_display = require("widgets.topbar.time")
+local volume = require("widgets.topbar.volume")
 local layout_display = require("widgets.topbar.layoutbox")
 
 
@@ -55,6 +56,7 @@ awful.screen.connect_for_each_screen(function(s)
                 { -- Right widgets
                     layout = wibox.layout.fixed.horizontal,
                     wibox.widget.systray(),
+                    -- margin(volume),
                     margin(date_display),
                     margin(layout_display.init(s))
                 }

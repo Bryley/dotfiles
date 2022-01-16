@@ -6,6 +6,7 @@ nvim/pack/
 
 zsh/plugins/
 zsh/zsh-machine-custom
+zsh/.zcompdump
 
 yay/
 
