@@ -38,6 +38,7 @@ sudo pacman --noconfirm -S neovim       # The latest version of neovim text edit
 sudo pacman --noconfirm -S ripgrep      # A better grep alternative used by neovim plugin telescope
 sudo pacman --noconfirm -S imagemagick  # An image manipulation software that can be used to blur images
 sudo pacman --noconfirm -S networkmanager # An easy to use network manager tool (use `nmtui` command)
+sudo pacman --noconfirm -S ncdu         # NCurses Disk Usage. A terminal UI for analysing disk usage
 
 
 # Network Manager start
