@@ -39,6 +39,7 @@ sudo pacman --noconfirm -S ripgrep      # A better grep alternative used by neov
 sudo pacman --noconfirm -S imagemagick  # An image manipulation software that can be used to blur images
 sudo pacman --noconfirm -S networkmanager # An easy to use network manager tool (use `nmtui` command)
 sudo pacman --noconfirm -S ncdu         # NCurses Disk Usage. A terminal UI for analysing disk usage
+sudo pacman --noconfirm -S exa          # Better alternative to ls command
 
 
 # Network Manager start
