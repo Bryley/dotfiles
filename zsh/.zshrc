@@ -42,3 +42,12 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
+# The following lines were added by compinstall
+
+# zstyle ':completion:*' completer _complete _ignored
+# zstyle :compinstall filename '/home/bryley/.config/zsh/.zshrc'
+# 
+# autoload -Uz compinit
+# compinit
+
+# End of lines added by compinstall
