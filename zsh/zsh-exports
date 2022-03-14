@@ -1,4 +1,5 @@
 
+export DOT_DIR="~/dotfiles"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export CLICOLOR=1                   # Adds colored output
