@@ -10,7 +10,7 @@ BG=#262626
 
 PRI=#5FAFFF
 
-set-option -s status-interval 3
+set-option -g status-interval 3
 set-option -g status-fg "$FG"
 set-option -g status-bg "$BG"
 

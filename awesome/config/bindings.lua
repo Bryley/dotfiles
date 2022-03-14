@@ -26,26 +26,28 @@ keys.globalkeys = gears.table.join(
     -- Start my key bindings --
     ---------------------------
 
-    -- Volume control -- TODO not working in vm, try another day
+    -- Volume control
     awful.key(
         { }, "XF86AudioRaiseVolume",
         function ()
-            naughty.notify({text = "Okay"})
-            awful.spawn('sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"', false)
+            naughty.notify({text = "Vol Up"})
+            awful.spawn("amixer -q -D pulse sset Master 5%+", false)
         end,
         {description = "Raise Volume", group = "awesome"}
     ),
     awful.key(
         { }, "XF86AudioLowerVolume",
         function ()
-            awful.spawn('sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"', false)
+            naughty.notify({text = "Vol Down"})
+            awful.spawn("amixer -q -D pulse sset Master 5%-", false)
         end,
         {description = "Lower Volume", group = "awesome"}
     ),
     awful.key(
         { }, "XF86AudioMute",
         function ()
-            awful.spawn('pactl set-sink-mute 0 toggle', false)
+            naughty.notify({text = "Vol Off"})
+            awful.spawn("amixer -D pulse set Master 1+ toggle", false)
         end,
         {description = "Mute/Unmute Volume", group = "awesome"}
     ),
@@ -54,7 +56,6 @@ keys.globalkeys = gears.table.join(
     awful.key(
         {options.modkey}, "Escape",
         function ()
-            -- naughty.notify({text = options.lock_script})
             awful.spawn.with_shell(options.lock_script)
         end,
         {description = "Locks computer", group = "awesome"}

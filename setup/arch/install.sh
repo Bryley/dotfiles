@@ -31,6 +31,7 @@ sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TO
 sudo pacman --noconfirm -S pipewire     # Audio framework
 sudo pacman --noconfirm --asdeps -S wireplumber # Audio session manager (dependency of pipewire-pulse)
 sudo pacman --noconfirm -S pipewire-pulse # Pulseaudio replacement built into pipewire
+sudo pacman --noconfirm -S alsa-utils   # Utilities for controlling volume
 
 # TODO display manager for login screen (lightdm)
 
