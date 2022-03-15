@@ -1,8 +1,12 @@
+--------------------------------------
+-- Bryley's AwesomeWM Configuration --
+--------------------------------------
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Standard awesome library
+-- Standard awesome libraries
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
@@ -13,6 +17,7 @@ local beautiful = require("beautiful")
 -- Notification library
 -- local menubar = require("menubar")
 -- local hotkeys_popup = require("awful.hotkeys_popup")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -46,21 +51,25 @@ local options = require("config.options")
 -- }}}
 
 
-require("widgets.topbar")
+-- Require my widgets
+require("widgets.topbar") -- The main bar at the top of the screen
 
+-- Setup wallpaper manager
 require("wallpaper")
 
 -- Mouse and Key Bindings --
 require("config.bindings")
 
+-- Rules for clients --
 require("config.rules")
 
--- {{{ Signals
+-- {{{ Signals TODO move into separate file/folder
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
 
     -- Add a border radius around clients
     c.shape = function(cr, w, h)
+        -- TODO this have poor antialiasing and has a weird shadow try to fix (look into the awesome-nice project)
         gears.shape.rounded_rect(cr, w, h, 10)
     end
 

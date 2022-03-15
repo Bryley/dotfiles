@@ -24,6 +24,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Add the custom bin to the path
 export PATH=$ZDOTDIR/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 
 # This is for Node version manager

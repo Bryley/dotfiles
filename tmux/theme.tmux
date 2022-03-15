@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 
 time_format='%I:%M\ %p'
 date_format='%d/%m/%Y'
