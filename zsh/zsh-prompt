@@ -1,0 +1,79 @@
+
+# Contains new experimentant custom made prompt code to experiment do:
+# 'zsh -d -f' then type 'source <this file>'
+
+PRIMARY_COLOR=#5FAFFF
+GIT_COLOR=#00c438
+
+# OPTIONS #
+MAX_PATH_LEN=3
+
+# setopt PROMPT_SUBST
+
+
+draw_prompt() {
+    # Prefix
+    PROMPT=" %F{$PRIMARY_COLOR}%B"
+
+    # User's path
+    CURRENT_PATH_LENGTH=$(pwd | sed 's;/home/[a-zA-Z0-9_]\+/;~/;' | sed 's/\//\n/g' | awk '/^[^\n]/ { print $0 }' | wc -l)
+    if (( $CURRENT_PATH_LENGTH > $MAX_PATH_LEN )); then
+        PROMPT="$PROMPT.../"
+    fi
+    PROMPT="$PROMPT%$MAX_PATH_LEN~"
+
+    # Git integration
+    DIRTY_GIT=$(git status --porcelain | tail -n1) # Will contain text if git repo is dirty (has local changes)
+    if [[ -n $DIRTY_GIT ]]; then
+        GIT_COLOR='red'
+    fi
+    PROMPT="$PROMPT%F{$GIT_COLOR}${vcs_info_msg_0_}"
+
+    # Command feedback
+    PROMPT="$PROMPT %(?.%F{green}.%F{red})❯"
+
+    # Suffix
+    PROMPT="$PROMPT %b%f"
+
+
+    ### Right Prompt ###
+
+    # Prefix
+    RPROMPT=""
+    # Time elapsed
+    if [[ $ELAPSED ]]; then
+        RPROMPT="$RPROMPT ${ELAPSED}ms"
+    fi
+}
+
+# Runs juts before command is executed
+theme_preexec() {
+    TIMER=$(( $(date +%s%0N)/1000000 ))
+
+    draw_prompt
+}
+
+# Runs just after command is executed
+theme_precmd() {
+
+    # Sort out command timer
+    if [ $TIMER ]; then
+        NOW=$(( $(date +%s%0N)/1000000 ))
+        ELAPSED=$(( $NOW-$TIMER ))
+
+        unset TIMER
+    fi
+
+}
+
+# Version control stuff
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats ' %b%m'
+
+preexec_functions+=( theme_preexec )
+
+precmd_functions+=( vcs_info )
+precmd_functions+=( theme_precmd )
+
+
