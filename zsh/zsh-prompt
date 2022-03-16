@@ -2,18 +2,19 @@
 # Contains new experimentant custom made prompt code to experiment do:
 # 'zsh -d -f' then type 'source <this file>'
 
+# TODO move these colors to a new place where they can be shared everywhere
 PRIMARY_COLOR=#5FAFFF
-GIT_COLOR=#00c438
+BRIGHT_GREEN=#00c438
 
 # OPTIONS #
-MAX_PATH_LEN=3
+MAX_PATH_LEN=4
 
-# setopt PROMPT_SUBST
-
-
+# Draws the prompt to the screen
 draw_prompt() {
     # Prefix
     PROMPT=" %F{$PRIMARY_COLOR}%B"
+
+    ### Left Prompt ###
 
     # User's path
     CURRENT_PATH_LENGTH=$(pwd | sed 's;/home/[a-zA-Z0-9_]\+/;~/;' | sed 's/\//\n/g' | awk '/^[^\n]/ { print $0 }' | wc -l)
@@ -23,11 +24,13 @@ draw_prompt() {
     PROMPT="$PROMPT%$MAX_PATH_LEN~"
 
     # Git integration
-    DIRTY_GIT=$(git status --porcelain | tail -n1) # Will contain text if git repo is dirty (has local changes)
+    DIRTY_GIT=$(git status --porcelain &> /dev/null | tail -n1) # Will contain text if git repo is dirty (has local changes)
+    GIT_COL=$BRIGHT_GREEN
     if [[ -n $DIRTY_GIT ]]; then
-        GIT_COLOR='red'
+        GIT_COL='red'
     fi
-    PROMPT="$PROMPT%F{$GIT_COLOR}${vcs_info_msg_0_}"
+    PROMPT="$PROMPT%F{$GIT_COL}${vcs_info_msg_0_}"
+    unset GIT_COL
 
     # Command feedback
     PROMPT="$PROMPT %(?.%F{green}.%F{red})❯"
@@ -41,21 +44,27 @@ draw_prompt() {
     # Prefix
     RPROMPT=""
     # Time elapsed
-    if [[ $ELAPSED ]]; then
-        RPROMPT="$RPROMPT ${ELAPSED}ms"
+    if [[ $TIME_ELAPSED ]]; then
+        RPROMPT="$RPROMPT ${TIME_ELAPSED}"
+    fi
+    if [[ $VIRTUAL_ENV_NAME ]]; then
+        RPROMPT="$RPROMPT %F{$BRIGHT_GREEN}%B$VIRTUAL_ENV_NAME "
     fi
 }
 
-# Runs juts before command is executed
-theme_preexec() {
-    TIMER=$(( $(date +%s%0N)/1000000 ))
+# Sets the virtual env variable
+virtual_env_set() {
+    VIRTUAL_ENV_NAME=$(echo $VIRTUAL_ENV | awk -F '/' '{print $NF}')
 
-    draw_prompt
+    if [[ -n $VIRTUAL_ENV_NAME ]]; then
+        if [ "$VIRTUAL_ENV_NAME" = ".venv" ]; then
+            VIRTUAL_ENV_NAME=$(echo $VIRTUAL_ENV | awk -F '/' '{print $(NF-1)}')
+        fi
+    fi
 }
 
-# Runs just after command is executed
-theme_precmd() {
-
+# Sets the timer variables
+timer_set() {
     # Sort out command timer
     if [ $TIMER ]; then
         NOW=$(( $(date +%s%0N)/1000000 ))
@@ -64,6 +73,39 @@ theme_precmd() {
         unset TIMER
     fi
 
+    # Convert to seconds
+    ELAPSED=$(( ELAPSED / 1000 ))
+
+    hours=$(( ELAPSED / 3600 ))
+    secs=$(( ELAPSED % 3600 ))
+
+    mins=$(( secs / 60 ))
+    secs=$(( secs % 60 ))
+
+    TIME_ELAPSED="%F{yellow}"
+    if (( hours > 0 )); then
+        TIME_ELAPSED="${hours}h"
+    fi
+    if (( mins > 0 )); then
+        TIME_ELAPSED="$TIME_ELAPSED ${mins}m"
+    fi
+    if (( secs > 0 )); then
+        TIME_ELAPSED="$TIME_ELAPSED ${secs}s"
+    fi
+}
+
+# Runs juts before command is executed
+theme_preexec() {
+    TIMER=$(( $(date +%s%0N)/1000000 ))
+}
+
+# Runs just after command is executed
+theme_precmd() {
+    timer_set
+    virtual_env_set
+
+    # Draw the prompt
+    draw_prompt
 }
 
 # Version control stuff
@@ -75,5 +117,20 @@ preexec_functions+=( theme_preexec )
 
 precmd_functions+=( vcs_info )
 precmd_functions+=( theme_precmd )
+
+
+# Below is code for a transient prompt copied from "https://github.com/romkatv/powerlevel10k/issues/888"
+
+set-short-prompt() {
+  if [[ $PROMPT != '%F{green}❯%f ' ]]; then
+    PROMPT='%(?.%F{green}.%F{red})❯%f '
+    zle .reset-prompt
+  fi
+}
+
+zle-line-finish() { set-short-prompt }
+zle -N zle-line-finish
+
+trap 'set-short-prompt; return 130' INT
 
 
