@@ -2,54 +2,31 @@
 -- Bryley's AwesomeWM Configuration --
 --------------------------------------
 
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+-- Use LuaRocks if installed
 pcall(require, "luarocks.loader")
 
--- Standard awesome libraries
-local gears = require("gears")
-local awful = require("awful")
-require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
--- local menubar = require("menubar")
--- local hotkeys_popup = require("awful.hotkeys_popup")
+local gears = require("gears")      -- Utility functions and constants
+local awful = require("awful")      -- Everything related to window management
 
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+local wibox = require("wibox")      -- Widget Box, widgets/layout library
+local beautiful = require("beautiful") -- Theme module
+
+
+-- Notification library TODO
+local naughty = require("naughty")
+-- local menubar = require("menubar")
+
+require("awful.autofocus")          -- Handles the focusing of clients
+local hotkeys_popup = require("awful.hotkeys_popup") -- Shows help dialog TODO move to keys
+require("awful.hotkeys_popup.keys") -- Enables extra shortcuts in help dialog
 
 require("config.errorhandling")
 
 -- Theme Set --
-beautiful.init("/home/bryley/.config/awesome/theme.lua")
+local conf_dir = gears.filesystem.get_configuration_dir() -- Path of config
+beautiful.init(conf_dir .. "theme.lua")
 
 local options = require("config.options")
-
--- {{{ Menu TODO make better or remove
--- Create a launcher widget and a main menu
--- local myawesomemenu = {
---    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
---    { "edit config", options.editor_cmd .. " " .. awesome.conffile },
---    { "restart", awesome.restart },
---    { "quit", function() awesome.quit() end },
--- }
--- 
--- local mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
---                                     { "open terminal", options.terminal }
---                                   }
---                         })
--- 
--- local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
---                                      menu = mymainmenu })
--- 
--- -- Menubar configuration
--- menubar.utils.terminal = options.terminal -- Set the terminal for applications that require it
--- }}}
-
 
 -- Require my widgets
 require("widgets.topbar") -- The main bar at the top of the screen
@@ -136,3 +113,25 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart --
 require("config.autostart")
+
+
+-- {{{ Menu TODO make better or remove
+-- Create a launcher widget and a main menu
+-- local myawesomemenu = {
+--    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+--    { "edit config", options.editor_cmd .. " " .. awesome.conffile },
+--    { "restart", awesome.restart },
+--    { "quit", function() awesome.quit() end },
+-- }
+-- 
+-- local mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+--                                     { "open terminal", options.terminal }
+--                                   }
+--                         })
+-- 
+-- local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+--                                      menu = mymainmenu })
+-- 
+-- -- Menubar configuration
+-- menubar.utils.terminal = options.terminal -- Set the terminal for applications that require it
+-- }}}
