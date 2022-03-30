@@ -24,21 +24,18 @@ require("config.errorhandling")
 
 -- Theme Set --
 local conf_dir = gears.filesystem.get_configuration_dir() -- Path of config
-beautiful.init(conf_dir .. "theme.lua")
+beautiful.init(conf_dir.."theme.lua")
 
 local options = require("config.options")
 
 -- Require my widgets
-require("widgets.topbar") -- The main bar at the top of the screen
+require("widgets.topbar")           -- The main bar at the top of the screen
 
--- Setup wallpaper manager
-require("wallpaper")
+require("wallpaper")                -- Wallpaper manager
 
--- Mouse and Key Bindings --
-require("config.bindings")
+require("config.bindings")          -- Mouse and key bindings
 
--- Rules for clients --
-require("config.rules")
+require("config.rules")             -- Rules for clients
 
 -- {{{ Signals TODO move into separate file/folder
 -- Signal function to execute when a new client appears.
