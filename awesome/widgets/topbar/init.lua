@@ -22,47 +22,46 @@ local margin = function (widget)
     }
 end
 
-awful.screen.connect_for_each_screen(function(s)
-    -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+-- Expects screen variable
+return {
+    setup = function (s)
+        -- Create the wibox
+        s.topbar = awful.wibar({
+            position = "top",
+            screen = s,
+            width = s.geometry.width - 2 * PADDING,
+            height = 33, -- TODO depend on screen height for high DPI screens
+            bg = "#3A3B3B", -- TODO store in global variable
+            shape = function(cr, w, h)
+                gears.shape.rounded_rect(cr, w, h, 10)
+            end
+        })
 
-    -- Create the wibox
-    s.topbar = awful.wibar({
-        position = "top",
-        screen = s,
-        width = s.geometry.width - 2 * PADDING,
-        height = 33, -- TODO depend on screen height for high DPI screens
-        bg = "#3A3B3B", -- TODO store in global variable
-        shape = function(cr, w, h)
-            gears.shape.rounded_rect(cr, w, h, 10)
-        end
-    })
-
-    s.topbar:setup {
-        layout = wibox.layout.stack, -- Stack to perfectly center time in middle
-        {
-            layout = wibox.container.margin,
-            margins = 5,
+        s.topbar:setup {
+            layout = wibox.layout.stack, -- Stack to perfectly center time in middle
             {
-                layout = wibox.layout.align.horizontal,
-                { -- Left widgets
-                    layout = wibox.layout.fixed.horizontal,
-                    margin(rofi_btn),
-                    margin(taglist.init(s)),
-                },
-                nil, -- Middle
-                { -- Right widgets
-                    layout = wibox.layout.fixed.horizontal,
-                    wibox.widget.systray(),
-                    -- margin(volume),
-                    margin(date_display),
-                    margin(layout_display.init(s))
+                layout = wibox.container.margin,
+                margins = 5,
+                {
+                    layout = wibox.layout.align.horizontal,
+                    { -- Left widgets
+                        layout = wibox.layout.fixed.horizontal,
+                        margin(rofi_btn),
+                        margin(taglist.init(s)),
+                    },
+                    nil, -- Middle
+                    { -- Right widgets
+                        layout = wibox.layout.fixed.horizontal,
+                        wibox.widget.systray(),
+                        -- margin(volume),
+                        margin(date_display),
+                        margin(layout_display.init(s))
+                    }
                 }
-            }
-        },
-        time_display,
-    }
+            },
+            time_display,
+        }
 
-    s.topbar.y = PADDING
-
-end)
+        s.topbar.y = PADDING
+    end
+}
