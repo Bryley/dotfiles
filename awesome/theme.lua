@@ -13,12 +13,21 @@ local config_home = gfs.get_configuration_dir()
 
 local theme = {}
 
+theme.scripts_folder = config_home.."../scripts/"
+
 -- Fonts --
 theme.font          = "RobotoMono Nerd Font Mono Regular 11"
 theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"
 theme.fontname      = "RobotoMono Nerd Font Mono Regular 11"
 
+theme.fonts = {
+    medium = "RobotoMono Nerd Font Mono Regular 11",
+    large = "RobotoMono Nerd Font Mono Regular 16",
+    very_large = "RobotoMono Nerd Font Mono Regular 30"
+}
+
 -- Colours --
+-- theme.bg_normal     = "#3A3B3B"
 theme.bg_normal     = "#1C1E26"
 theme.bg_focus      = theme.bg_normal
 theme.bg_urgent     = theme.bg_normal
@@ -34,12 +43,40 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.highlight = "#F43E5C"
+theme.highlight     = "#F43E5C"
 theme.highlight_alt = "#B877DB"
 
-theme.misc1 = "#6C6F93"
-theme.misc2 = "#2f3240"
-theme.transparent = "'#282A3600"
+theme.misc1         = "#6C6F93"
+theme.misc2         = "#2f3240"
+theme.transparent   = "#282A3600"
+
+theme.custom_colours = {
+    bg          = "#3A3B3B",
+    bg_light    = "#5c5e5e",
+    bg_dark     = "#2d2e2e",
+}
+
+-- theme.bg_normal     = "#1C1E26"
+-- theme.bg_focus      = theme.bg_normal
+-- theme.bg_urgent     = theme.bg_normal
+-- theme.bg_minimize   = "#aaaaaa"--theme.bg_normal
+-- theme.bg_systray    = theme.bg_normal
+-- theme.bg_light      = "#232530"
+-- theme.bg_very_light = "#2E303E"
+-- theme.bg_dark       = "#1A1C23"
+-- 
+-- theme.fg_normal     = "#dddddd"
+-- theme.fg_dark       = "#cccccc"
+-- theme.fg_focus      = "#ffffff"
+-- theme.fg_urgent     = "#ffffff"
+-- theme.fg_minimize   = "#ffffff"
+-- 
+-- theme.highlight = "#F43E5C"
+-- theme.highlight_alt = "#B877DB"
+-- 
+-- theme.misc1 = "#6C6F93"
+-- theme.misc2 = "#2f3240"
+-- theme.transparent = "'#282A3600"
 
 -- terminal colors
 theme.blue = "#26BBD9"
@@ -95,6 +132,7 @@ theme.menu_width  = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
+-- TODO remove as it is not used
 theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
 
@@ -141,7 +179,7 @@ theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
--- Generate Awesome icon:
+-- Generate Awesome icon: TODO maybe remove
 theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )

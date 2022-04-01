@@ -2,7 +2,7 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 
-local keys = require("config.bindings")
+local keys = require("config.bindings").keys
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
