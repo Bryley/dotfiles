@@ -26,6 +26,7 @@ sudo pacman --noconfirm -S awesome      # The lua based window manager
 sudo pacman --noconfirm -S alacritty    # Terminal emulator
 sudo pacman --noconfirm -S rofi         # A better application search menu
 sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
+sudo pacman --noconfirm -S udisks2      # Automatic mounting of USB sticks
 
 # Audio
 sudo pacman --noconfirm -S pipewire     # Audio framework
@@ -53,6 +54,7 @@ sudo pacman --noconfirm -S iw           # Requirement for tmux config to get net
 sudo pacman --noconfirm -S ncdu         # NCurses Disk Usage. A terminal UI for analysing disk usage
 sudo pacman --noconfirm -S exa          # Better alternative to ls command
 sudo pacman --noconfirm -S pkgfile      # Contains the command not found searching tool for better errors
+# sudo pacman --noconfirm -S zsh-syntax-highlight
 
 
 # AUR programs
@@ -60,6 +62,7 @@ yay -S nvm                              # Node version manager (Node is used by 
 yay -S nerd-fonts-roboto-mono           # Roboto Nerd font for Awesome WM
 yay -S i3lock-color                     # Lockscreen for arch
 yay -S command-not-found                # Instead of saying 'command not found' it will show you the programs for that command to install
+yay -S udiskie                          # Utility for automounting USBs
 
 # Network Manager start
 sudo systemctl enable NetworkManager.service
@@ -76,10 +79,10 @@ chsh -s /usr/bin/zsh
 printf "\n%b\n" "\e[32m Installing Nerd Fonts \e[0m"
 mkdir -p ~/.local/share/fonts
 # Hack font
-curl -L -o ~/.local/share/fonts/HackBold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Bold/complete/Hack%20Bold%20Nerd%20Font%20Complete.ttf
-curl -L -o ~/.local/share/fonts/HackBoldItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/BoldItalic/complete/Hack%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
-curl -L -o ~/.local/share/fonts/HackItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Italic/complete/Hack%20Italic%20Nerd%20Font%20Complete.ttf
-curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
+# curl -L -o ~/.local/share/fonts/HackBold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Bold/complete/Hack%20Bold%20Nerd%20Font%20Complete.ttf
+# curl -L -o ~/.local/share/fonts/HackBoldItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/BoldItalic/complete/Hack%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
+# curl -L -o ~/.local/share/fonts/HackItalic https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Italic/complete/Hack%20Italic%20Nerd%20Font%20Complete.ttf
+# curl -L -o ~/.local/share/fonts/HackRegular https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
 
 # Roboto font TODO not needed as we have installed nerd-fonts-roboto-mono from AUR
 # curl -L -o ~/.local/share/fonts/RobotoBold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/RobotoMono/Bold/complete/Roboto%20Mono%20Bold%20Nerd%20Font%20Complete.ttf
@@ -90,5 +93,11 @@ fc-cache -f
 
 # Generate blurry wallpaper
 bash $HOME/.config/awesome/wallpapers/generate_blurry.sh
+
+nvm install node
+
+# uDisks2 setup to mount USB devices to /media
+sudo mkdir /media
+echo "ENV{ID_FS_USAGE}==\"filesystem|other|crypto\", ENV{UDISKS_FILESYSTEM_SHARED}=\"1\"" | sudo tee /etc/udev/rules.d/99-udisks2.rules
 
 printf "\n%b\n" "\e[32m Finished installing software \e[0m"

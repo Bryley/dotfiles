@@ -8,13 +8,13 @@ main() {
     for host in $HOSTS; do
         # Do a single ping request to server waiting only a second
         if ping -q -c 1 -W 1 $host &> /dev/null; then
-			SSID=$(iw dev | sed -nr 's/^\t\tssid (.*)/\1/p')
-			if [ -n "$SSID" ]; then
-				printf '%s' "$SSID"
+            SSID=$(iw dev | sed -nr 's/^\t\tssid (.*)/\1/p')
+            if [ -n "$SSID" ]; then
+                # printf '%s' "$SSID"
                 network=$SSID
-			else
-				network='Ethernet'
-			fi
+            else
+                network='Ethernet'
+            fi
             break
         fi
     done
