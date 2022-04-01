@@ -24,13 +24,11 @@ local setup = function (update_volume)
         awful.key({ options.modkey,           }, "s",      hotkeys_popup.show_help,
                   {description="show help", group="awesome"}),
         awful.key({ options.modkey,           }, "n", function ()
-            naughty.notify({text = "Vol Down"})
             update_volume(-1)
         end,
         {description="test1", group="awesome"}
         ),
         awful.key({ options.modkey,           }, ".", function ()
-            naughty.notify({text = "Vol UP"})
             update_volume(1)
         end,
         {description="test1", group="awesome"}
