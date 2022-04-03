@@ -44,7 +44,6 @@ local setup = function (update_volume)
         awful.key(
             { }, "XF86AudioRaiseVolume",
             function ()
-                naughty.notify({text = "Vol Up"})
                 -- awful.spawn("amixer -q -D pulse sset Master 5%+", false)
                 update_volume(1)
             end,
@@ -53,7 +52,6 @@ local setup = function (update_volume)
         awful.key(
             { }, "XF86AudioLowerVolume",
             function ()
-                naughty.notify({text = "Vol Down"})
                 -- awful.spawn("amixer -q -D pulse sset Master 5%-", false)
                 update_volume(-1)
             end,
@@ -63,7 +61,7 @@ local setup = function (update_volume)
             { }, "XF86AudioMute",
             function ()
                 naughty.notify({text = "Vol Off"})
-                awful.spawn("amixer -D pulse set Master 1+ toggle", false)
+                -- awful.spawn("amixer -D pulse set Master 1+ toggle", false)
                 update_volume(100)
             end,
             {description = "Mute/Unmute Volume", group = "awesome"}

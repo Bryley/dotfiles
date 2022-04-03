@@ -57,6 +57,7 @@ local vol = awful.popup({
 
 
 local update_volume = function(code)
+    naughty.notify({text = "Changing volume"})
     local cmd = "bash "..beautiful.scripts_folder.."volume.sh "
     if code == 0 then
         cmd = cmd.."get"
