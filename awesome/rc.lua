@@ -25,7 +25,7 @@ beautiful.init(conf_dir.."theme.lua")
 
 -- local options = require("config.options")
 
--- Require my widgets
+-- Setup my widgets
 local topbar = require("widgets.topbar") -- The main bar at the top of the screen
 local vol_popup = require("widgets.volume_popup")
 
