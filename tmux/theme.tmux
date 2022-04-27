@@ -1,5 +1,5 @@
 
-time_format='%I:%M\ %p'
+time_format='%I:%M %p'
 date_format='%d/%m/%Y'
 
 scripts_dir=$DOT_DIR/scripts
@@ -27,8 +27,8 @@ set-option -g window-status-format " #I #W "
 set-option -g window-status-current-format "#[fg=$PRI,bold] #I #W "
 
 # Status Right
-
+set-option -g status-right-length 50
 RS="#[fg=$PRI,bold] #($scripts_dir/network.sh) "
-RS="$RS#[bg=$PRI,fg=$BG,nobold] #(date +$time_format) #(date +$date_format) "
+RS="$RS#[bg=$PRI,fg=$BG,nobold] #(date +'$time_format') #(date +'$date_format') "
 set-option -g status-right $RS
 
