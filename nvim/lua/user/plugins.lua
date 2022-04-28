@@ -61,6 +61,7 @@ return packer.startup(function(use)
     use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
     use "tpope/vim-repeat"                  -- Adds better repeatability for surround.vim
     use "psliwka/vim-smoothie"              -- Adds smooth scrolling
+    use "AndrewRadev/sideways.vim"          -- Adds ':Sideways<Left|Right>' for swapping objects
     use "p00f/nvim-ts-rainbow"              -- Adds rainbow brackets
     use "nvim-treesitter/playground"        -- Shows AST for current code using treesitter
     use "folke/which-key.nvim"              -- When pressing leader gives hints for remembering
@@ -100,6 +101,7 @@ return packer.startup(function(use)
     -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'nvim-lualine/lualine.nvim'         -- Adds better bottom bar
     use "martinsione/darkplus.nvim"         -- Darkplus vscode like colorscheme
+    use "tomasiser/vim-code-dark"           -- vscode like colourschemes
 
 
 

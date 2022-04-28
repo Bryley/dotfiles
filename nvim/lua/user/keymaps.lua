@@ -26,6 +26,9 @@ keymap("n", "<F4>", "<cmd>ToggleTerm<CR>", opts)
 keymap("n", "<F5>", "<cmd>TermExec cmd='./.venv/bin/python <C-r>%'<CR>", verbose)
 keymap("n", "<C-Q>", "<Nop>", opts)                 -- Stop from quitting
 
+keymap("n", "<C-h>", "<cmd>SidewaysLeft<CR>", opts) -- sideways.vim plugin
+keymap("n", "<C-l>", "<cmd>SidewaysRight<CR>", opts) -- sideways.vim plugin
+
 keymap("n", "<leader>c", "<cmd>lua require'docstr'.docstr()<CR>", verbose)
 
 -- Terminal --
@@ -33,10 +36,14 @@ keymap("t", "<Esc>", "<C-\\><C-n>", opts)    -- Esc goes to normal mode in term
 
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+-- keymap("n", "<C-Up>", ":resize -2<CR>", opts)
+-- keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+-- keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
+-- keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+keymap("n", "<Up>", ":resize -2<CR>", opts)
+keymap("n", "<Down>", ":resize +2<CR>", opts)
+keymap("n", "<Left>", ":vertical resize +2<CR>", opts)
+keymap("n", "<Right>", ":vertical resize -2<CR>", opts)
 
 -- Telescope
 keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', opts)
