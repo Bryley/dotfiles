@@ -56,9 +56,11 @@ return packer.startup(function(use)
         run = ":TSUpdate",
     }
     use "moll/vim-bbye"                     -- Creates better buffer deleting
+    use "kana/vim-textobj-user"             -- Dependency for vim-textobj-numberal
 
     -- Essentials
     use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
+    use "tkhren/vim-textobj-numeral"        -- Adds text object 'n' for number
     use "tpope/vim-repeat"                  -- Adds better repeatability for surround.vim
     use "psliwka/vim-smoothie"              -- Adds smooth scrolling
     use "AndrewRadev/sideways.vim"          -- Adds ':Sideways<Left|Right>' for swapping objects

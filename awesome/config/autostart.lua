@@ -13,6 +13,7 @@ awful.spawn.with_shell(
     'picom -f --no-vsync &;' ..
     'VBoxClient-all &;' .. -- TODO temorary for some reason the below command doesn't work
     'udiskie &;' ..
+    'setxkbmap -option caps:ctrl_modifier &;' .. -- Remap caplocks to control
 
     'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
 )
