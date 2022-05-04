@@ -1,2 +1,0 @@
-;;; Generated package description from scroll-on-jump.el  -*- no-byte-compile: t -*-
-(define-package "scroll-on-jump" "20220211.548" "Scroll when jumping to a new point" '((emacs "26.2")) :commit "99386fc01b3c7bc2e75458efca408a23220a5f87" :authors '(("Campbell Barton" . "ideasman42@gmail.com")) :maintainer '("Campbell Barton" . "ideasman42@gmail.com") :url "https://gitlab.com/ideasman42/emacs-scroll-on-jump")
