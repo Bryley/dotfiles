@@ -47,6 +47,138 @@ Evil mode is a mode that turns emacs into vim.
   )
 #+end_src
 
+** Org mode
+
+Org mode is a super useful tool for note taking and task organisation.
+
+First lets setup a hook function that will be called whenever a org mode file is loaded.
+
+#+begin_src emacs-lisp
+  (defun bryley/org-mode-setup ()
+    ;;(org-indent-mode)
+    ;; (variable-pitch-mode t)
+    (visual-line-mode t)
+    ;;(globaldisplay-line-numbers-mode t)
+  )
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package org
+    :init
+    (setq org-startup-indented t) ;; Indenting is handled automatically by org
+    :hook (org-mode . bryley/org-mode-setup)
+    :config
+    (setq org-ellipsis " ▾")
+  )
+#+end_src
+
+*** org-superstar
+
+Package for adding bullets to org documents.
+
+#+begin_src emacs-lisp
+    (use-package org-superstar
+      :after org
+      :hook (org-mode . org-superstar-mode)
+    )
+#+end_src
+
+*** evil-org
+
+Evil-org is a helper for intergrating org with evil mode so that vim keybindings work as expected in org mode.
+
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :after (evil org)
+    :hook (org-mode . evil-org-mode)
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys)
+  )
+#+end_src
+
+** Projectile
+
+Projectile gives you lots of useful commands for managing projects.
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :init
+    (setq projectile-switch-project-action #'projectile-dired)
+  )
+
+  (use-package counsel-projectile
+    :config (counsel-projectile-mode)
+  )
+#+end_src
+
+** Language Server Protocol
+
+LSPs are useful for autocompleting and understanding code as you write it.
+
+#+begin_src emacs-lisp
+  ;;    (use-package lsp-mode
+  ;;      :commands (lsp lsp-deferred)
+  ;;      :hook (lsp-mode . efs/lsp-mode-setup)
+  ;;      :init
+  ;;      (setq lsp-keymap-prefix "SPC l")
+  ;;      :config
+  ;;      (lsp-enable-which-key-integration t)
+  ;;    )
+      (use-package lsp-mode
+	:init
+	;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+	(setq lsp-keymap-prefix "SPC l")
+	:hook (
+		(python-mode . lsp)
+		(lsp-mode . lsp-enable-which-key-integration))
+	:commands lsp
+      )
+    (use-package lsp-ui
+      :after general
+      :commands lsp-ui-mode
+      :config
+      :general
+	(general-nmap
+	  :predicate 'lsp-mode
+		"K" 'lsp-ui-doc-glance)
+	(general-nmap
+	  :predicate 'lsp-mode
+		"gs" 'lsp-signature-activate)
+	(general-nmap
+	  :predicate 'lsp-mode
+		"gr" 'lsp-ui-peek-find-references)
+	(general-nmap
+	  :predicate 'lsp-mode
+		"gd" 'lsp-ui-peek-find-definitions)
+	)
+    (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+    ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+#+end_src
+
+*** Python
+
+#+begin_src emacs-lisp
+  (use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+#+end_src
+
+** Rainbow Delimiters
+
+Adds rainbox highlighted brackets to make it easier to see bracket links.
+
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode)
+  )
+#+end_src
+
 ** general
 General is a keybinding plugin that allows for easy kindbindings to be setup with a leader key.
 
@@ -57,6 +189,23 @@ General is a keybinding plugin that allows for easy kindbindings to be setup wit
 )
 #+end_src
 The key bindings are setup under the 'Key bindings' section.
+
+** helpful
+helpful is a package that offers an alternate better help buffer page with colours.
+
+#+begin_src emacs-lisp
+  (use-package helpful
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . helpful-function)
+    ([remap describe-symbol] . helpful-symbol)
+    ([remap describe-variable] . helpful-variable)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-key] . helpful-key)
+  )
+#+end_src
 
 ** Theme
 *** doom-one
@@ -72,14 +221,6 @@ The main theme used is 'doom-one' from 'doom-themes' package
 )
 #+end_src
 
-*** org-bullets
-Package for adding bullets to org documents.
-
-#+begin_src emacs-lisp
-(use-package org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode t)))
-#+end_src
-
 *** Modeline
 
 #+begin_src emacs-lisp
@@ -93,17 +234,44 @@ Package for adding bullets to org documents.
 Which key is a package that helps with showing the available options when doing key chords.
 #+begin_src emacs-lisp
   (use-package which-key
+    :init
+    (setq which-key-idle-delay 0.3)
     :config
     (which-key-mode)
   )
 #+end_src
 
 ** Ivy
+
 Ivy is a fuzzy finder tool that integrates itself within Emacs.
 
 #+begin_src emacs-lisp
-(use-package ivy)
-(ivy-mode)
+  (use-package ivy
+    :config
+    (ivy-mode)
+  )
+#+end_src
+
+Ivy rich is an extention to ivy that makes ivy have even better things.
+
+#+begin_src emacs-lisp
+  (use-package ivy-rich
+    :init
+    (ivy-rich-mode t)
+  )
+#+end_src
+
+** Counsel
+Counsel is another ivy extention that allows for better default keybindings for find file M-x and so on.
+
+#+begin_src emacs-lisp
+    (use-package counsel
+    :bind (("M-x" . counsel-M-x)
+	   ("C-x b" . counsel-ibuffer)
+	   ("C-x C-f" . counsel-find-file)
+	   :map minibuffer-local-map
+	   ("C-r" . 'counsel-minibuffer-history))
+    )
 #+end_src
 
 ** All the Icons
@@ -119,33 +287,35 @@ Extra icon support. Note that the code below will run 'all-the-icons-install-fon
 #+end_src
 
 ** Scroll on Jump
+DISABLED because it was janky.
+
 Package used to smooth scrolling.
 #+begin_src emacs-lisp
-(use-package scroll-on-jump)
+;; (use-package scroll-on-jump)
 #+end_src
 
 Below was copied from the github and is for setup with evil.
 #+begin_src emacs-lisp
-(with-eval-after-load 'evil
-  (scroll-on-jump-advice-add evil-undo)
-  (scroll-on-jump-advice-add evil-redo)
-  (scroll-on-jump-advice-add evil-jump-item)
-  (scroll-on-jump-advice-add evil-jump-forward)
-  (scroll-on-jump-advice-add evil-jump-backward)
-  (scroll-on-jump-advice-add evil-ex-search-next)
-  (scroll-on-jump-advice-add evil-ex-search-previous)
-  (scroll-on-jump-advice-add evil-forward-paragraph)
-  (scroll-on-jump-advice-add evil-backward-paragraph)
-  (scroll-on-jump-advice-add evil-goto-mark)
-
-  ;; Actions that themselves scroll.
-  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)
-)
+;; (with-eval-after-load 'evil
+;;   (scroll-on-jump-advice-add evil-undo)
+;;   (scroll-on-jump-advice-add evil-redo)
+;;   (scroll-on-jump-advice-add evil-jump-item)
+;;   (scroll-on-jump-advice-add evil-jump-forward)
+;;   (scroll-on-jump-advice-add evil-jump-backward)
+;;   (scroll-on-jump-advice-add evil-ex-search-next)
+;;   (scroll-on-jump-advice-add evil-ex-search-previous)
+;;   (scroll-on-jump-advice-add evil-forward-paragraph)
+;;   (scroll-on-jump-advice-add evil-backward-paragraph)
+;;   (scroll-on-jump-advice-add evil-goto-mark)
+;; 
+;;   ;; Actions that themselves scroll.
+;;   (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)
+;; )
 #+end_src
 * Global Configurations
 ** Must-have Configurations
@@ -162,8 +332,22 @@ Below was copied from the github and is for setup with evil.
 *** Line numbers
     Enables line numbers.
 #+begin_src emacs-lisp
-(setq display-line-numbers-type 'relative)  ;; Use relative line numbers
-(display-line-numbers-mode t)                 ;; Enable line numbers
+  (setq display-line-numbers-type 'visual)  ;; Use relative line numbers (visually shown)
+(setq-default left-fringe-width  10)
+  (global-display-line-numbers-mode t)                 ;; Enable line numbers
+#+end_src
+
+*** Extra settings
+
+Keeps 3 lines from cursor at top and bottom of buffer when scrolling like ~scrolloff~ setting in vim, also stop cursor from being centered when it goes offscreen.
+
+#+begin_src emacs-lisp
+  (setq scroll-margin 3)
+  (setq scroll-step 1)
+#+end_src
+
+#+begin_src emacs-lisp
+  (global-hl-line-mode t)
 #+end_src
 
 ** Key bindings
@@ -184,34 +368,44 @@ Make it so that Ctrl-Shift-V pastes from clipboard.
 *** General
 Below are keybindings that use a leader key (Space) using the package ~general~.
 #+begin_src emacs-lisp
-(nvmap :keymaps 'override :prefix "SPC"
-       "SPC"   '(counsel-M-x :which-key "M-x")
-       "f f"   '(find-file :which-key "Find file")
-       "r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
-)
-(nvmap :keymaps 'override :prefix "SPC"
-       "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
-       "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
-       "m ."   '(counsel-org-goto :which-key "Counsel org goto")
-       "m e"   '(org-export-dispatch :which-key "Org export dispatch")
-       "m f"   '(org-footnote-new :which-key "Org footnote new")
-       "m h"   '(org-toggle-heading :which-key "Org toggle heading")
-       "m i"   '(org-toggle-item :which-key "Org toggle item")
-       "m n"   '(org-store-link :which-key "Org store link")
-       "m o"   '(org-set-property :which-key "Org set property")
-       "m t"   '(org-todo :which-key "Org todo")
-       "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
-       "m B"   '(org-babel-tangle :which-key "Org babel tangle")
-       "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
-       "m T"   '(org-todo-list :which-key "Org todo list")
-       "o a"   '(org-agenda :which-key "Org agenda")
-)
+  (nvmap :keymaps 'override :prefix "SPC"
+	 "SPC"   '(counsel-M-x :which-key "M-x")
+	 "f f"   '(projectile-find-file :which-key "Find file")
+	 "r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
+	 "p"     '(projectile-command-map :which-key "Projectile Commands")
+	 ;; "l"     '((lambda () (interactive) (lsp-command-map) :which-key "LSP Commands" :predicate '(lsp-mode))
+  )
+  (nvmap :keymaps 'override :prefix "SPC"
+	 "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
+	 "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
+	 "m ."   '(counsel-org-goto :which-key "Counsel org goto")
+	 "m e"   '(org-export-dispatch :which-key "Org export dispatch")
+	 "m f"   '(org-footnote-new :which-key "Org footnote new")
+	 "m h"   '(org-toggle-heading :which-key "Org toggle heading")
+	 "m i"   '(org-toggle-item :which-key "Org toggle item")
+	 "m n"   '(org-store-link :which-key "Org store link")
+	 "m o"   '(org-set-property :which-key "Org set property")
+	 "m t"   '(org-todo :which-key "Org todo")
+	 "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
+	 "m B"   '(org-babel-tangle :which-key "Org babel tangle")
+	 "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
+	 "m T"   '(org-todo-list :which-key "Org todo list")
+	 "o a"   '(org-agenda :which-key "Org agenda")
+  )
+#+end_src
+
+Escape with escape like in Vim.
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 #+end_src
 
 ** Font
+
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil
-  :font "Hack Nerd Font 14"
-  :weight 'medium
-)
+ (set-frame-font "Hack Nerd Font 14" nil t)
+   (set-face-attribute 'default nil
+     :font "Hack Nerd Font 14"
+     :weight 'medium
+   )
 #+end_src
