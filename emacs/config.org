@@ -31,6 +31,7 @@ Evil mode is a mode that turns emacs into vim.
 #+begin_src emacs-lisp
   (use-package evil
     :init      ;; tweak evil's configuration before loading it
+    (setq select-enable-clipboard nil) ;; Unlink system clipboard with evil registers
     (setq evil-want-keybinding nil)
     (setq evil-vsplit-window-right t)
     (setq evil-split-window-below t)
@@ -39,11 +40,17 @@ Evil mode is a mode that turns emacs into vim.
     (setq evil-want-C-i-jump nil) ;; This will make tab work correctly in org mode
     (evil-mode t)
   )
+  ;; Allows evil to work in more locations
   (use-package evil-collection
     :after evil
     :config
-    (setq evil-collection-mode-list '(dashboard dired ibuffer))
+    (setq evil-collection-mode-list '(dashboard dired ibuffer package-menu))
     (evil-collection-init)
+  )
+  ;; Required so clipboard works like vim (+ register is system clipboard)
+  (use-package xclip
+    :config
+    (xclip-mode)
   )
 #+end_src
 
@@ -73,7 +80,6 @@ First lets setup a hook function that will be called whenever a org mode file is
 #+end_src
 
 *** org-superstar
-
 Package for adding bullets to org documents.
 
 #+begin_src emacs-lisp
@@ -97,8 +103,17 @@ Evil-org is a helper for intergrating org with evil mode so that vim keybindings
   )
 #+end_src
 
-** Projectile
+*** org-tempo
+org-tempo contains a few useful org command that no longer exist such as =<s= then pressing tab in org mode to open a source block.
 
+#+begin_src emacs-lisp
+  (with-eval-after-load 'org
+    ;; This is needed as of Org 9.2
+    (require 'org-tempo)
+    )
+#+end_src
+
+** Projectile
 Projectile gives you lots of useful commands for managing projects.
 
 #+begin_src emacs-lisp
@@ -116,7 +131,6 @@ Projectile gives you lots of useful commands for managing projects.
 #+end_src
 
 ** Language Server Protocol
-
 LSPs are useful for autocompleting and understanding code as you write it.
 
 #+begin_src emacs-lisp
@@ -128,35 +142,35 @@ LSPs are useful for autocompleting and understanding code as you write it.
   ;;      :config
   ;;      (lsp-enable-which-key-integration t)
   ;;    )
-      (use-package lsp-mode
-	:init
-	;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-	(setq lsp-keymap-prefix "SPC l")
-	:hook (
-		(python-mode . lsp)
-		(lsp-mode . lsp-enable-which-key-integration))
-	:commands lsp
-      )
-    (use-package lsp-ui
-      :after general
-      :commands lsp-ui-mode
-      :config
-      :general
-	(general-nmap
-	  :predicate 'lsp-mode
-		"K" 'lsp-ui-doc-glance)
-	(general-nmap
-	  :predicate 'lsp-mode
-		"gs" 'lsp-signature-activate)
-	(general-nmap
-	  :predicate 'lsp-mode
-		"gr" 'lsp-ui-peek-find-references)
-	(general-nmap
-	  :predicate 'lsp-mode
-		"gd" 'lsp-ui-peek-find-definitions)
-	)
-    (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-    ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+  (use-package lsp-mode
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "SPC l")
+    :hook (
+           (python-mode . lsp)
+           (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp
+    )
+  ;;    (use-package lsp-ui
+  ;;      :after general
+  ;;      :commands lsp-ui-mode
+  ;;      :config
+  ;;       :general
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"K" 'lsp-ui-doc-glance)
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"gs" 'lsp-signature-activate)
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"gr" 'lsp-ui-peek-find-references)
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"gd" 'lsp-ui-peek-find-definitions)
+  ;; 	)
+  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 #+end_src
 
 *** Python
@@ -230,6 +244,16 @@ The main theme used is 'doom-one' from 'doom-themes' package
   )
 #+end_src
 
+** Dashboard
+Dashboard is used to include a dashboard when emacs opens up.
+
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :config
+    (dashboard-setup-startup-hook)
+  )
+#+end_src
+
 ** Which Key
 Which key is a package that helps with showing the available options when doing key chords.
 #+begin_src emacs-lisp
@@ -287,36 +311,34 @@ Extra icon support. Note that the code below will run 'all-the-icons-install-fon
 #+end_src
 
 ** Scroll on Jump
-DISABLED because it was janky.
 
 Package used to smooth scrolling.
+
 #+begin_src emacs-lisp
-;; (use-package scroll-on-jump)
+  (use-package scroll-on-jump
+    :custom
+    (scroll-on-jump-smooth nil)
+    (scroll-on-jump-duration 0.7)
+    :config
+    (scroll-on-jump-advice-add evil-undo)
+    (scroll-on-jump-advice-add evil-redo)
+    (scroll-on-jump-advice-add evil-jump-item)
+    (scroll-on-jump-advice-add evil-jump-forward)
+    (scroll-on-jump-advice-add evil-jump-backward)
+    (scroll-on-jump-advice-add evil-ex-search-next)
+    (scroll-on-jump-advice-add evil-ex-search-previous)
+    (scroll-on-jump-advice-add evil-forward-paragraph)
+    (scroll-on-jump-advice-add evil-backward-paragraph)
+    (scroll-on-jump-advice-add evil-goto-mark)
+    (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+    (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+    (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+    (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+    (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+    (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)
+  )
 #+end_src
 
-Below was copied from the github and is for setup with evil.
-#+begin_src emacs-lisp
-;; (with-eval-after-load 'evil
-;;   (scroll-on-jump-advice-add evil-undo)
-;;   (scroll-on-jump-advice-add evil-redo)
-;;   (scroll-on-jump-advice-add evil-jump-item)
-;;   (scroll-on-jump-advice-add evil-jump-forward)
-;;   (scroll-on-jump-advice-add evil-jump-backward)
-;;   (scroll-on-jump-advice-add evil-ex-search-next)
-;;   (scroll-on-jump-advice-add evil-ex-search-previous)
-;;   (scroll-on-jump-advice-add evil-forward-paragraph)
-;;   (scroll-on-jump-advice-add evil-backward-paragraph)
-;;   (scroll-on-jump-advice-add evil-goto-mark)
-;; 
-;;   ;; Actions that themselves scroll.
-;;   (scroll-on-jump-with-scroll-advice-add evil-goto-line)
-;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-;;   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)
-;; )
-#+end_src
 * Global Configurations
 ** Must-have Configurations
 *** GUI Settings
