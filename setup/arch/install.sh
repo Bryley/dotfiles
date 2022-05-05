@@ -44,6 +44,7 @@ sudo pacman --noconfirm -S unzip        # Unzips files (This and wget required f
 sudo pacman --noconfirm -S tmux         # Terminal multiplexer
 sudo pacman --noconfirm -S zsh          # Z shell, modern alternate to bash
 sudo pacman --noconfirm -S neovim       # The latest version of neovim text editor
+sudo pacman --noconfirm -S emacs        # The latest version of neovim text editor
 sudo pacman --noconfirm -S ripgrep      # A better grep alternative used by neovim plugin telescope
 sudo pacman --noconfirm -S imagemagick  # An image manipulation software that can be used to blur images
 
@@ -54,6 +55,7 @@ sudo pacman --noconfirm -S iw           # Requirement for tmux config to get net
 sudo pacman --noconfirm -S ncdu         # NCurses Disk Usage. A terminal UI for analysing disk usage
 sudo pacman --noconfirm -S exa          # Better alternative to ls command
 sudo pacman --noconfirm -S pkgfile      # Contains the command not found searching tool for better errors
+sudo pacman --noconfirm -S ispell       # Spellcheck program used by emacs
 # sudo pacman --noconfirm -S zsh-syntax-highlight
 
 

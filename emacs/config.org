@@ -55,8 +55,7 @@ Evil mode is a mode that turns emacs into vim.
 #+end_src
 
 ** Org mode
-
-Org mode is a super useful tool for note taking and task organisation.
+Org mode is a super useful tool for note taking and task organization.
 
 First lets setup a hook function that will be called whenever a org mode file is loaded.
 
@@ -65,7 +64,7 @@ First lets setup a hook function that will be called whenever a org mode file is
     ;;(org-indent-mode)
     ;; (variable-pitch-mode t)
     (visual-line-mode t)
-    ;;(globaldisplay-line-numbers-mode t)
+    (fly-spell-mode t) ;; Enables spellcheck
   )
 #+end_src
 
@@ -73,6 +72,10 @@ First lets setup a hook function that will be called whenever a org mode file is
   (use-package org
     :init
     (setq org-startup-indented t) ;; Indenting is handled automatically by org
+    (setq org-log-done 'time)     ;; When marking a TODO item as done record the closed time
+    (setq org-agenda-files '(
+      "~/agenda.org"
+    ))     ;; When marking a TODO item as done record the closed time
     :hook (org-mode . bryley/org-mode-setup)
     :config
     (setq org-ellipsis " ▾")
@@ -134,6 +137,13 @@ Projectile gives you lots of useful commands for managing projects.
 LSPs are useful for autocompleting and understanding code as you write it.
 
 #+begin_src emacs-lisp
+  (use-package lsp-mode
+    :hook (lsp-mode . lsp-enable-which-key-integration)
+    :commands lsp
+  )
+#+end_src
+
+#+begin_src emacs-lisp
   ;;    (use-package lsp-mode
   ;;      :commands (lsp lsp-deferred)
   ;;      :hook (lsp-mode . efs/lsp-mode-setup)
@@ -142,15 +152,15 @@ LSPs are useful for autocompleting and understanding code as you write it.
   ;;      :config
   ;;      (lsp-enable-which-key-integration t)
   ;;    )
-  (use-package lsp-mode
-    :init
-    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-    (setq lsp-keymap-prefix "SPC l")
-    :hook (
-           (python-mode . lsp)
-           (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp
-    )
+;;  (use-package lsp-mode
+;;    :init
+;;    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;;    (setq lsp-keymap-prefix "SPC l")
+;;    :hook (
+;;           (python-mode . lsp)
+;;           (lsp-mode . lsp-enable-which-key-integration))
+;;    :commands lsp
+;;    )
   ;;    (use-package lsp-ui
   ;;      :after general
   ;;      :commands lsp-ui-mode
@@ -169,18 +179,39 @@ LSPs are useful for autocompleting and understanding code as you write it.
   ;; 	  :predicate 'lsp-mode
   ;; 		"gd" 'lsp-ui-peek-find-definitions)
   ;; 	)
-  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+ ;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
   ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 #+end_src
 
 *** Python
+Setup pyright LSP server for python.
 
 #+begin_src emacs-lisp
-  (use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
+    (use-package lsp-pyright
+      :hook (python-mode . (lambda ()
+                              (require 'lsp-pyright)
+                              (lsp)
+                          )
+            )
+    )  ; or lsp-deferred
+#+end_src
+
+** Treemacs
+Neotree is a file explorer package.
+
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :bind ("<f2>" . treemacs)
+  )
+  (use-package treemacs-evil
+    :after (treemacs evil)
+  )
+  (use-package treemacs-projectile
+    :after (treemacs projectile)
+  )
+  (use-package treemacs-icons-dired
+    :hook (dired-mode . treemacs-icons-dired-enable-once)
+  )
 #+end_src
 
 ** Rainbow Delimiters
@@ -360,7 +391,6 @@ Package used to smooth scrolling.
 #+end_src
 
 *** Extra settings
-
 Keeps 3 lines from cursor at top and bottom of buffer when scrolling like ~scrolloff~ setting in vim, also stop cursor from being centered when it goes offscreen.
 
 #+begin_src emacs-lisp
@@ -368,8 +398,14 @@ Keeps 3 lines from cursor at top and bottom of buffer when scrolling like ~scrol
   (setq scroll-step 1)
 #+end_src
 
+Highlights selected line a different colour to make it easier to see.
 #+begin_src emacs-lisp
   (global-hl-line-mode t)
+#+end_src
+
+Automatically select the help window when it opens (vim's default behavior[
+#+begin_src emacs-lisp
+  (setq help-window-select t)
 #+end_src
 
 ** Key bindings
@@ -393,25 +429,28 @@ Below are keybindings that use a leader key (Space) using the package ~general~.
   (nvmap :keymaps 'override :prefix "SPC"
 	 "SPC"   '(counsel-M-x :which-key "M-x")
 	 "f f"   '(projectile-find-file :which-key "Find file")
+	 "f b"   '(counsel-buffer-or-recentf :which-key "Find buffer")
 	 "r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
 	 "p"     '(projectile-command-map :which-key "Projectile Commands")
-	 ;; "l"     '((lambda () (interactive) (lsp-command-map) :which-key "LSP Commands" :predicate '(lsp-mode))
+	 "l"     '(lsp-map :which-key "LSP Commands" :predicate '(lsp-mode))
   )
   (nvmap :keymaps 'override :prefix "SPC"
-	 "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
-	 "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
-	 "m ."   '(counsel-org-goto :which-key "Counsel org goto")
-	 "m e"   '(org-export-dispatch :which-key "Org export dispatch")
-	 "m f"   '(org-footnote-new :which-key "Org footnote new")
-	 "m h"   '(org-toggle-heading :which-key "Org toggle heading")
-	 "m i"   '(org-toggle-item :which-key "Org toggle item")
-	 "m n"   '(org-store-link :which-key "Org store link")
-	 "m o"   '(org-set-property :which-key "Org set property")
-	 "m t"   '(org-todo :which-key "Org todo")
-	 "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
-	 "m B"   '(org-babel-tangle :which-key "Org babel tangle")
-	 "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
-	 "m T"   '(org-todo-list :which-key "Org todo list")
+	 ;; "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
+	 ;; "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
+	 ;; "m ."   '(counsel-org-goto :which-key "Counsel org goto")
+	 ;; "m e"   '(org-export-dispatch :which-key "Org export dispatch")
+	 ;; "m f"   '(org-footnote-new :which-key "Org footnote new")
+	 ;; "m h"   '(org-toggle-heading :which-key "Org toggle heading")
+	 ;; "m i"   '(org-toggle-item :which-key "Org toggle item")
+	 ;; "m n"   '(org-store-link :which-key "Org store link")
+	 ;; "m o"   '(org-set-property :which-key "Org set property")
+	 "o t"   '(org-todo :which-key "Org todo")
+	 "o d"   '(org-deadline :which-key "Org Deadline")
+	 "o q"   '(org-set-tags :which-key "Org Tags")
+	 ;; "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
+	 ;; "m B"   '(org-babel-tangle :which-key "Org babel tangle")
+	 ;; "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
+	 ;; "m T"   '(org-todo-list :which-key "Org todo list")
 	 "o a"   '(org-agenda :which-key "Org agenda")
   )
 #+end_src
@@ -420,6 +459,7 @@ Escape with escape like in Vim.
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-set-key (kbd "M-c") 'kill-buffer)
 #+end_src
 
 ** Font
