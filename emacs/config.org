@@ -375,11 +375,11 @@ Package used to smooth scrolling.
 *** GUI Settings
 
 #+begin_src emacs-lisp
-(setq inhibit-startup-message t)  ;; Removes the startup page
+  (setq inhibit-startup-message t)  ;; Removes the startup page
 
-(scroll-bar-mode -1)              ;; Disables scrollbar
-(tool-bar-mode -1)                ;; Disables tool-bar
-(tooltip-mode -1)                 ;; Disables tooltips
+  (scroll-bar-mode -1)              ;; Disables scrollbar
+  (tool-bar-mode -1)                ;; Disables tool-bar
+  (tooltip-mode -1)                 ;; Disables tooltips
 #+end_src
 
 *** Line numbers
@@ -406,6 +406,14 @@ Highlights selected line a different colour to make it easier to see.
 Automatically select the help window when it opens (vim's default behavior[
 #+begin_src emacs-lisp
   (setq help-window-select t)
+#+end_src
+
+*** Tab bar
+Tab bar is emacs built in way for having multiple projects in the same frame. Similar to how tmux works in a terminal.
+
+#+begin_src emacs-lisp
+  ;; (setq tab-bar-position t)         ;; Sets the tab to be at the bottom instead of the top
+  (tab-bar-mode t)                  ;; Enables tab bar at the top of the screen (like tmux functionality inside emacs)
 #+end_src
 
 ** Key bindings

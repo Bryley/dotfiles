@@ -2,6 +2,7 @@
 export DOT_DIR="~/dotfiles"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
+export TERM=$TERMINAL
 export CLICOLOR=1                   # Adds colored output
 export LSCOLORS=ExFxCxDxBxegedabagacad # ls command colored output
 
