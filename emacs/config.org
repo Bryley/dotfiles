@@ -479,3 +479,27 @@ Escape with escape like in Vim.
      :weight 'medium
    )
 #+end_src
+
+* Notes
+Here are some useful things I have found along the way while transitioning to emacs from neovim:
+
+** Expression register
+The expression register in evil (~=~ register) behaves mostly like it does in vim however it will evaluate elisp instead.
+
+That means you can do (in insert mode):
+
+~<C-r>=(some-emacs-function argument)<RET>~
+
+This will put the output of the elisp function at the cursor.
+
+I found this confusing as vim offers the =system()= function when in the expression register to run bash commands.
+
+To mymic this behaviour in emacs you can use the ~shell-command-to-string~ function like so:
+
+*Vim way*:
+~<C-r>=system("ls ~/Documents")<RET>~
+
+*Emacs way*:
+~<C-r>=(shell-command-to-string "ls ~/Documents")<RET>~
+
+This will output the files in your Documents folder at your cursor.

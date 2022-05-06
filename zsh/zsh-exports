@@ -6,6 +6,9 @@ export TERM=$TERMINAL
 export CLICOLOR=1                   # Adds colored output
 export LSCOLORS=ExFxCxDxBxegedabagacad # ls command colored output
 
+# Used for work kubernetes clusters
+export HOSTNAME="bryleys-local-machine-1234-5678"
+
 # Setup syntax highlighting colors
 typeset -Ag ZSH_HIGHLIGHT_STYLES
 
