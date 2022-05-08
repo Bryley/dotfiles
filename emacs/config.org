@@ -32,6 +32,7 @@ Evil mode is a mode that turns emacs into vim.
   (use-package evil
     :init      ;; tweak evil's configuration before loading it
     (setq select-enable-clipboard nil) ;; Unlink system clipboard with evil registers
+    (setq evil-undo-system 'undo-redo) ;; Enable undo system
     (setq evil-want-keybinding nil)
     (setq evil-vsplit-window-right t)
     (setq evil-split-window-below t)
@@ -39,22 +40,53 @@ Evil mode is a mode that turns emacs into vim.
     (setq evil-want-C-u-scroll t)
     (setq evil-want-C-i-jump nil) ;; This will make tab work correctly in org mode
     (evil-mode t)
-  )
+    ;; (evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
+    )
   ;; Allows evil to work in more locations
   (use-package evil-collection
     :after evil
     :config
-    (setq evil-collection-mode-list '(dashboard dired ibuffer package-menu))
+    (setq evil-collection-mode-list '(dashboard dired ibuffer package-menu magit))
     (evil-collection-init)
-  )
+    )
   ;; Required so clipboard works like vim (+ register is system clipboard)
   (use-package xclip
     :config
     (xclip-mode)
   )
+
+  ;; Makes gc<motion> comment the code in a file
+  (use-package evil-commentary
+    :config
+    (evil-commentary-mode)
+    )
+
+  ;; Adds the surround plugin (ds' will delete surrounding quotes, etc.)
+  (use-package evil-surround
+    :config
+    (global-evil-surround-mode 1)
+  )
+#+end_src
+
+*** Closing last window
+The default behaviour when closing the last window with ~:q~ ex command in emacs is to close the entire frame even if there are other workgroups. Below is my implementation to instead of closing the frame altogether if the last window is closed then open the dashboard.
+
+#+begin_src emacs-lisp
+  (defun bryley/on-quit ()
+    (interactive)
+    (if (<= (length (window-list)) 1)
+        ;; Switch to dashboard if last window
+        (switch-to-buffer "*dashboard*")
+        ;; Else delete window as usual
+        (evil-window-delete)
+    )
+  )
+
+  (evil-ex-define-cmd "q[uit]" 'bryley/on-quit)
 #+end_src
 
 ** Org mode
+*** Main setup
 Org mode is a super useful tool for note taking and task organization.
 
 First lets setup a hook function that will be called whenever a org mode file is loaded.
@@ -73,13 +105,29 @@ First lets setup a hook function that will be called whenever a org mode file is
     :init
     (setq org-startup-indented t) ;; Indenting is handled automatically by org
     (setq org-log-done 'time)     ;; When marking a TODO item as done record the closed time
-    (setq org-agenda-files '(
-      "~/agenda.org"
-    ))     ;; When marking a TODO item as done record the closed time
+    (setq org-todo-keywords-for-agenda '((sequence "TODO" "INPROGRESS" "DONE")))
+    ;; Adds entry to ,b to create emacs-lisp code blocks
+    (setq org-structure-template-alist '(("b" . "src emacs-lisp")
+                                         ("a" . "export ascii")
+                                         ("c" . "center")
+                                         ("C" . "comment")
+                                         ("e" . "example")
+                                         ("E" . "export")
+                                         ("h" . "export html")
+                                         ("l" . "export latex")
+                                         ("q" . "quote")
+                                         ("s" . "src")
+                                         ("v" . "verse")))
     :hook (org-mode . bryley/org-mode-setup)
     :config
     (setq org-ellipsis " ▾")
-  )
+    )
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq org-agenda-files '(
+      "~/Dropbox/org_files"
+  ))
 #+end_src
 
 *** org-superstar
@@ -120,27 +168,118 @@ org-tempo contains a few useful org command that no longer exist such as =<s= th
 Projectile gives you lots of useful commands for managing projects.
 
 #+begin_src emacs-lisp
-  (use-package projectile
-    :diminish projectile-mode
-    :config (projectile-mode)
-    :custom ((projectile-completion-system 'ivy))
-    :init
-    (setq projectile-switch-project-action #'projectile-dired)
-  )
+    (use-package projectile
+      :init
+      (setq projectile-switch-project-action #'projectile-dired)
+      (setq projectile-indexing-method 'alien)
+      (setq projectile-project-search-path '("~/Documents" ("~/dotfiles" . 0)))
 
-  (use-package counsel-projectile
-    :config (counsel-projectile-mode)
+      ;; :hook (after-init . projectile-mode)
+    )
+    (projectile-mode +1)
+
+  ;;  (use-package counsel-projectile
+  ;;    :config (counsel-projectile-mode)
+  ;;  )
+#+end_src
+
+** Magit
+
+Magit is a git client built for emacs.
+
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+
+** Consult
+Consult is a handy completion package that has similarities with telescope in neovim.
+
+#+begin_src emacs-lisp
+  (use-package consult
+    :init
+    ; Sets the default project root to be closest git project
+    ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
   )
 #+end_src
 
 ** Language Server Protocol
+
 LSPs are useful for autocompleting and understanding code as you write it.
 
 #+begin_src emacs-lisp
   (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :init
+    ;; Temp
+    (setq lsp-keymap-prefix "C-c l")
     :hook (lsp-mode . lsp-enable-which-key-integration)
     :commands lsp
   )
+#+end_src
+
+Better alternatives to commands using consult.
+
+#+begin_src emacs-lisp
+  (use-package consult-lsp)
+#+end_src
+
+Have a dropdown for code completions.
+
+#+begin_src emacs-lisp
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    :custom
+    (company-idle-delay 0.0)   ;; No delay
+    (company-minimum-prefix-length 1) ;; Open suggestions after 1 character typed
+    (company-selection-wrap-around t) ;; Wrap around when reaching bottom/top
+  )
+
+  ;; Better looking dropdown
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package lsp-ui
+    :after general
+    :commands lsp-ui-mode
+    :custom
+    (lsp-ui-doc-position 'at-point)
+    :config
+    :general
+    (general-nmap
+      :predicate 'lsp-mode
+      "K" 'lsp-ui-doc-glance)
+    ;; (general-nmap
+    ;;   :predicate 'lsp-mode
+    ;;   "gs" 'lsp-signature-activate)
+    (general-nmap
+      :predicate 'lsp-mode
+      "gr" 'lsp-ui-peek-find-references)
+    ;; (general-nmap
+    ;;   :predicate 'lsp-mode
+    ;;   "gd" 'lsp-ui-peek-find-definitions)
+  )
+#+end_src
+
+#+begin_src emacs-lisp
+
+  ;; Function switches will toggle the symbols page for lsp-treemacs
+  (defun lsp-treemacs-symbols-toggle ()
+    "Toggle the lsp-treemacs-symbols buffer."
+    (interactive)
+    (if (get-buffer "*LSP Symbols List*")
+        (kill-buffer "*LSP Symbols List*")
+      (progn (lsp-treemacs-symbols)
+             (other-window -1))))
+
+  (use-package lsp-treemacs
+    :after '(lsp treemacs)
+    :config
+    (lsp-treemacs-sync-mode t)
+    )
+  ;; :commands lsp-treemacs-errors-list)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -201,14 +340,19 @@ Neotree is a file explorer package.
 
 #+begin_src emacs-lisp
   (use-package treemacs
-    :bind ("<f2>" . treemacs)
+    :config
+    ;; This will update with projectile automatically to show the correct project
+    ;; If this isn't working call treemacs-display-current-project-exclusively
+    (treemacs-project-follow-mode)
   )
+
   (use-package treemacs-evil
     :after (treemacs evil)
   )
   (use-package treemacs-projectile
     :after (treemacs projectile)
   )
+  ;; Icons for dired from treemacs
   (use-package treemacs-icons-dired
     :hook (dired-mode . treemacs-icons-dired-enable-once)
   )
@@ -224,25 +368,211 @@ Adds rainbox highlighted brackets to make it easier to see bracket links.
   )
 #+end_src
 
-** general
+** General.el (Key bindings)
 General is a keybinding plugin that allows for easy kindbindings to be setup with a leader key.
 
-#+begin_src emacs-lisp
-(use-package general
-  :config
-  (general-evil-setup t)
-)
-#+end_src
-The key bindings are setup under the 'Key bindings' section.
+TODO move keybindings to here, look at https://github.com/jakebox/jake-emacs/blob/main/jake-emacs/init.org for inspiration.
 
+*** SPC Leader
+
+#+begin_src emacs-lisp
+  (use-package general
+    :config
+    (general-evil-setup t)
+
+    ;; SPC prefix
+    (general-define-key
+     :states '(normal motion visual)
+     :keymaps 'override
+     :prefix "SPC"
+
+     ;; Top level shortcuts
+     "SPC" '(execute-extended-command :which-key "M-x")
+     "d"   '(find-dired :which-key "Dired")
+     "r"   '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload config")
+
+
+     ;; Help commands
+     "h"   '(nil :which-key "help")
+     "hv"  '(describe-variable :which-key "variable")
+     "hf"  '(describe-function :which-key "function")
+     "hx"  '(describe-command :which-key "command")
+     "hm"  '(describe-mode :which-key "mode")
+     "hk"  '(describe-key :which-key "key")
+     "hb"  '(describe-bindings :which-key "bindings")
+
+
+     ;; Find commands
+     "f"   '(nil :which-key "find")
+     ;; "ff"  '(consult-find :which-key "Find file")
+     "ff"  '(projectile-find-file :which-key "find file")
+     "fr"  '(consult-recent-file :which-key "find recent")
+     "fh"  '(consult-org-heading :which-key "find heading")
+     "fb"  '(consult-buffer :which-key "find buffer")
+     "fg"  '(consult-ripgrep :which-key "grep files")
+
+
+     ;; Buffers
+     "b"   '(nil :which-key "buffers")
+     "bh"  '(centaur-tabs-backward-tab :which-key "backward buffer")
+     "bl"  '(centaur-tabs-forward-tab :which-key "forward buffer")
+     ;; "bq"  '(kill-buffer :which-key "kill buffer")
+     "bq"  '((lambda () (interactive) (kill-buffer (current-buffer))) :which-key "kill buffer")
+
+
+     ;; eyebrowse commands
+     "a"   '(nil :which-key "eyebrowse")
+     "af"  '(eyebrowse-switch-to-window-config :which-key "find window config")
+     "an"  '(eyebrowse-next-window-config :which-key "next eyebrowse config")
+     "ap"  '(eyebrowse-prev-window-config :which-key "prev eyebrowse config")
+     ;; Vim-like keybindings
+     "al"  '(eyebrowse-next-window-config :which-key "next eyebrowse config")
+     "ah"  '(eyebrowse-prev-window-config :which-key "prev eyebrowse config")
+
+     "ac"  '(eyebrowse-create-window-config :which-key "create eyebrowse config")
+     "a,"  '(eyebrowse-rename-window-config :which-key "rename eyebrowse config")
+     "aq"  '(eyebrowse-close-window-config :which-key "close eyebrowse config")
+
+
+     ;; Projectile
+     "p"   '(nil :which-key "projectile")
+     "pp"  '(projectile-switch-project :which-key "switch project")
+
+     )
+
+
+    ;; Ctl-A leader (eyebrowse and tmux)
+    (general-define-key
+     :keymaps 'override
+     :prefix "C-a"
+     "f"  '(eyebrowse-switch-to-window-config :which-key "find window config")
+     "n"  '(eyebrowse-next-window-config :which-key "next eyebrowse config")
+     "p"  '(eyebrowse-prev-window-config :which-key "prev eyebrowse config")
+
+     ;; Vim-like keybindings
+     "l"  '(eyebrowse-next-window-config :which-key "next eyebrowse config")
+     "h"  '(eyebrowse-prev-window-config :which-key "prev eyebrowse config")
+
+     "c"  '(eyebrowse-create-window-config :which-key "create eyebrowse config")
+     ","  '(eyebrowse-rename-window-config :which-key "rename eyebrowse config")
+     "q"  '(eyebrowse-close-window-config :which-key "close eyebrowse config")
+     )
+    )
+#+end_src
+
+*** Application Leader (",")
+**** Org mode
+These are org-mode related keybindings that will be available in org mode.
+
+#+begin_src emacs-lisp
+  (general-def
+    :states 'normal
+    :keymaps 'org-mode-map
+    :prefix ","
+
+    "t"   '(org-todo :which-key "Org todo")
+    "c"   '(nil :which-key "clocking")
+    "cd"  '(org-deadline :which-key "deadline")
+    "cs"  '(org-schedule :which-key "schedule")
+    "q"   '(org-set-tags :which-key "tags")
+    "b"   '(org-insert-structure-template :which-key "create '#+begin_' block")
+  )
+#+end_src
+
+**** LSP mode
+
+For all programming things
+#+begin_src emacs-lisp
+  (general-def
+    :states 'normal
+    :keymaps 'lsp-mode-map
+    :prefix ","
+
+    "l"    '(nil :which-key "lsp")
+    "ld"   '(consult-lsp-diagnostics :which-key "diagnostics")
+    "lr"   '(lsp-rename :which-key "rename")
+    "ls"   '(lsp-treemacs-symbols-toggle :which-key "toggle symbols view")
+    
+    "lg"   '(nil :which-key "goto")
+    "lgd"   '(lsp-find-definition :which-key "definition")
+    "lgr"   '(lsp-find-references :which-key "references")
+    "lgt"   '(lsp-find-type-definition :which-key "type definition")
+
+  )
+#+end_src
+
+*** Global overrides
+
+**** Treemacs
+Make treemacs more like nvim.tree keybindings
+
+#+begin_src emacs-lisp
+  ;; TODO make this work because it is disabling Control V in other buffers as well
+  ;; (general-def
+  ;;   :states '(normal motion visual)
+  ;;   ;; :keymaps 'override
+  ;;   :keymaps 'treemacs-mode-map
+
+  ;;   "C-v" 'treemacs-visit-node-horizontal-split
+  ;;   "C-x" 'treemacs-visit-node-vertical-split
+  ;; )
+#+end_src
+
+**** Main overrides
+Here is a list of keybindings that override default behaviour.
+
+#+begin_src emacs-lisp
+  (general-def
+    :keymaps 'override
+
+    "<f2>" 'treemacs
+    "<f4>" 'vterm-toggle
+    ;; "<f2>" '(lambda () (interactive) (bryley/toggle_treemacs))
+     ;; "r"   '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload config")
+
+    ;; Emacs --------
+    ;; "ß" 'evil-window-next ;; option-s
+    ;; "Í" 'other-frame ;; option-shift-s
+    ;; "C-S-B" 'counsel-switch-buffer
+    ;; "∫" 'counsel-switch-buffer ;; option-b
+    ;; "s-o" 'jib-hydra-window/body
+
+    ;; Remapping normal help features to use Counsel version
+    ;; "C-h v" 'counsel-describe-variable
+    ;; "C-h o" 'counsel-describe-symbol
+    ;; "C-h f" 'counsel-describe-function
+    ;; "C-h F" 'counsel-describe-face
+
+    ;; Editing ------
+    ;; "M-v" 'simpleclip-paste
+    ;; "M-V" 'evil-paste-after ;; shift-paste uses the internal clipboard
+    ;; "M-c" 'simpleclip-copy
+    ;; "M-u" 'capitalize-dwim ;; Default is upcase-dwim
+    ;; "M-U" 'upcase-dwim ;; M-S-u (switch upcase and capitalize)
+    ;; "C-c u" 'jib/split-and-close-sentence
+
+    ;; Utility ------
+    ;; "C-c c" 'org-capture
+    ;; "C-c a" 'org-agenda
+    ;; "C-s" 'counsel-grep-or-swiper ;; Large files will use grep (faster)
+    ;; "s-\"" 'ispell-word ;; that's super-shift-'
+    ;; "M-+" 'jib/calc-speaking-time
+
+    ;; super-number functions
+    ;; "s-1" 'mw-thesaurus-lookup-dwim
+    ;; "s-2" 'ispell-buffer
+    ;; "s-3" 'revert-buffer
+    ;; "s-4" '(lambda () (interactive) (counsel-file-jump nil jib/dropbox))
+    )
+#+end_src
 ** helpful
 helpful is a package that offers an alternate better help buffer page with colours.
 
 #+begin_src emacs-lisp
   (use-package helpful
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
+    ;; :custom
+    ;; (counsel-describe-function-function #'helpful-callable)
+    ;; (counsel-describe-variable-function #'helpful-variable)
     :bind
     ([remap describe-function] . helpful-function)
     ([remap describe-symbol] . helpful-symbol)
@@ -280,6 +610,9 @@ Dashboard is used to include a dashboard when emacs opens up.
 
 #+begin_src emacs-lisp
   (use-package dashboard
+    :init
+    (setq dashboard-projects-backend 'projectile)
+    (setq dashboard-items '((recents . 5) (agenda . 5) (projects . 5)))
     :config
     (dashboard-setup-startup-hook)
   )
@@ -296,37 +629,93 @@ Which key is a package that helps with showing the available options when doing 
   )
 #+end_src
 
-** Ivy
+** Vertico
+Vertico is a lightweight alternative to ivy/helm completion system.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (setq vertico-cycle t)
+    (vertico-mode)
+  )
+#+end_src
+
+Orderless is an extention to vertico which makes searching more like a fuzzy search.
+
+#+begin_src emacs-lisp
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion))))
+  )
+#+end_src
+
+savehist is an extention to vertico which saves the history and shows most recent at the top for convenience.
+
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    (savehist-mode)
+  )
+#+end_src
+
+Enable richer annotations using the Marginalia package.
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :init
+    (marginalia-mode))
+#+end_src
+
+** eyebrowse
+Eyebrowse is a window layout manager and is useful for emulating a tmux" like environment in emacs where multiple projects can exist on separate buffers.
+
+#+begin_src emacs-lisp
+  (use-package eyebrowse
+    :init
+    (setq eyebrowse-wrap-around t)  ;; Will wrap back to beginning if cycled too far
+    (setq eyebrowse-new-workspace "*dashboard*")  ;; Makes default buffer on new workspaces the dashboard
+    :config
+    (eyebrowse-mode)
+  )
+#+end_src
+
+** Ivy (OLD delete later)
+TODO switch from ivy to vertico
 
 Ivy is a fuzzy finder tool that integrates itself within Emacs.
 
 #+begin_src emacs-lisp
-  (use-package ivy
-    :config
-    (ivy-mode)
-  )
+;;  (use-package ivy
+;;    :config
+;;    (ivy-mode)
+;;  )
 #+end_src
 
 Ivy rich is an extention to ivy that makes ivy have even better things.
 
 #+begin_src emacs-lisp
-  (use-package ivy-rich
-    :init
-    (ivy-rich-mode t)
-  )
+;;  (use-package ivy-rich
+;;    :init
+;;    (ivy-rich-mode t)
+;;  )
 #+end_src
 
 ** Counsel
 Counsel is another ivy extention that allows for better default keybindings for find file M-x and so on.
 
 #+begin_src emacs-lisp
-    (use-package counsel
-    :bind (("M-x" . counsel-M-x)
-	   ("C-x b" . counsel-ibuffer)
-	   ("C-x C-f" . counsel-find-file)
-	   :map minibuffer-local-map
-	   ("C-r" . 'counsel-minibuffer-history))
-    )
+;;    (use-package counsel
+;;    :bind (("M-x" . counsel-M-x)
+;;	   ("C-x b" . counsel-ibuffer)
+;;	   ("C-x C-f" . counsel-find-file)
+;;	   :map minibuffer-local-map
+;;	   ("C-r" . 'counsel-minibuffer-history))
+;;    )
 #+end_src
 
 ** All the Icons
@@ -370,6 +759,56 @@ Package used to smooth scrolling.
   )
 #+end_src
 
+** pyvenv
+pyvenv allows us to easily select virutal environments
+
+#+begin_src emacs-lisp
+  (use-package pyvenv)
+
+  (defun activate ()
+      (interactive)
+      (pyvenv-activate ".venv")
+      (lsp-restart-workspace)
+      (treemacs-display-current-project-exclusively)
+      (message "Activated workspace")
+  )
+#+end_src
+
+** vterm
+Superior terminal emulation inside of Emacs.
+
+#+begin_src emacs-lisp
+  (use-package vterm)
+
+  ;; Simple package to toggle vterm at the bottom of the screen
+  (use-package vterm-toggle)
+  ;; This is to change the height of the terminal by default
+  (setq vterm-toggle-fullscreen-p nil)
+  (add-to-list 'display-buffer-alist
+               '((lambda(bufname _) (with-current-buffer bufname
+                                      (or (equal major-mode 'vterm-mode)
+                                          (string-prefix-p vterm-buffer-name bufname))))
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 ;;(display-buffer-reuse-window display-buffer-in-direction)
+                 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                 ;;(direction . bottom)
+                 ;;(dedicated . t) ;dedicated is supported in emacs27
+                 (reusable-frames . visible)
+                 (window-height . 0.3)))
+#+end_src
+
+** Centaur tabs
+Centaur tabs offers a tab bar at the top of frames for each buffer in the project giving a much more IDE-like feel.
+
+#+begin_src emacs-lisp
+  (use-package centaur-tabs
+    :config
+    ;; Don't include any automatic/default buffers as tabs
+    (setq centaur-tabs-excluded-prefixes '("*" " *"))
+    (centaur-tabs-mode t)
+  )
+#+end_src
+
 * Global Configurations
 ** Must-have Configurations
 *** GUI Settings
@@ -377,6 +816,7 @@ Package used to smooth scrolling.
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)  ;; Removes the startup page
 
+  (menu-bar-mode -1)                ;; Disables the "File", "Edit" and stuff at the top
   (scroll-bar-mode -1)              ;; Disables scrollbar
   (tool-bar-mode -1)                ;; Disables tool-bar
   (tooltip-mode -1)                 ;; Disables tooltips
@@ -386,7 +826,7 @@ Package used to smooth scrolling.
     Enables line numbers.
 #+begin_src emacs-lisp
   (setq display-line-numbers-type 'visual)  ;; Use relative line numbers (visually shown)
-(setq-default left-fringe-width  10)
+  (setq-default display-line-numbers-width 3)
   (global-display-line-numbers-mode t)                 ;; Enable line numbers
 #+end_src
 
@@ -413,7 +853,7 @@ Tab bar is emacs built in way for having multiple projects in the same frame. Si
 
 #+begin_src emacs-lisp
   ;; (setq tab-bar-position t)         ;; Sets the tab to be at the bottom instead of the top
-  (tab-bar-mode t)                  ;; Enables tab bar at the top of the screen (like tmux functionality inside emacs)
+  ;;(tab-bar-mode t)                  ;; Enables tab bar at the top of the screen (like tmux functionality inside emacs)
 #+end_src
 
 ** Key bindings
@@ -434,33 +874,34 @@ Make it so that Ctrl-Shift-V pastes from clipboard.
 *** General
 Below are keybindings that use a leader key (Space) using the package ~general~.
 #+begin_src emacs-lisp
-  (nvmap :keymaps 'override :prefix "SPC"
-	 "SPC"   '(counsel-M-x :which-key "M-x")
-	 "f f"   '(projectile-find-file :which-key "Find file")
-	 "f b"   '(counsel-buffer-or-recentf :which-key "Find buffer")
-	 "r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
-	 "p"     '(projectile-command-map :which-key "Projectile Commands")
-	 "l"     '(lsp-map :which-key "LSP Commands" :predicate '(lsp-mode))
-  )
-  (nvmap :keymaps 'override :prefix "SPC"
-	 ;; "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
-	 ;; "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
-	 ;; "m ."   '(counsel-org-goto :which-key "Counsel org goto")
-	 ;; "m e"   '(org-export-dispatch :which-key "Org export dispatch")
-	 ;; "m f"   '(org-footnote-new :which-key "Org footnote new")
-	 ;; "m h"   '(org-toggle-heading :which-key "Org toggle heading")
-	 ;; "m i"   '(org-toggle-item :which-key "Org toggle item")
-	 ;; "m n"   '(org-store-link :which-key "Org store link")
-	 ;; "m o"   '(org-set-property :which-key "Org set property")
-	 "o t"   '(org-todo :which-key "Org todo")
-	 "o d"   '(org-deadline :which-key "Org Deadline")
-	 "o q"   '(org-set-tags :which-key "Org Tags")
-	 ;; "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
-	 ;; "m B"   '(org-babel-tangle :which-key "Org babel tangle")
-	 ;; "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
-	 ;; "m T"   '(org-todo-list :which-key "Org todo list")
-	 "o a"   '(org-agenda :which-key "Org agenda")
-  )
+;;  (nvmap :keymaps 'override :prefix "SPC"
+;;         "SPC"   '(counsel-M-x :which-key "M-x")
+;;         "f f"   '(projectile-find-file :which-key "Find file")
+;;         "f b"   '(counsel-buffer-or-recentf :which-key "Find buffer")
+;;         "r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
+;;         "p"     '(projectile-command-map :which-key "Projectile Commands")
+;;         "l"     '(lsp-map :which-key "LSP Commands" :predicate '(lsp-mode))
+;;  )
+;;  (nvmap :keymaps 'override :prefix "SPC"
+;;         ;; "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
+;;         ;; "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
+;;         ;; "m ."   '(counsel-org-goto :which-key "Counsel org goto")
+;;         ;; "m e"   '(org-export-dispatch :which-key "Org export dispatch")
+;;         ;; "m f"   '(org-footnote-new :which-key "Org footnote new")
+;;         ;; "m h"   '(org-toggle-heading :which-key "Org toggle heading")
+;;         ;; "m i"   '(org-toggle-item :which-key "Org toggle item")
+;;         ;; "m n"   '(org-store-link :which-key "Org store link")
+;;         ;; "m o"   '(org-set-property :which-key "Org set property")
+;;         "o t"   '(org-todo :which-key "Org todo")
+;;         "o d"   '(org-deadline :which-key "Org Deadline")
+;;         "o s"   '(org-schedule :which-key "Org Schedule")
+;;         "o q"   '(org-set-tags :which-key "Org Tags")
+;;         ;; "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
+;;         ;; "m B"   '(org-babel-tangle :which-key "Org babel tangle")
+;;         ;; "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
+;;         ;; "m T"   '(org-todo-list :which-key "Org todo list")
+;;         "o a"   '(org-agenda :which-key "Org agenda")
+;;         )
 #+end_src
 
 Escape with escape like in Vim.

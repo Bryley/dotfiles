@@ -138,6 +138,13 @@ local setup = function (update_volume)
             {description = "Open a web browser", group = "launcher"}
         ),
         awful.key(
+            {options.modkey}, "e",
+            function ()
+                awful.spawn("emacs")
+            end,
+            {description = "Open Emacs", group = "launcher"}
+        ),
+        awful.key(
             { options.modkey, "Control" }, "r",
             awesome.restart,
             {description = "Reload awesome", group = "awesome"}
