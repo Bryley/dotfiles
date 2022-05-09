@@ -6,23 +6,23 @@
 The following code is used to setup 'use-package'
 
 #+begin_src emacs-lisp
-(require 'package)
+  (require 'package)
 
-(setq package-archives '(
-    ("melpa" . "https://melpa.org/packages/")
-    ("org" . "https://orgmode.org/elpa/")
-    ("elpa" . "https://elpa.gnu.org/packages/")
-))
+  (setq package-archives '(
+      ("melpa" . "https://melpa.org/packages/")
+      ("org" . "https://orgmode.org/elpa/")
+      ("elpa" . "https://elpa.gnu.org/packages/")
+  ))
 
-(package-initialize)
+  (package-initialize)
 
-(setq use-package-always-ensure t)              ;; Always use :ensure by default
+  (setq use-package-always-ensure t)              ;; Always use :ensure by default
 
-(unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package)
-)
-(eval-when-compile (require 'use-package))      ;; Use 'use-package'
+  (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package)
+  )
+  (eval-when-compile (require 'use-package))      ;; Use 'use-package'
 #+end_src
 
 * Package Setups
@@ -40,6 +40,7 @@ Evil mode is a mode that turns emacs into vim.
     (setq evil-want-C-u-scroll t)
     (setq evil-want-C-i-jump nil) ;; This will make tab work correctly in org mode
     (evil-mode t)
+    (modify-syntax-entry ?_ "w")  ;; Make _ be apart of evil 'words'
     ;; (evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
     )
   ;; Allows evil to work in more locations
@@ -192,183 +193,19 @@ Magit is a git client built for emacs.
 #+end_src
 
 ** Consult
-Consult is a handy completion package that has similarities with telescope in neovim.
+
+Consult is a handy completion package (like counsil) that has similarities with telescope in neovim.
 
 #+begin_src emacs-lisp
   (use-package consult
-    :init
+    ;; :init
     ; Sets the default project root to be closest git project
     ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
   )
 #+end_src
 
-** Language Server Protocol
-
-LSPs are useful for autocompleting and understanding code as you write it.
-
-#+begin_src emacs-lisp
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-    :init
-    ;; Temp
-    (setq lsp-keymap-prefix "C-c l")
-    :hook (lsp-mode . lsp-enable-which-key-integration)
-    :commands lsp
-  )
-#+end_src
-
-Better alternatives to commands using consult.
-
-#+begin_src emacs-lisp
-  (use-package consult-lsp)
-#+end_src
-
-Have a dropdown for code completions.
-
-#+begin_src emacs-lisp
-  (use-package company
-    :after lsp-mode
-    :hook (lsp-mode . company-mode)
-    :custom
-    (company-idle-delay 0.0)   ;; No delay
-    (company-minimum-prefix-length 1) ;; Open suggestions after 1 character typed
-    (company-selection-wrap-around t) ;; Wrap around when reaching bottom/top
-  )
-
-  ;; Better looking dropdown
-  (use-package company-box
-    :hook (company-mode . company-box-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-  (use-package lsp-ui
-    :after general
-    :commands lsp-ui-mode
-    :custom
-    (lsp-ui-doc-position 'at-point)
-    :config
-    :general
-    (general-nmap
-      :predicate 'lsp-mode
-      "K" 'lsp-ui-doc-glance)
-    ;; (general-nmap
-    ;;   :predicate 'lsp-mode
-    ;;   "gs" 'lsp-signature-activate)
-    (general-nmap
-      :predicate 'lsp-mode
-      "gr" 'lsp-ui-peek-find-references)
-    ;; (general-nmap
-    ;;   :predicate 'lsp-mode
-    ;;   "gd" 'lsp-ui-peek-find-definitions)
-  )
-#+end_src
-
-#+begin_src emacs-lisp
-
-  ;; Function switches will toggle the symbols page for lsp-treemacs
-  (defun lsp-treemacs-symbols-toggle ()
-    "Toggle the lsp-treemacs-symbols buffer."
-    (interactive)
-    (if (get-buffer "*LSP Symbols List*")
-        (kill-buffer "*LSP Symbols List*")
-      (progn (lsp-treemacs-symbols)
-             (other-window -1))))
-
-  (use-package lsp-treemacs
-    :after '(lsp treemacs)
-    :config
-    (lsp-treemacs-sync-mode t)
-    )
-  ;; :commands lsp-treemacs-errors-list)
-#+end_src
-
-#+begin_src emacs-lisp
-  ;;    (use-package lsp-mode
-  ;;      :commands (lsp lsp-deferred)
-  ;;      :hook (lsp-mode . efs/lsp-mode-setup)
-  ;;      :init
-  ;;      (setq lsp-keymap-prefix "SPC l")
-  ;;      :config
-  ;;      (lsp-enable-which-key-integration t)
-  ;;    )
-;;  (use-package lsp-mode
-;;    :init
-;;    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-;;    (setq lsp-keymap-prefix "SPC l")
-;;    :hook (
-;;           (python-mode . lsp)
-;;           (lsp-mode . lsp-enable-which-key-integration))
-;;    :commands lsp
-;;    )
-  ;;    (use-package lsp-ui
-  ;;      :after general
-  ;;      :commands lsp-ui-mode
-  ;;      :config
-  ;;       :general
-  ;; 	(general-nmap
-  ;; 	  :predicate 'lsp-mode
-  ;; 		"K" 'lsp-ui-doc-glance)
-  ;; 	(general-nmap
-  ;; 	  :predicate 'lsp-mode
-  ;; 		"gs" 'lsp-signature-activate)
-  ;; 	(general-nmap
-  ;; 	  :predicate 'lsp-mode
-  ;; 		"gr" 'lsp-ui-peek-find-references)
-  ;; 	(general-nmap
-  ;; 	  :predicate 'lsp-mode
-  ;; 		"gd" 'lsp-ui-peek-find-definitions)
-  ;; 	)
- ;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-  ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-#+end_src
-
-*** Python
-Setup pyright LSP server for python.
-
-#+begin_src emacs-lisp
-    (use-package lsp-pyright
-      :hook (python-mode . (lambda ()
-                              (require 'lsp-pyright)
-                              (lsp)
-                          )
-            )
-    )  ; or lsp-deferred
-#+end_src
-
-** Treemacs
-Neotree is a file explorer package.
-
-#+begin_src emacs-lisp
-  (use-package treemacs
-    :config
-    ;; This will update with projectile automatically to show the correct project
-    ;; If this isn't working call treemacs-display-current-project-exclusively
-    (treemacs-project-follow-mode)
-  )
-
-  (use-package treemacs-evil
-    :after (treemacs evil)
-  )
-  (use-package treemacs-projectile
-    :after (treemacs projectile)
-  )
-  ;; Icons for dired from treemacs
-  (use-package treemacs-icons-dired
-    :hook (dired-mode . treemacs-icons-dired-enable-once)
-  )
-#+end_src
-
-** Rainbow Delimiters
-
-Adds rainbox highlighted brackets to make it easier to see bracket links.
-
-#+begin_src emacs-lisp
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode)
-  )
-#+end_src
-
 ** General.el (Key bindings)
+
 General is a keybinding plugin that allows for easy kindbindings to be setup with a leader key.
 
 TODO move keybindings to here, look at https://github.com/jakebox/jake-emacs/blob/main/jake-emacs/init.org for inspiration.
@@ -388,8 +225,10 @@ TODO move keybindings to here, look at https://github.com/jakebox/jake-emacs/blo
 
      ;; Top level shortcuts
      "SPC" '(execute-extended-command :which-key "M-x")
-     "d"   '(find-dired :which-key "Dired")
-     "r"   '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload config")
+     "d"   '(find-dired :which-key "dired")
+     "r"   '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "reload config")
+     "o"   '(find-file :which-key "open")
+     "c"   '(numpydoc-generate :which-key "generate comments")
 
 
      ;; Help commands
@@ -565,6 +404,233 @@ Here is a list of keybindings that override default behaviour.
     ;; "s-4" '(lambda () (interactive) (counsel-file-jump nil jib/dropbox))
     )
 #+end_src
+** Language Server Protocol
+
+LSPs are useful for autocompleting and understanding code as you write it.
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :init
+    ;; Temp
+    (setq lsp-keymap-prefix "C-c l")
+    :hook (lsp-mode . lsp-enable-which-key-integration)
+    :commands lsp
+  )
+#+end_src
+
+Better alternatives to commands using consult.
+
+#+begin_src emacs-lisp
+    (use-package consult-lsp
+      :after (consult lsp))
+#+end_src
+
+Have a dropdown for code completions.
+
+#+begin_src emacs-lisp
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    :custom
+    (company-idle-delay 0.0)   ;; No delay
+    (company-minimum-prefix-length 1) ;; Open suggestions after 1 character typed
+    (company-selection-wrap-around t) ;; Wrap around when reaching bottom/top
+  )
+
+  ;; Better looking dropdown
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package lsp-ui
+    :after general
+    :commands lsp-ui-mode
+    :custom
+    (lsp-ui-doc-position 'at-point)
+    :config
+    :general
+    (general-nmap
+      :predicate 'lsp-mode
+      "K" 'lsp-ui-doc-glance)
+    ;; (general-nmap
+    ;;   :predicate 'lsp-mode
+    ;;   "gs" 'lsp-signature-activate)
+    (general-nmap
+      :predicate 'lsp-mode
+      "gr" 'lsp-ui-peek-find-references)
+    ;; (general-nmap
+    ;;   :predicate 'lsp-mode
+    ;;   "gd" 'lsp-ui-peek-find-definitions)
+  )
+#+end_src
+
+#+begin_src emacs-lisp
+
+  ;; Function switches will toggle the symbols page for lsp-treemacs
+  (defun lsp-treemacs-symbols-toggle ()
+    "Toggle the lsp-treemacs-symbols buffer."
+    (interactive)
+    (if (get-buffer "*LSP Symbols List*")
+        (kill-buffer "*LSP Symbols List*")
+      (progn (lsp-treemacs-symbols)
+             (other-window -1))))
+
+  (use-package lsp-treemacs
+    :after '(lsp treemacs)
+    :config
+    (lsp-treemacs-sync-mode t)
+    )
+  ;; :commands lsp-treemacs-errors-list)
+#+end_src
+
+#+begin_src emacs-lisp
+  ;;    (use-package lsp-mode
+  ;;      :commands (lsp lsp-deferred)
+  ;;      :hook (lsp-mode . efs/lsp-mode-setup)
+  ;;      :init
+  ;;      (setq lsp-keymap-prefix "SPC l")
+  ;;      :config
+  ;;      (lsp-enable-which-key-integration t)
+  ;;    )
+;;  (use-package lsp-mode
+;;    :init
+;;    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;;    (setq lsp-keymap-prefix "SPC l")
+;;    :hook (
+;;           (python-mode . lsp)
+;;           (lsp-mode . lsp-enable-which-key-integration))
+;;    :commands lsp
+;;    )
+  ;;    (use-package lsp-ui
+  ;;      :after general
+  ;;      :commands lsp-ui-mode
+  ;;      :config
+  ;;       :general
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"K" 'lsp-ui-doc-glance)
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"gs" 'lsp-signature-activate)
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"gr" 'lsp-ui-peek-find-references)
+  ;; 	(general-nmap
+  ;; 	  :predicate 'lsp-mode
+  ;; 		"gd" 'lsp-ui-peek-find-definitions)
+  ;; 	)
+ ;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+#+end_src
+
+*** Python
+Setup pyright LSP server for python.
+
+#+begin_src emacs-lisp
+    (use-package lsp-pyright
+      :hook (python-mode . (lambda ()
+                              (require 'lsp-pyright)
+                              (lsp)
+                          )
+            )
+    )  ; or lsp-deferred
+#+end_src
+
+** Treesitter
+
+Treesitter is a language parser and ties in well with syntax highlighting.
+
+#+begin_src emacs-lisp
+
+  (defun enable-tree-sitter ()
+    (interactive)
+    (tree-sitter-mode)
+    (tree-sitter-hl-mode)
+  )
+
+  (use-package tree-sitter
+    :hook
+    (python-mode . enable-tree-sitter)
+    (web-mode . enable-tree-sitter)
+    ;; TODO add more hooks
+    :config
+    ;; (global-tree-sitter-mode)
+    ;; (add-hook prog-mode-hook #'tree-sitter-mode)
+    )
+  (use-package tree-sitter-langs
+    :after treesitter
+    :config
+    (tree-sitter-require 'python)
+    (tree-sitter-require 'javascript)
+    (tree-sitter-require 'html)
+    (tree-sitter-require 'css)
+    (tree-sitter-require 'typescript)
+    (tree-sitter-require 'json)
+    (tree-sitter-require 'bash)
+  )
+#+end_src
+
+#+RESULTS:
+
+** yasnippet
+
+Yasnippet is a snippet handler for emacs.
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode t)
+  )
+#+end_src
+
+** Numpy docs (Python)
+
+Used for generating numpy documentation in python code.
+
+#+begin_src emacs-lisp
+  (use-package numpydoc
+    :custom
+    (numpydoc-insertion-style 'yas)
+  )
+#+end_src
+
+** Treemacs
+Neotree is a file explorer package.
+
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :custom
+    (treemacs--project-follow-delay 0.1)
+    :config
+    ;; This will update with projectile automatically to show the correct project
+    ;; If this isn't working call treemacs-display-current-project-exclusively
+    (treemacs-project-follow-mode)
+  )
+
+  (use-package treemacs-evil
+    :after (treemacs evil)
+  )
+  (use-package treemacs-projectile
+    :after (treemacs projectile)
+  )
+  ;; Icons for dired from treemacs
+  (use-package treemacs-icons-dired
+    :hook (dired-mode . treemacs-icons-dired-enable-once)
+  )
+#+end_src
+
+** Rainbow Delimiters
+
+Adds rainbox highlighted brackets to make it easier to see bracket links.
+
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode)
+  )
+#+end_src
+
 ** helpful
 helpful is a package that offers an alternate better help buffer page with colours.
 
@@ -583,7 +649,7 @@ helpful is a package that offers an alternate better help buffer page with colou
 #+end_src
 
 ** Theme
-*** doom-one
+*** doom-themes
 The main theme used is 'doom-one' from 'doom-themes' package
 
 #+begin_src emacs-lisp
@@ -594,6 +660,15 @@ The main theme used is 'doom-one' from 'doom-themes' package
   :config
   (load-theme 'doom-one t)
 )
+#+end_src
+
+*** VSCode theme
+
+Used just for testing
+
+#+begin_src emacs-lisp
+  (use-package vscode-dark-plus-theme
+  )
 #+end_src
 
 *** Modeline
@@ -762,6 +837,19 @@ Package used to smooth scrolling.
 ** pyvenv
 pyvenv allows us to easily select virutal environments
 
+TODO update headings and stuff
+
+#+begin_src emacs-lisp
+  ;; (use-package auto-virtualenv
+  ;;   :hook
+  ;;   (python-mode-hook . auto-virtualenv-set-virtualenv)
+  ;;   ;; Activate on changing buffers
+  ;;   (window-configuration-change-hook . auto-virtualenv-set-virtualenv)
+  ;;   ;; Activate on focus in
+  ;;   (focus-in-hook . auto-virtualenv-set-virtualenv)
+  ;; )
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package pyvenv)
 
@@ -802,6 +890,13 @@ Centaur tabs offers a tab bar at the top of frames for each buffer in the projec
 
 #+begin_src emacs-lisp
   (use-package centaur-tabs
+    :custom
+    (centaur-tabs-excluded-prefixes '("*" " *"))
+    (centaur-tabs-style "wave")
+    (centaur-tabs-set-icons t)
+    (centaur-tabs-gray-out-icons 'buffer)
+    (centaur-tabs-set-modified-marker t)
+    (centaur-tabs-modified-marker "*")
     :config
     ;; Don't include any automatic/default buffers as tabs
     (setq centaur-tabs-excluded-prefixes '("*" " *"))
@@ -820,14 +915,20 @@ Centaur tabs offers a tab bar at the top of frames for each buffer in the projec
   (scroll-bar-mode -1)              ;; Disables scrollbar
   (tool-bar-mode -1)                ;; Disables tool-bar
   (tooltip-mode -1)                 ;; Disables tooltips
+
+  ;; Transparent window
+  (set-frame-parameter (selected-frame) 'alpha '(97 97))
 #+end_src
 
 *** Line numbers
-    Enables line numbers.
+
+Enables line numbers.
+
 #+begin_src emacs-lisp
   (setq display-line-numbers-type 'visual)  ;; Use relative line numbers (visually shown)
   (setq-default display-line-numbers-width 3)
   (global-display-line-numbers-mode t)                 ;; Enable line numbers
+  (toggle-truncate-lines nil)     ;; Disable line wrapping
 #+end_src
 
 *** Extra settings
@@ -925,6 +1026,7 @@ Escape with escape like in Vim.
 Here are some useful things I have found along the way while transitioning to emacs from neovim:
 
 ** Expression register
+
 The expression register in evil (~=~ register) behaves mostly like it does in vim however it will evaluate elisp instead.
 
 That means you can do (in insert mode):
@@ -944,3 +1046,12 @@ To mymic this behaviour in emacs you can use the ~shell-command-to-string~ funct
 ~<C-r>=(shell-command-to-string "ls ~/Documents")<RET>~
 
 This will output the files in your Documents folder at your cursor.
+
+Below is an alias I created to make it a little easier by using ~(system cmd)~ instead of ~(shell-command-to-string cmd)~.
+
+#+begin_src emacs-lisp
+  (defun system (command)
+    (interactive)
+    (shell-command-to-string command)
+  )
+#+end_src
