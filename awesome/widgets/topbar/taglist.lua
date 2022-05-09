@@ -93,7 +93,7 @@ M.init = function(s)
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
-        widget_template = template
+        -- widget_template = template
     }
 end
 

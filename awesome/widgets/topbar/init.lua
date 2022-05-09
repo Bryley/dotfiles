@@ -30,8 +30,8 @@ return {
             position = "top",
             screen = s,
             width = s.geometry.width - 2 * PADDING,
-            height = 33, -- TODO depend on screen height for high DPI screens
-            bg = "#3A3B3B", -- TODO store in global variable
+            height = s.geometry.height * 0.027, -- Bar should be 2.7% of height
+            bg = "#3A3B3Bee", -- TODO store in global variable
             shape = function(cr, w, h)
                 gears.shape.rounded_rect(cr, w, h, 10)
             end

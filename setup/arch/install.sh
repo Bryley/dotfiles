@@ -21,12 +21,14 @@ sudo pacman -Syu --noconfirm && yay -Sua
 # GUI stuff
 sudo pacman --noconfirm -S xorg         # Contains usuful packages for xorg display server
 sudo pacman --noconfirm -S xsel         # Clipboard tool to enable + register in neovim
-sudo pacman --noconfirm -S picom        # A compositor for xorg (Useful for animations, opaque windows and more)
+# sudo pacman --noconfirm -S picom        # A compositor for xorg 
+yay -S picom-git                        # A compositor for xorg (Useful for animations, opaque windows and more)
 sudo pacman --noconfirm -S awesome      # The lua based window manager
 sudo pacman --noconfirm -S alacritty    # Terminal emulator
 sudo pacman --noconfirm -S rofi         # A better application search menu
 sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
 sudo pacman --noconfirm -S udisks2      # Automatic mounting of USB sticks
+sudo pacman --noconfirm -S redshift     # A program that will automattically alter blue light coming out of screen
 
 # Audio
 sudo pacman --noconfirm -S pipewire     # Audio framework
@@ -56,12 +58,12 @@ sudo pacman --noconfirm -S ncdu         # NCurses Disk Usage. A terminal UI for 
 sudo pacman --noconfirm -S exa          # Better alternative to ls command
 sudo pacman --noconfirm -S pkgfile      # Contains the command not found searching tool for better errors
 sudo pacman --noconfirm -S ispell       # Spellcheck program used by emacs
-# sudo pacman --noconfirm -S zsh-syntax-highlight
 
 
 # AUR programs
 yay -S nvm                              # Node version manager (Node is used by neovim)
 yay -S nerd-fonts-roboto-mono           # Roboto Nerd font for Awesome WM
+yay -S nerd-fonts-hack                  # Font used by terminal emulator
 yay -S i3lock-color                     # Lockscreen for arch
 yay -S command-not-found                # Instead of saying 'command not found' it will show you the programs for that command to install
 yay -S udiskie                          # Utility for automounting USBs
@@ -94,7 +96,8 @@ mkdir -p ~/.local/share/fonts
 fc-cache -f
 
 # Generate blurry wallpaper
-bash $HOME/.config/awesome/wallpapers/generate_blurry.sh
+# TODO automatically call later or add in README
+# bash $HOME/.config/awesome/wallpapers/generate_blurry.sh
 
 nvm install node
 
