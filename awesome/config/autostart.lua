@@ -15,6 +15,7 @@ awful.spawn.with_shell(
     'VBoxClient-all &;' .. -- TODO temorary for some reason the below command doesn't work
     'udiskie &;' ..
     'setxkbmap -option caps:ctrl_modifier &;' .. -- Remap caplocks to control
+    -- 'xrandr --setprovideroutputsource modesetting NVIDIA-0 &;' .. -- Set nvidia as only graphics card to use
     'xrdb -merge ~/.Xresources &;' .. -- Use .Xresources (handy for high DPI screens
     'redshift -l 27.4705:153.0260 &;' .. -- Use redshift to reduce blue light for brisbane lat and longitude
 
