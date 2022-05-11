@@ -2,7 +2,8 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 
-local PADDING = 10
+local beautiful = require("beautiful") -- Theme module
+
 
 -- Widgets
 local rofi_btn = require("widgets.topbar.search")
@@ -11,6 +12,7 @@ local date_display = require("widgets.topbar.date")
 local time_display = require("widgets.topbar.time")
 local volume = require("widgets.topbar.volume")
 local layout_display = require("widgets.topbar.layoutbox")
+local dashboard_widget = require("widgets.topbar.dashboard")
 
 
 local margin = function (widget)
@@ -29,11 +31,13 @@ return {
         s.topbar = awful.wibar({
             position = "top",
             screen = s,
-            width = s.geometry.width - 2 * PADDING,
-            height = s.geometry.height * 0.027, -- Bar should be 2.7% of height
-            bg = "#3A3B3Bee", -- TODO store in global variable
+            width = s.geometry.width - 2 * beautiful.margin,
+            -- height = s.geometry.height * 0.027, -- Bar should be 2.7% of height
+            height = beautiful.topbar_height,
+            -- bg = "#3A3B3Bee", -- TODO store in global variable
+            bg = beautiful.bg_normal,
             shape = function(cr, w, h)
-                gears.shape.rounded_rect(cr, w, h, 10)
+                gears.shape.rounded_rect(cr, w, h, beautiful.border_radius) -- was 10
             end
         })
 
@@ -41,7 +45,7 @@ return {
             layout = wibox.layout.stack, -- Stack to perfectly center time in middle
             {
                 layout = wibox.container.margin,
-                margins = 5,
+                margins = beautiful.margin,
                 {
                     layout = wibox.layout.align.horizontal,
                     { -- Left widgets
@@ -55,6 +59,7 @@ return {
                         wibox.widget.systray(),
                         -- margin(volume),
                         margin(date_display),
+                        margin(dashboard_widget),
                         margin(layout_display.init(s))
                     }
                 }
@@ -62,6 +67,6 @@ return {
             time_display,
         }
 
-        s.topbar.y = PADDING
+        s.topbar.y = beautiful.margin
     end
 }

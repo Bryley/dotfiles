@@ -13,12 +13,32 @@ local config_home = gfs.get_configuration_dir()
 
 local theme = {}
 
+theme.dpi = dpi
 theme.scripts_folder = config_home.."../scripts/"
 
+-- Colors --
+
+theme.bg_normal = "#000000" .. "66"
+theme.bg_alternate = "#000000" .. "11"
+theme.bg_hover = "#000000" .. "21"
+theme.bg_down = "#000000" .. "17"
+
+theme.bg_light = "#ffffff" .. "2d"
+theme.bg_light = "#ffffff" .. "2d"
+
+
+-- Number Settings --
+
+theme.border_radius = dpi(20)
+theme.margin = dpi(7)
+
+theme.topbar_height = dpi(40)
+
 -- Fonts --
-theme.font          = "RobotoMono Nerd Font Mono Regular 11"
-theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"
-theme.fontname      = "RobotoMono Nerd Font Mono Regular 11"
+
+theme.font          = "Inter Font Regular 12"
+theme.titlefont     = "Inter Font Bold 12"
+theme.fontname      = "Inter Font Regular 12"
 
 theme.fonts = {
     medium = "RobotoMono Nerd Font Mono Regular 11",
@@ -26,16 +46,26 @@ theme.fonts = {
     very_large = "RobotoMono Nerd Font Mono Regular 30"
 }
 
+-- theme.font          = "RobotoMono Nerd Font Mono Regular 11"
+-- theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"
+-- theme.fontname      = "RobotoMono Nerd Font Mono Regular 11"
+--
+-- theme.fonts = {
+--     medium = "RobotoMono Nerd Font Mono Regular 11",
+--     large = "RobotoMono Nerd Font Mono Regular 16",
+--     very_large = "RobotoMono Nerd Font Mono Regular 30"
+-- }
+
 -- Colours --
 -- theme.bg_normal     = "#3A3B3B"
-theme.bg_normal     = "#1C1E26"
-theme.bg_focus      = theme.bg_normal
-theme.bg_urgent     = theme.bg_normal
-theme.bg_minimize   = "#aaaaaa"--theme.bg_normal
-theme.bg_systray    = theme.bg_normal
-theme.bg_light      = "#232530"
-theme.bg_very_light = "#2E303E"
-theme.bg_dark       = "#1A1C23"
+-- theme.bg_normal     = "#1C1E26"
+-- theme.bg_focus      = theme.bg_normal
+-- theme.bg_urgent     = theme.bg_normal
+-- theme.bg_minimize   = "#aaaaaa"--theme.bg_normal
+-- theme.bg_systray    = theme.bg_normal
+-- theme.bg_light      = "#232530"
+-- theme.bg_very_light = "#2E303E"
+-- theme.bg_dark       = "#1A1C23"
 
 theme.fg_normal     = "#dddddd"
 theme.fg_dark       = "#cccccc"
@@ -62,7 +92,7 @@ theme.custom_colours = {
 -- theme.bg_minimize   = "#aaaaaa"--theme.bg_normal
 -- theme.bg_systray    = theme.bg_normal
 -- theme.bg_light      = "#232530"
--- theme.bg_very_light = "#2E303E"
+theme.bg_very_light = "#2E303E"
 -- theme.bg_dark       = "#1A1C23"
 -- 
 -- theme.fg_normal     = "#dddddd"
