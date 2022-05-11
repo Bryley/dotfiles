@@ -53,6 +53,7 @@ sudo pacman --noconfirm -S imagemagick  # An image manipulation software that ca
 sudo pacman --noconfirm -S networkmanager # An easy to use network manager tool (use `nmtui` command)
 sudo pacman --noconfirm -S net-tools    # Useful cmd tools for networking
 sudo pacman --noconfirm -S iw           # Requirement for tmux config to get network
+sudo pacman --noconfirm -S nm-connection-editor # A basic GTK GUI for network settings
 
 sudo pacman --noconfirm -S ncdu         # NCurses Disk Usage. A terminal UI for analysing disk usage
 sudo pacman --noconfirm -S exa          # Better alternative to ls command

@@ -1,6 +1,6 @@
 configuration {
     modi: "combi";
-    combi-modi: [window,drun,run];
+    combi-modi: [window,drun];
     font: "RobotoMono Nerd Font 15";
     show-icons: true;
     icon-theme: "Papirus";
