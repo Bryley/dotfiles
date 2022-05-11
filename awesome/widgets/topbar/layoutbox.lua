@@ -31,7 +31,7 @@ local btns = gears.table.join(
 
 M.init = function (s)
     local layoutbox = awful.widget.layoutbox(s)
-    layoutbox:buttons(btns)
+    -- layoutbox:buttons(btns)
     return layoutbox
 end
 

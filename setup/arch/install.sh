@@ -60,6 +60,8 @@ sudo pacman --noconfirm -S exa          # Better alternative to ls command
 sudo pacman --noconfirm -S pkgfile      # Contains the command not found searching tool for better errors
 sudo pacman --noconfirm -S ispell       # Spellcheck program used by emacs
 
+sudo pacman --noconfirm -S inter-font   # Font used for GUI
+
 
 # AUR programs
 yay -S nvm                              # Node version manager (Node is used by neovim)
