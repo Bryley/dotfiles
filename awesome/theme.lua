@@ -5,7 +5,9 @@
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local wibox = require("wibox")
 
+local gears  = require("gears")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
@@ -34,6 +36,20 @@ theme.margin = dpi(7)
 
 theme.topbar_height = dpi(40)
 
+
+-- Taglist Stuff --
+
+local taglist_shape = function (cr, w, h)
+    -- return gears.shape.rounded_rect(cr, w, h, theme.border_radius)
+    return gears.shape.rounded_rect(cr, w, h, theme.border_radius)
+end
+
+theme.taglist_shape = taglist_shape
+-- theme.taglist_shape_focus = taglist_shape
+-- theme.taglist_shape_empty = taglist_shape
+
+theme.taglist_bg_focus = "#000000" .. "3f"
+
 -- Fonts --
 
 theme.font          = "Inter Font Regular 12"
@@ -45,6 +61,67 @@ theme.fonts = {
     large = "RobotoMono Nerd Font Mono Regular 16",
     very_large = "RobotoMono Nerd Font Mono Regular 30"
 }
+
+-- Font Awesome Icons --
+
+theme.icon_size = 12
+theme.icon_font = "Font Awesome 5 Free-Solid-900 " -- attention to space at the end!
+theme.icon_color = "#ffffff"
+
+theme.icons = {
+    browser = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f268}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    terminal = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{e32a}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    slack = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f198}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    emacs = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f2d7}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    database = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f1c0}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    lens = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{e2df}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    mail = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f0e0}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+    client_other = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">\u{e122}</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    },
+}
+
+for i, icon in ipairs(theme.icons) do
+    icon.font = theme.icon_font.. theme.icon_size
+end
 
 -- theme.font          = "RobotoMono Nerd Font Mono Regular 11"
 -- theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"
@@ -141,13 +218,14 @@ theme.border_marked = theme.bg_very_light
 
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
+
+-- local taglist_square_size = dpi(4)
+-- theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+--     taglist_square_size, theme.fg_normal
+-- )
+-- theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+--     taglist_square_size, theme.fg_normal
+-- )
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]

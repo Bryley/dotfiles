@@ -23,16 +23,6 @@ local setup = function (update_volume)
     keys.globalkeys = gears.table.join(
         awful.key({ options.modkey,           }, "s",      hotkeys_popup.show_help,
                   {description="show help", group="awesome"}),
-        awful.key({ options.modkey,           }, "n", function ()
-            update_volume(-1)
-        end,
-        {description="test1", group="awesome"}
-        ),
-        awful.key({ options.modkey,           }, ".", function ()
-            update_volume(1)
-        end,
-        {description="test1", group="awesome"}
-        ),
         -- awful.key({ options.modkey,           }, "Escape", awful.tag.history.restore,
         --           {description = "go back", group = "tag"}),
 
@@ -116,6 +106,22 @@ local setup = function (update_volume)
                 awful.client.focus.bydirection("right")
             end,
             {description = "Focus to the right", group = "client"}
+        ),
+
+        -- Focusing screens
+        awful.key(
+            {options.modkey}, ",",
+            function ()
+                awful.screen.focus_relative(-1)
+            end,
+            {description = "Focus previous screen", group = "screen"}
+        ),
+        awful.key(
+            {options.modkey}, ".",
+            function ()
+                awful.screen.focus_relative(1)
+            end,
+            {description = "Focus next screen", group = "screen"}
         ),
 
         ---------------------------

@@ -29,6 +29,7 @@ sudo pacman --noconfirm -S rofi         # A better application search menu
 sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
 sudo pacman --noconfirm -S udisks2      # Automatic mounting of USB sticks
 sudo pacman --noconfirm -S redshift     # A program that will automattically alter blue light coming out of screen
+sudo pacman --noconfirm -S ttf-font-awesome # Easy icons stored in a font.
 
 # Audio
 sudo pacman --noconfirm -S pipewire     # Audio framework

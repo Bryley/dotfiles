@@ -165,6 +165,13 @@ org-tempo contains a few useful org command that no longer exist such as =<s= th
     )
 #+end_src
 
+*** ox-pandoc
+This is for conversion with pandoc
+
+#+begin_src emacs-lisp
+  (use-package ox-pandoc)
+#+end_src
+
 ** Projectile
 Projectile gives you lots of useful commands for managing projects.
 
