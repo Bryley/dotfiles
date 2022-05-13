@@ -45,10 +45,16 @@ local taglist_shape = function (cr, w, h)
 end
 
 theme.taglist_shape = taglist_shape
--- theme.taglist_shape_focus = taglist_shape
--- theme.taglist_shape_empty = taglist_shape
+theme.taglist_spacing = dpi(3)
 
 theme.taglist_bg_focus = "#000000" .. "3f"
+theme.taglist_bg_occupied = "#000000" .. "11"
+
+-- theme.taglist_bg_dark = "#000000" .. "4c"
+theme.taglist_bg_dark = "#000000" .. "00"
+
+theme.taglist_padding_inline = 10
+
 
 -- Fonts --
 
@@ -76,7 +82,7 @@ theme.icons = {
         widget = wibox.widget.textbox
     },
     terminal = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{e32a}</span> ',
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f120}</span> ',
         align  = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -88,7 +94,7 @@ theme.icons = {
         widget = wibox.widget.textbox
     },
     emacs = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f2d7}</span> ',
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f044}</span> ',
         align  = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -100,7 +106,7 @@ theme.icons = {
         widget = wibox.widget.textbox
     },
     lens = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{e2df}</span> ',
+        markup = ' <span color="'.. theme.icon_color ..'">\u{e4e2}</span> ',
         align  = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -112,7 +118,7 @@ theme.icons = {
         widget = wibox.widget.textbox
     },
     client_other = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{e122}</span> ',
+        markup = ' <span color="'.. theme.icon_color ..'">\u{f192}</span> ',
         align  = 'center',
         valign = 'center',
         widget = wibox.widget.textbox

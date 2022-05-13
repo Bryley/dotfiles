@@ -97,7 +97,7 @@ local update_callback = function(self, tag, index, tags)
     else
         contents = ""..index
     end
-    self:get_children_by_id('index_role')[1].markup = contents
+    -- self:get_children_by_id('index_role')[1].markup = contents
 
     -- Do icons by checking the client and choosing based on class.
     -- Look into font awesome icons for each program that is used.
@@ -108,6 +108,9 @@ local update_callback = function(self, tag, index, tags)
     for i, c in ipairs(tag:clients()) do
 
         local icon = client_icons[c.class]
+        if icon == nil then
+            icon = beautiful.icons.client_other
+        end
         icon_list:add(icon)
 
         -- Use this as testing for class:
@@ -122,27 +125,92 @@ local update_callback = function(self, tag, index, tags)
 
 end
 
+local index_bubble = {
+    widget = wibox.container.background,
+    bg = beautiful.taglist_bg_dark,
+    forced_width = 25,
+    forced_height = 25,
+    shape = beautiful.taglist_shape,
+    {
+        layout = wibox.container.margin,
+        margins = 2,
+        {
+            widget = wibox.widget.textbox,
+            id = 'index_role',
+            -- id = 'text_role',
+            align = "center",
+            valign = "center",
+        }
+    },
+}
+
+-- local template = {
+--     layout = wibox.container.background,
+--     id = 'background_role',
+--     -- forced_width = 25,
+--     -- forced_height = 25,
+--     {
+--         {
+--             { -- Index
+--                 widget = wibox.container.margin,
+--                 -- left = beautiful.taglist_padding_inline,
+--                 -- right = beautiful.taglist_padding_inline,
+--                 -- top = 2,
+--                 -- bottom = 2,
+--                 margins = 5,
+--                 index_bubble,
+--             },
+--             -- { -- Client Icons
+--             --     widget = wibox.container.margin,
+--             --     right = beautiful.taglist_padding_inline,
+--             --     {
+--             --         id = 'icons_role',
+--             --         layout = wibox.layout.fixed.horizontal,
+--             --     },
+--             -- },
+--         },
+--         layout = wibox.layout.fixed.horizontal,
+--     },
+--     create_callback = update_callback,
+--     update_callback = update_callback,
+-- }
+
 local template = {
     layout = wibox.container.background,
     id = 'background_role',
     -- forced_width = 25,
     -- forced_height = 25,
     {
-        { -- Index number
-            layout = wibox.container.margin,
-            margins = 2,
-            {
-                widget = wibox.widget.textbox,
-                id = 'index_role',
-                align = "center",
-                valign = "center",
-            }
-        },
-        { -- Client Icons TODO manage this (almost done check out commented code above)
-            id = 'icons_role',
+        widget = wibox.container.margin,
+        top = 2,
+        bottom = 2,
+        left = 10,
+        right = 10,
+        {
+            { -- Index number
+                widget = wibox.container.background,
+                bg = beautiful.taglist_bg_dark,
+                forced_width = 25,
+                forced_height = 25,
+                shape = beautiful.taglist_shape,
+                {
+                    layout = wibox.container.margin,
+                    margins = 2,
+                    {
+                        widget = wibox.widget.textbox,
+                        -- id = 'index_role',
+                        id = 'text_role',
+                        align = "center",
+                        valign = "center",
+                    }
+                },
+            },
+            { -- Client Icons TODO manage this (almost done check out commented code above)
+                id = 'icons_role',
+                layout = wibox.layout.fixed.horizontal,
+            },
             layout = wibox.layout.fixed.horizontal,
         },
-        layout = wibox.layout.fixed.horizontal,
     },
     create_callback = update_callback,
     update_callback = update_callback,
