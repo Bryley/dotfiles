@@ -58,6 +58,17 @@ theme.taglist_padding_inline = 10
 
 -- Fonts --
 
+theme.material_icon_font = "Material Icons 12"
+theme.icon_color = "#ffffff"
+
+theme.wifi_icon = wibox.widget{
+    markup = ' <span color="'.. theme.icon_color ..'">\u{e63e}</span> ',
+    align  = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+}
+
+
 theme.font          = "Inter Font Regular 12"
 theme.titlefont     = "Inter Font Bold 12"
 theme.fontname      = "Inter Font Regular 12"
@@ -68,66 +79,126 @@ theme.fonts = {
     very_large = "RobotoMono Nerd Font Mono Regular 30"
 }
 
--- Font Awesome Icons --
+-- Icons --
 
-theme.icon_size = 12
-theme.icon_font = "Font Awesome 5 Free-Solid-900 " -- attention to space at the end!
-theme.icon_color = "#ffffff"
+-- Use some icons from Material Icons and Font Awesome 5
+theme.material_icon_font = "Material Icons 12"
+theme.icon_font = "Font Awesome 5 Free-Solid-900 12"
+
+
+local function icon(unicode, font_awesome)
+    -- Helper function for creating an icon
+    font_awesome = font_awesome or false
+
+    local w = wibox.widget{
+        markup = ' <span color="'.. theme.icon_color ..'">'..unicode..'</span> ',
+        align  = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox
+    }
+    w.font = font_awesome and theme.font_awesome_font or theme.material_icon_font
+
+    return w
+end
 
 theme.icons = {
-    browser = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f268}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
+    clients = {
+        browser = icon("\u{f268}", true),
+        terminal = icon("\u{eb8e}", false),
+        slack = icon("\u{f198}", true),
+        emacs = icon("\u{e244}", false),
+        database = icon("\u{f1c0}", true),
+        lens = icon("\u{e4e2}", true),
+        mail = icon("\u{f0e0}", true),
+        client_other = icon("\u{f192}", true),
     },
-    terminal = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f120}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
+    network = {
+        wifi = icon("\u{e63e}", false),
+        wired = icon("\u{eb2f}", false),
+        off = icon("\u{e648}", false),
     },
-    slack = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f198}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
+    volume = {
+        mute = icon("\u{e04f}", false),
+        low = icon("\u{e04e}", false),
+        mid = icon("\u{e04d}", false),
+        high = icon("\u{e050}", false),
     },
-    emacs = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f044}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
+    battery = {
+        charging = icon("\u{e1a3}", false),
+        full = icon("\u{e1a4}", false),
+        levels = { -- List starting at lowest battery symbol to highest
+            icon("\u{ebdc}", false),
+            icon("\u{ebd9}", false),
+            icon("\u{ebe0}", false),
+            icon("\u{ebdd}", false),
+            icon("\u{ebe2}", false),
+            icon("\u{ebd4}", false),
+        },
     },
-    database = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f1c0}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
-    },
-    lens = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{e4e2}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
-    },
-    mail = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f0e0}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
-    },
-    client_other = wibox.widget{
-        markup = ' <span color="'.. theme.icon_color ..'">\u{f192}</span> ',
-        align  = 'center',
-        valign = 'center',
-        widget = wibox.widget.textbox
-    },
+    menu = icon("\u{e5d2}", false),
 }
 
-for i, icon in ipairs(theme.icons) do
-    icon.font = theme.icon_font.. theme.icon_size
-end
+
+-- Font Awesome Icons (Old) --
+
+-- theme.icon_size = 12
+-- theme.icon_font = "Font Awesome 5 Free-Solid-900 " -- attention to space at the end!
+-- theme.icon_color = "#ffffff"
+--
+-- theme.icons = {
+--     browser = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f268}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     terminal = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f120}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     slack = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f198}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     emacs = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f044}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     database = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f1c0}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     lens = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{e4e2}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     mail = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f0e0}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+--     client_other = wibox.widget{
+--         markup = ' <span color="'.. theme.icon_color ..'">\u{f192}</span> ',
+--         align  = 'center',
+--         valign = 'center',
+--         widget = wibox.widget.textbox
+--     },
+-- }
+--
+-- for i, icon in ipairs(theme.icons) do
+--     icon.font = theme.icon_font.. theme.icon_size
+-- end
 
 -- theme.font          = "RobotoMono Nerd Font Mono Regular 11"
 -- theme.titlefont     = "RobotoMono Nerd Font Mono Bold 11"

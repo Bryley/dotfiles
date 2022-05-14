@@ -13,23 +13,14 @@ local M = {}
 
 
 local client_icons = {
-    ['Brave-browser'] = beautiful.icons.browser,
-    ['Alacritty'] = beautiful.icons.terminal,
-    ['Slack'] = beautiful.icons.slack,
-    ['Emacs'] = beautiful.icons.emacs,
-    ['Prospect Mail'] = beautiful.icons.mail,
-    ['DBeaver'] = beautiful.icons.database,
-    ['Lens'] = beautiful.icons.lens,
+    ['Brave-browser'] = beautiful.icons.clients.browser,
+    ['Alacritty'] = beautiful.icons.clients.terminal,
+    ['Slack'] = beautiful.icons.clients.slack,
+    ['Emacs'] = beautiful.icons.clients.emacs,
+    ['Prospect Mail'] = beautiful.icons.clients.mail,
+    ['DBeaver'] = beautiful.icons.clients.database,
+    ['Lens'] = beautiful.icons.clients.lens,
 }
-
--- Filter function to use for tags
-function tagfilter(tag)
-    -- If tag contains clients or is selected
-    if tag.selected or #tag:clients() > 0 then
-        return true
-    end
-    return false
-end
 
 
 -- TODO play around with this

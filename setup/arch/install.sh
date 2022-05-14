@@ -30,6 +30,7 @@ sudo pacman --noconfirm -S xorg-xinit   # Starts xorg with 'startx' command # TO
 sudo pacman --noconfirm -S udisks2      # Automatic mounting of USB sticks
 sudo pacman --noconfirm -S redshift     # A program that will automattically alter blue light coming out of screen
 sudo pacman --noconfirm -S ttf-font-awesome # Easy icons stored in a font.
+yay -S ttf-material-icons-git           # Googles Material Icons
 
 # Audio
 sudo pacman --noconfirm -S pipewire     # Audio framework
