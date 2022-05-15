@@ -32,27 +32,6 @@ function tagfilter(tag)
 end
 
 
--- TODO play around with this
--- M.init = function (screen)
--- 
---     -- screen.tags[1].name
---     local tag = screen.tags[1]
--- 
---     return {
---         layout = wibox.layout.fixed.horizontal,
---         {
---             layout = wibox.widget.textbox,
---             text = tag.name .. " " .. tostring(tag.selected)
---         },
---         {
---             layout = wibox.widget.textbox,
---             text = screen.tags[1].name
---         },
---     }
--- end
--- 
--- return M
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1,
@@ -145,34 +124,44 @@ local index_bubble = {
 }
 
 -- local template = {
---     layout = wibox.container.background,
+--     container = wibox.container.background,
 --     id = 'background_role',
---     -- forced_width = 25,
---     -- forced_height = 25,
 --     {
+--         widget = wibox.container.margin,
+--         left = 10,
+--         right = 10,
+--         top = 2,
+--         bottom = 2,
 --         {
---             { -- Index
---                 widget = wibox.container.margin,
---                 -- left = beautiful.taglist_padding_inline,
---                 -- right = beautiful.taglist_padding_inline,
---                 -- top = 2,
---                 -- bottom = 2,
---                 margins = 5,
---                 index_bubble,
---             },
---             -- { -- Client Icons
---             --     widget = wibox.container.margin,
---             --     right = beautiful.taglist_padding_inline,
---             --     {
---             --         id = 'icons_role',
---             --         layout = wibox.layout.fixed.horizontal,
---             --     },
+--             -- {
+--                 widget = wibox.container.background,
+--                 shape = beautiful.taglist_shape,
+--                 bg = "#fb3456",
+--                 forced_width = 20,
+--                 forced_height = 20,
+--                 -- { -- Index
+--                 --     widget = wibox.container.margin,
+--                 --     -- left = beautiful.taglist_padding_inline,
+--                 --     -- right = beautiful.taglist_padding_inline,
+--                 --     -- top = 2,
+--                 --     -- bottom = 2,
+--                 --     margins = 5,
+--                 --     index_bubble,
+--                 -- },
+--                 -- { -- Client Icons
+--                 --     widget = wibox.container.margin,
+--                 --     right = beautiful.taglist_padding_inline,
+--                 --     {
+--                 --         id = 'icons_role',
+--                 --         layout = wibox.layout.fixed.horizontal,
+--                 --     },
+--                 -- },
 --             -- },
+--             -- layout = wibox.layout.fixed.horizontal,
 --         },
---         layout = wibox.layout.fixed.horizontal,
 --     },
---     create_callback = update_callback,
---     update_callback = update_callback,
+--     -- create_callback = update_callback,
+--     -- update_callback = update_callback,
 -- }
 
 local template = {
