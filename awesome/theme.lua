@@ -28,6 +28,10 @@ theme.bg_down = "#000000" .. "17"
 theme.bg_light = "#ffffff" .. "2d"
 theme.bg_light = "#ffffff" .. "2d"
 
+theme.bg_btn = "#000000" .. "11"
+theme.bg_btn_down = "#000000" .. "3f"
+theme.bg_btn_hover = theme.bg_btn_down
+
 
 -- Number Settings --
 
@@ -47,11 +51,8 @@ end
 theme.taglist_shape = taglist_shape
 theme.taglist_spacing = dpi(3)
 
-theme.taglist_bg_focus = "#000000" .. "3f"
-theme.taglist_bg_occupied = "#000000" .. "11"
-
--- theme.taglist_bg_dark = "#000000" .. "4c"
-theme.taglist_bg_dark = "#000000" .. "00"
+theme.taglist_bg_focus = theme.bg_btn_down
+theme.taglist_bg_occupied = theme.bg_btn
 
 theme.taglist_padding_inline = 10
 
@@ -110,7 +111,7 @@ theme.icons = {
         database = icon("\u{f1c0}", true),
         lens = icon("\u{e4e2}", true),
         mail = icon("\u{f0e0}", true),
-        client_other = icon("\u{f192}", true),
+        other = icon("\u{f192}", true),
     },
     network = {
         wifi = icon("\u{e63e}", false),

@@ -79,7 +79,7 @@ local update_callback = function(self, tag, index, tags)
 
         local icon = client_icons[c.class]
         if icon == nil then
-            icon = beautiful.icons.client_other
+            icon = beautiful.icons.clients.other
         end
         icon_list:add(icon)
 
@@ -92,28 +92,47 @@ local update_callback = function(self, tag, index, tags)
         -- })
         -- icon_list:add(beautiful.icons.browser)
     end
+end
+
+local create_callback = function(self, tag, index, tags)
+    -- Hover support
+    self:connect_signal('mouse::enter', function()
+        self.old_colour = self.bg
+
+        self.bg = beautiful.bg_btn_hover
+        self.hover = true
+    end)
+    self:connect_signal('mouse::leave', function()
+        self.bg = self.old_colour
+        self.hover = false
+    end)
+    self:connect_signal('button::release', function()
+        self.old_colour = beautiful.taglist_bg_focus
+    end)
+
+    update_callback(self, tag, index, tags)
 
 end
 
-local index_bubble = {
-    widget = wibox.container.background,
-    bg = beautiful.taglist_bg_dark,
-    forced_width = 25,
-    forced_height = 25,
-    shape = beautiful.taglist_shape,
-    {
-        layout = wibox.container.margin,
-        margins = 2,
-        {
-            widget = wibox.widget.textbox,
-            id = 'index_role',
-            -- id = 'text_role',
-            align = "center",
-            valign = "center",
-        }
-    },
-}
-
+-- TODO use later
+-- local index_bubble = {
+--     widget = wibox.container.background,
+--     bg = beautiful.taglist_bg_dark,
+--     forced_width = 25,
+--     forced_height = 25,
+--     shape = beautiful.taglist_shape,
+--     {
+--         layout = wibox.container.margin,
+--         margins = 2,
+--         {
+--             widget = wibox.widget.textbox,
+--             id = 'index_role',
+--             -- id = 'text_role',
+--             align = "center",
+--             valign = "center",
+--         }
+--     },
+-- }
 -- local template = {
 --     container = wibox.container.background,
 --     id = 'background_role',
@@ -185,14 +204,14 @@ local template = {
                     }
                 },
             },
-            { -- Client Icons TODO manage this (almost done check out commented code above)
+            {
                 id = 'icons_role',
                 layout = wibox.layout.fixed.horizontal,
             },
             layout = wibox.layout.fixed.horizontal,
         },
     },
-    create_callback = update_callback,
+    create_callback = create_callback,
     update_callback = update_callback,
 }
 
