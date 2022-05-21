@@ -42,12 +42,15 @@ local get_battery_icon = function ()
     end)
 end
 
--- local widget = wibox.layout.fixed.horizontal (
---     get_network_icon(),
---     get_battery_icon()
--- )
+-- local widget = wibox.widget{
+--     widget = wibox.layout.fixed.horizontal,
+    -- get_network_icon(),
+    -- get_battery_icon()
+-- }
 
-local widget = get_network_icon()
+local widget = wibox.widget {
+    widget = get_network_icon()
+}
 
 -- beautiful.debug(widget)
 
