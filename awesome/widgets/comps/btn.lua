@@ -17,6 +17,7 @@ return function (contents, click)
         shape = function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
         end,
+        bg = beautiful.bg_btn,
         {
             layout = wibox.container.margin,
             left = beautiful.dpi(10),
@@ -29,16 +30,16 @@ return function (contents, click)
         }
     })
     widget:connect_signal("mouse::enter", function (w)
-        w:set_bg(beautiful.bg_hover)
+        w:set_bg(beautiful.bg_btn_hover)
     end)
     widget:connect_signal("mouse::leave", function (w)
-        w:set_bg(nil)
+        w:set_bg(beautiful.bg_btn)
     end)
     widget:connect_signal("button::press", function(w)
         w:set_bg(beautiful.bg_down)
     end)
     widget:connect_signal("button::release", function(w)
-        w:set_bg(nil)
+        w:set_bg(beautiful.bg_btn)
         click(w)
     end)
 

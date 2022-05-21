@@ -53,6 +53,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
+        { name = 'orgmode' },
         { name = 'path' },
         { name = 'luasnip' },
         { name = 'buffer', keyword_length = 3},

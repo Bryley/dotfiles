@@ -33,20 +33,28 @@ opt.colorcolumn = '80'                      -- 80 character limit on line
 opt.completeopt = { "menuone", "noselect" } -- For better selection with cmp
 
 
-
 -- Searching
 opt.hlsearch = true                         -- highlight all matches on previous search pattern
 opt.ignorecase = true                       -- ignore case in search patterns
+opt.smartcase = true                        -- Ignore case unless uppercase
 
 -- Tabbing
-opt.smartcase = true                        -- Ignore case unless uppercase
-opt.smartindent = true                      -- Make indenting smarter again
-opt.expandtab = true                        -- Convert tabs to spaces
-opt.shiftwidth = 4                          -- The number of spaces inserted for each indentation
-opt.tabstop = 4                             -- Insert 4 spaces for a tab
+opt.tabstop = 4                             -- \t char = 4 spaces
+opt.shiftwidth = 4                          -- 1 level of indentation is 4 spaces
+opt.softtabstop = 4                         -- Tab is 4 spaces for inserting and deleting
+opt.expandtab = true                        -- Tabs should always be spaces instead
+opt.autoindent = true                       -- Automatically indent lines as you type
 
 -- Enable later
+-- opt.smartindent = true                      -- Make indenting smarter again
+
 --opt.showtabline = 4                         -- always show tabs
 --opt.conceallevel = 0                        -- so that `` is visible in markdown files
 --opt.fileencoding = "utf-8"                  -- the encoding written to a file
 --opt.signcolumn = "yes"                      -- always show the sign column, otherwise it would shift the text each time
+
+-- Auto commands
+
+-- Have org files be 2 spaces for tabs and indentation
+vim.api.nvim_exec([[ autocmd FileType org setlocal tabstop=2 shiftwidth=2 softtabstop=2 ]], false)
+

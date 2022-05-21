@@ -2,10 +2,15 @@
 -- Bryley's awesome theme --
 ----------------------------
 
+local json = require"libs.json"
+
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local wibox = require("wibox")
+
+local awful = require("awful")
+local naughty = require("naughty")
 
 local gears  = require("gears")
 local gfs = require("gears.filesystem")
@@ -373,6 +378,31 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
+
+
+
+-- DEBUG Stuff
+
+function dump(o)
+    if type(o) == 'table' then
+        local s = '{ '
+        for k,v in pairs(o) do
+            if type(k) == 'function' then k = tostring(k) end
+            if type(k) ~= 'number' then k = '\\"'..k..'\\"' end
+            s = s .. '['..k..'] = ' .. dump(v) .. ','
+        end
+        return s .. '} '
+    else
+        return tostring(o)
+    end
+end
+
+theme.debug = function (data)
+    awful.spawn.with_shell("echo \""..dump(data).."\" > ~/.awesome_output")
+    naughty.notify({text = "Sent data to file"})
+end
+
+
 
 return theme
 

@@ -72,6 +72,12 @@ return packer.startup(function(use)
     use "Bryley/docstr.nvim"                -- My custom docstring plugin
     use 'norcalli/nvim-colorizer.lua'       -- Color preview
 
+    -- Org mode Stuff
+    use 'nvim-orgmode/orgmode'              -- Neovim Orgmode
+    -- use 'akinsho/org-bullets.nvim'          -- Add more stylish bullets
+    -- use 'lukas-reineke/headlines.nvim'      -- Adds highlighting to headlines and source code
+    use 'dhruvasagar/vim-table-mode'        -- Better nvim table support (TODO play around with it)
+
     -- IDE like
     use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side
     use {
@@ -108,9 +114,7 @@ return packer.startup(function(use)
     -- Colorschemes and Styling plugins
     -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'nvim-lualine/lualine.nvim'         -- Adds better bottom bar
-    use "martinsione/darkplus.nvim"         -- Darkplus vscode like colorscheme
-    use "tomasiser/vim-code-dark"           -- vscode like colourschemes
-
+    use 'tomasiser/vim-code-dark'           -- vscode like colourschemes
 
 
   -- Automatically set up your configuration after cloning packer.nvim
