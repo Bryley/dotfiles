@@ -1,5 +1,6 @@
+#!/bin/bash
 
-# Add symlinks
+# Add symlinks in .config
 
 ln -sf $(pwd)/xinitrc ~/.xinitrc
 ln -sf $(pwd)/zshenv ~/.zshenv
