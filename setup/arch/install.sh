@@ -18,7 +18,7 @@ then
 fi
 
 # Update packages and sync databases
-sudo pacman -Syu --noconfirm && yay -Sua
+sudo pacman --noconfirm -Syu && yay --noconfirm -Sua
 
 
 
@@ -81,8 +81,8 @@ aur_packages=(
 
     # Fonts
     'nerd-fonts-hack'       # Font used by terminal emulator
-    'nerd-fonts-roboto-mono'# Roboto Nerd font for Awesome WM
-    'ttf-material-icons-git'# Googles Material Icons
+    'nerd-fonts-roboto-mono' # Roboto Nerd font for Awesome WM
+    'ttf-material-icons-git' # Googles Material Icons
 )
 
 
