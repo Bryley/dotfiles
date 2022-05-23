@@ -92,6 +92,7 @@ return packer.startup(function(use)
         "akinsho/toggleterm.nvim",          -- Better terminals inside nvim
         branch="main"
     }
+    use 'jpalardy/vim-slime'                -- Vim + TMUX support
 
     -- LSP
     use 'neovim/nvim-lspconfig'             -- LSP setup
