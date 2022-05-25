@@ -2,9 +2,9 @@
 
 alias vim="nvim"
 alias vimdiff="nvim -d"
-# alias ls="ls --color=always"
 alias ls="exa"
 alias t="tmux -2"
+alias clipboard="xsel --clipboard"      # stdin to clipboard ('pwd | clipboard')
 
 # Python aliases
 alias python="python3.9"                # Make python 3.9 default version.
