@@ -11,5 +11,6 @@ require "user.pluginconfigs.comment"
 require "user.pluginconfigs.toggleterm"
 require "user.pluginconfigs.colorizer"
 require "user.pluginconfigs.orgmode"
+require "user.pluginconfigs.rusttools"
 
 require "user.pluginconfigs.lsp"

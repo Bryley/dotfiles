@@ -92,6 +92,8 @@ return packer.startup(function(use)
         "akinsho/toggleterm.nvim",          -- Better terminals inside nvim
         branch="main"
     }
+    -- use 'rust-lang/rust.vim'                -- Rust language support
+    use 'simrat39/rust-tools.nvim'          -- Rust Tools
 
     -- LSP
     use 'neovim/nvim-lspconfig'             -- LSP setup
