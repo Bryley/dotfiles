@@ -93,6 +93,8 @@ return packer.startup(function(use)
         branch="main"
     }
     -- use 'jpalardy/vim-slime'                -- Vim + TMUX support
+    -- use 'rust-lang/rust.vim'                -- Rust language support
+    use 'simrat39/rust-tools.nvim'          -- Rust Tools
 
     -- LSP
     use 'neovim/nvim-lspconfig'             -- LSP setup
