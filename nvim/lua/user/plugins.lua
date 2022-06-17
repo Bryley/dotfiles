@@ -118,6 +118,7 @@ return packer.startup(function(use)
     -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use 'nvim-lualine/lualine.nvim'         -- Adds better bottom bar
     use 'tomasiser/vim-code-dark'           -- vscode like colourschemes
+    use 'Mofiqul/vscode.nvim'               -- Another vscode theme
 
 
   -- Automatically set up your configuration after cloning packer.nvim
