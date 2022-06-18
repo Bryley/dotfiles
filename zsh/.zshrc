@@ -28,7 +28,6 @@ zsh_add_file "zsh-vim"
 zsh_add_file "zsh-machine-custom"
 
 # Plugins
-# zsh_add_plugin "romkatv/powerlevel10k" # Adds theme
 zsh_add_plugin "zsh-users/zsh-autosuggestions" # Fish like suggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting" # Fish like syntax
@@ -40,18 +39,3 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # My theme
 zsh_add_file "zsh-prompt"
-
-
-# For the powerlevel10k theme
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-# [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
-# The following lines were added by compinstall TODO remove later
-
-# zstyle ':completion:*' completer _complete _ignored
-# zstyle :compinstall filename '/home/bryley/.config/zsh/.zshrc'
-# 
-# autoload -Uz compinit
-# compinit
-
-# End of lines added by compinstall
