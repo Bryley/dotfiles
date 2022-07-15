@@ -12,5 +12,6 @@ require "user.pluginconfigs.toggleterm"
 require "user.pluginconfigs.colorizer"
 require "user.pluginconfigs.orgmode"
 require "user.pluginconfigs.rusttools"
+require "user.pluginconfigs.neogen"
 
 require "user.pluginconfigs.lsp"

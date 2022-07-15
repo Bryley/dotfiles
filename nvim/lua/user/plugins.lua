@@ -70,6 +70,7 @@ return packer.startup(function(use)
     use "terrortylor/nvim-comment"          -- Commenting plugin
     use "iamcco/markdown-preview.nvim"      -- Plugin for previewing markdown
     use "Bryley/docstr.nvim"                -- My custom docstring plugin
+    use "danymat/neogen"                    -- Documentation Generator
     use 'norcalli/nvim-colorizer.lua'       -- Color preview
 
     -- Org mode Stuff

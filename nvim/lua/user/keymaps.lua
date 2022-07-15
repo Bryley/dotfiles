@@ -29,7 +29,8 @@ keymap("n", "<C-Q>", "<Nop>", opts)                 -- Stop from quitting
 keymap("n", "<C-h>", "<cmd>SidewaysLeft<CR>", opts) -- sideways.vim plugin
 keymap("n", "<C-l>", "<cmd>SidewaysRight<CR>", opts) -- sideways.vim plugin
 
-keymap("n", "<leader>c", "<cmd>lua require'docstr'.docstr()<CR>", verbose)
+-- keymap("n", "<leader>c", "<cmd>lua require'docstr'.docstr()<CR>", verbose)
+keymap("n", "<leader>c", "<cmd>lua require('neogen').generate()<CR>", verbose)
 
 -- Terminal --
 keymap("t", "<Esc>", "<C-\\><C-n>", opts)    -- Esc goes to normal mode in term
