@@ -31,6 +31,7 @@ zsh_add_file "zsh-machine-custom"
 zsh_add_plugin "zsh-users/zsh-autosuggestions" # Fish like suggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting" # Fish like syntax
+zsh_add_plugin "jeffreytse/zsh-vi-mode" # Better vi mode
 # End of plugins
 
 # Sourcing extra files
