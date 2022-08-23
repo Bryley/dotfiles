@@ -28,10 +28,11 @@ zsh_add_file "zsh-vim"
 zsh_add_file "zsh-machine-custom"
 
 # Plugins
+zsh_add_plugin "jeffreytse/zsh-vi-mode" # Better vi mode
 zsh_add_plugin "zsh-users/zsh-autosuggestions" # Fish like suggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-zsh_add_plugin "zsh-users/zsh-syntax-highlighting" # Fish like syntax
-zsh_add_plugin "jeffreytse/zsh-vi-mode" # Better vi mode
+zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting" # Syntax highlighting
+# zsh_add_plugin "zsh-users/zsh-syntax-highlighting" # Fish like syntax
 # End of plugins
 
 # Sourcing extra files
