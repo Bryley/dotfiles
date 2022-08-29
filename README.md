@@ -17,6 +17,8 @@ WARNING this may delete files/directories within `~/.config` so if there are any
 	1. Create simlinks with `~/./config` directiories linking them to this directory.
 1. Once `setup.sh` has executed close and reopen your terminal emulator (Should be alacritty).
 1. To download plugins for neovim open up `/.config/nvim/lua/user/plugins.lua` and save the file.
+1. For zsh, the plugin `fast-syntax-highlighting` is installed which gives nice colors in the terminal.
+There are different themes to choose from using the `fast-theme` command, I believe `base16` goes the best with the other colors `fast-theme base16`.
 
 ## Python
 
