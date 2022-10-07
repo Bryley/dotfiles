@@ -122,6 +122,11 @@ return packer.startup(function(use)
     use 'Mofiqul/vscode.nvim'               -- Another vscode theme
     use 'elkowar/yuck.vim'                  -- Language support for 'yuck' language
 
+    -- Other
+    use 'seandewar/nvimesweeper'            -- Adds minesweeper into nvim for fun
+    use 'alec-gibson/nvim-tetris'           -- Adds Tetris into nvim for fun
+
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
