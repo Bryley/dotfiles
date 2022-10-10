@@ -1,5 +1,6 @@
+@use './eww-bar/eww.scss';
+@use './dashboard/eww.scss';
+
 * {
   all: unset; //Unsets everything so you can style everything from scratch
 }
-// @use './eww-bar/eww.scss';
-@use './dashboard/eww.scss';

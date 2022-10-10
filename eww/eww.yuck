@@ -13,5 +13,6 @@
 
 ; (include "./eww-bar/eww.yuck")
 (include "./bar/bar.yuck")
+(include "./eww-bar/eww.yuck")
 (include "./volume/eww.yuck")
 (include "./dashboard/eww.yuck")
