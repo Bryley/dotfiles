@@ -32,5 +32,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-exec awesome
+exec bspwm
+# exec awesome
 # exec qtile start

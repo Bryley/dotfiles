@@ -1,0 +1,21 @@
+#!/bin/bash
+
+DOT_DIR=$HOME/dotfiles
+
+# pgrep -x sxhkd > /dev/null || sxhkd &
+pkill sxhkd
+sxhkd &
+bash $DOT_DIR/bspwm/autostart.sh
+
+# Setup all monitors from xrandr
+for monitorname in $(xrandr --query | grep ' connected' | awk '{print $1}'); do
+    bspc monitor $monitorname -d 1 2 3 4 5 6 7 8 9
+done
+
+bspc config window_gap 25
+bspc config border_width 3
+
+bspc config normal_border_color '#30302f'
+bspc config focused_border_color '#3498db'
+
+bspc config focus_follows_pointer true

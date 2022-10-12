@@ -31,6 +31,10 @@ package_dependencies=(
 packages=(
     # GUI
     'xorg'                  # Contains usuful packages for xorg display server
+    'bspwm'                 # Tiling Window Manager
+    'sxhkd'                 # Keyboard shortcuts for window manager
+    'feh'                   # Wallpaper Manager
+    'polybar'               # Customisable bar application
     'xsel'                  # Clipboard tool to enable '+' register in neovim
     'alacritty'             # Terminal emulator
     'rofi'                  # A better application search menu
@@ -70,7 +74,8 @@ packages=(
 # List of AUR packages
 aur_packages=(
     # GUI
-    'picom-git'             # A compositor for xorg
+    # 'picom-git'             # A compositor for xorg
+    'picom-pijulius-git'    # A compositor for xorg with great animations
     'awesome-git'           # Awesome Window Manger (dev branch)
     'i3lock-color'          # Lockscreen for X server
 

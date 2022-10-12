@@ -2,7 +2,7 @@
 
 alias vim="nvim"
 alias vimdiff="nvim -d"
-alias ls="exa"
+alias ls="exa --icons"
 alias t="tmux -2"
 alias clipboard="xsel --clipboard"      # stdin to clipboard ('pwd | clipboard')
 

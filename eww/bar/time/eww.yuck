@@ -1,0 +1,11 @@
+
+(defwindow time
+  :geometry (geometry :y "5px"
+                      :height "35px"
+                      :width "500px"
+                      :anchor "top center")
+  ; :stacking "fg"
+  ; :reserve (struts :distance "20px" :side "top")
+  ; :windowtype: "dock"
+  ; :wm-ignore false
+  "Time")

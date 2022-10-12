@@ -1,5 +1,5 @@
 
-export DOT_DIR="~/dotfiles"
+export DOT_DIR="$HOME/dotfiles"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export TERM=$TERMINAL
