@@ -1,7 +1,15 @@
 
+########################
+# General Key Bindings #
+########################
+
 # Quit/Reload bspwm
 super + alt + {q,r}
     bspc {quit,wm -r};eww reload
+
+# Lock screen
+super + Escape
+    lock
 
 # terminal emulator
 super + Return
@@ -15,7 +23,9 @@ super + b
 super + r
     rofi -show
 
-# Window Manager #
+########################
+# BSPWM Window Manager #
+########################
 
 # Switch workspaces
 super + ctrl + {h,l}
@@ -24,6 +34,18 @@ super + ctrl + {h,l}
 # Close windows
 super + {_,shift} + q
     bspc node --{close,kill}
+
+# Focus on different windows
+super + {h,j,k,l}
+    bspc node --focus {west,south,north,east}
+
+# Swap node with other node in workspace
+super + shift + {h,j,k,l}
+    bspc node --swap {west,south,north,east}
+
+# Move node to different desktop
+super + ctrl + shift + {h,l}
+    bspc node --to-desktop {prev,next}.local --focus
 
 # program launcher
 # super + @space

@@ -120,6 +120,8 @@ return packer.startup(function(use)
     use 'nvim-lualine/lualine.nvim'         -- Adds better bottom bar
     use 'tomasiser/vim-code-dark'           -- vscode like colourschemes
     use 'Mofiqul/vscode.nvim'               -- Another vscode theme
+    use 'NTBBloodbath/doom-one.nvim'        -- Doom theme
+
     use 'elkowar/yuck.vim'                  -- Language support for 'yuck' language
 
     -- Other
