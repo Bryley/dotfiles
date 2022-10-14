@@ -3,8 +3,6 @@
 DOT_DIR=$HOME/dotfiles
 
 # pgrep -x sxhkd > /dev/null || sxhkd &
-pkill sxhkd
-sxhkd &
 bash $DOT_DIR/bspwm/autostart.sh
 
 # Setup all monitors from xrandr

@@ -50,6 +50,7 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim"            -- Have packer manage itself
     use "nvim-lua/popup.nvim"               -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim"             -- Useful lua functions used by lots of plugins
+    use 'stevearc/dressing.nvim'            -- Adds better UI for selections in different plugins
     use "kyazdani42/nvim-web-devicons"      -- Adds NERD font icons to different plugins.
     use {                                   -- Uses parser for better syntax highlighting.
         "nvim-treesitter/nvim-treesitter",
@@ -72,6 +73,7 @@ return packer.startup(function(use)
     use "Bryley/docstr.nvim"                -- My custom docstring plugin
     use "danymat/neogen"                    -- Documentation Generator
     use 'norcalli/nvim-colorizer.lua'       -- Color preview
+    use 'ziontee113/icon-picker.nvim'       -- Icon picking plugin
 
     -- Org mode Stuff
     use 'nvim-orgmode/orgmode'              -- Neovim Orgmode

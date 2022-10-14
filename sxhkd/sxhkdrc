@@ -35,6 +35,10 @@ super + ctrl + {h,l}
 super + {_,shift} + q
     bspc node --{close,kill}
 
+# Switch Desktops
+super + ctrl + alt + {h,j,k,l}
+    bspc monitor -f {west,south,north,east}
+
 # Focus on different windows
 super + {h,j,k,l}
     bspc node --focus {west,south,north,east}

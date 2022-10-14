@@ -13,6 +13,8 @@ require "user.pluginconfigs.colorizer"
 require "user.pluginconfigs.orgmode"
 require "user.pluginconfigs.rusttools"
 require "user.pluginconfigs.neogen"
+require "user.pluginconfigs.icon_picker"
+require "user.pluginconfigs.dressing"
 require "user.pluginconfigs.vscode"
 
 require "user.pluginconfigs.lsp"

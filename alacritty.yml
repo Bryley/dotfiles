@@ -10,6 +10,9 @@ font:
   italic:
     family: "Hack Nerd Font"
 
+key_bindings:
+  - { key: I, mods: Control, chars: "\x1b[105;5u" }
+
 window:
   opacity: 1
   padding:

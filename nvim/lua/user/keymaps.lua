@@ -70,6 +70,10 @@ keymap('n', '<leader>do', '<cmd>lua require("dap").step_out()<CR>', opts)
 keymap('n', '<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
 keymap('n', '<leader>dc', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opts)
 
+-- icon-picker
+keymap('n', '<leader>i', '<cmd>IconPickerNormal nerd_font<CR>', opts)
+-- keymap('i', '<C-i>', '<cmd>IconPickerInsert<CR>', opts)
+
 
 -- Insert --
 keymap("i", "<C-H>", "<C-W>", opts)
