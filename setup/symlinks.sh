@@ -17,6 +17,7 @@ rm -rf ~/.config/qtile
 rm -rf ~/.config/eww
 rm -rf ~/.config/bspwm
 rm -rf ~/.config/sxhkd
+rm -rf ~/.config/dunst
 
 ln -sf $(pwd)/nvim ~/.config/nvim
 ln -sf $(pwd)/emacs ~/.config/emacs
@@ -29,4 +30,5 @@ ln -sf $(pwd)/picom ~/.config/picom
 ln -sf $(pwd)/eww ~/.config/eww
 ln -sf $(pwd)/bspwm ~/.config/bspwm
 ln -sf $(pwd)/sxhkd ~/.config/sxhkd
+ln -sf $(pwd)/dunst ~/.config/dunst
 

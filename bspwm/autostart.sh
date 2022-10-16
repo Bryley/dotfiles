@@ -3,10 +3,10 @@
 # xrdb -merge ~/.Xresources &
 
 # Keyboard event software
-pkill sxhkd && sxhkd &
+pkill sxhkd; sxhkd &
 
 # Bar
-# bash $DOT_DIR/polybar/launch.sh
+bash $DOT_DIR/polybar/launch.sh
 
 # Program for auto mounting USBs
 pkill udiskie; udiskie &

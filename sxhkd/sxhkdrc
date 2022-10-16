@@ -11,6 +11,12 @@ super + alt + {q,r}
 super + Escape
     lock
 
+# Volume Controls
+XF86Audio{LowerVolume,RaiseVolume}
+    pactl set-sink-volume 0 {-,+}5%
+XF86AudioMute
+    pactl set-sink-mute 0 toggle
+
 # terminal emulator
 super + Return
 	alacritty

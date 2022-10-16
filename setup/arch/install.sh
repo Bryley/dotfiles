@@ -41,6 +41,7 @@ packages=(
     'xorg-xinit'            # Starts xorg with 'startx' command # TODO This will be changed to a display manager like lightdm
     'udisks2'               # Automatic mounting of USB sticks
     'redshift'              # Filters blue light based on time of day
+    'dunst'                 # Notification daemon
 
     # Audio
     'pipewire'              # Audio framework
@@ -75,6 +76,7 @@ packages=(
 aur_packages=(
     # GUI
     # 'picom-git'             # A compositor for xorg
+    'xtitle'                # Command that gives info about open window used by bspwm rules
     'picom-pijulius-git'    # A compositor for xorg with great animations
     'awesome-git'           # Awesome Window Manger (dev branch)
     'i3lock-color'          # Lockscreen for X server
