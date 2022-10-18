@@ -64,6 +64,7 @@ return packer.startup(function(use)
     use "tkhren/vim-textobj-numeral"        -- Adds text object 'n' for number
     use "tpope/vim-repeat"                  -- Adds better repeatability for surround.vim
     use "psliwka/vim-smoothie"              -- Adds smooth scrolling
+    use "ggandor/leap.nvim"                 -- Navigation plugin for jumping around file
     use "AndrewRadev/sideways.vim"          -- Adds ':Sideways<Left|Right>' for swapping objects
     use "p00f/nvim-ts-rainbow"              -- Adds rainbow brackets
     use "nvim-treesitter/playground"        -- Shows AST for current code using treesitter
@@ -74,6 +75,7 @@ return packer.startup(function(use)
     use "danymat/neogen"                    -- Documentation Generator
     use 'norcalli/nvim-colorizer.lua'       -- Color preview
     use 'ziontee113/icon-picker.nvim'       -- Icon picking plugin
+    use 'Shatur/neovim-session-manager'     -- Session Manager for nvim
 
     -- Org mode Stuff
     use 'nvim-orgmode/orgmode'              -- Neovim Orgmode

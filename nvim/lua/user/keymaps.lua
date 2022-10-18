@@ -72,6 +72,7 @@ keymap('n', '<leader>dc', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("
 
 -- icon-picker
 keymap('n', '<leader>i', '<cmd>IconPickerNormal nerd_font<CR>', opts)
+-- This fails due to <C-I> acting like Tab in terminal
 -- keymap('i', '<C-i>', '<cmd>IconPickerInsert<CR>', opts)
 
 

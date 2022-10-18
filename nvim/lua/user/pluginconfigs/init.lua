@@ -16,5 +16,7 @@ require "user.pluginconfigs.neogen"
 require "user.pluginconfigs.icon_picker"
 require "user.pluginconfigs.dressing"
 require "user.pluginconfigs.vscode"
+require "user.pluginconfigs.leap"
+require "user.pluginconfigs.session"
 
 require "user.pluginconfigs.lsp"
