@@ -58,6 +58,7 @@ return packer.startup(function(use)
     }
     use "moll/vim-bbye"                     -- Creates better buffer deleting
     use "kana/vim-textobj-user"             -- Dependency for vim-textobj-numberal
+    use 'anuvyklack/keymap-amend.nvim'      -- Keymap plugin for fold preview
 
     -- Essentials
     use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
@@ -100,10 +101,14 @@ return packer.startup(function(use)
     -- use 'jpalardy/vim-slime'                -- Vim + TMUX support
     -- use 'rust-lang/rust.vim'                -- Rust language support
     use 'simrat39/rust-tools.nvim'          -- Rust Tools
+    use 'anuvyklack/pretty-fold.nvim'       -- Pretty Folds with zf
+    use 'anuvyklack/fold-preview.nvim'      -- Have preview of folds when hovering
 
     -- LSP
     use 'neovim/nvim-lspconfig'             -- LSP setup
-    use 'williamboman/nvim-lsp-installer'   -- Easy to use installer for LSP servers
+    --use 'williamboman/nvim-lsp-installer'   -- Easy to use installer for LSP servers
+    use { "williamboman/mason.nvim" }       -- Easy to use installer for LSP servers
+    use { "williamboman/mason-lspconfig.nvim" } -- Plugin for mason.nvim
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp"                  -- The base auto completion plugin

@@ -18,5 +18,7 @@ require "user.pluginconfigs.dressing"
 require "user.pluginconfigs.vscode"
 require "user.pluginconfigs.leap"
 require "user.pluginconfigs.session"
+require "user.pluginconfigs.prettyfold"
+require "user.pluginconfigs.foldpreview"
 
 require "user.pluginconfigs.lsp"
