@@ -13,5 +13,3 @@ title="$(xtitle "$wid")"
 
 [ "$class" = "Matplotlib" ] && echo 'state=floating' ]
 
-# echo "'${title}' '${wid}'" "'${class}'" "'${instance}'" "'${consequences}'" >> ~/Desktop/test_rules
-

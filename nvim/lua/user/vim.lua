@@ -32,6 +32,8 @@ opt.colorcolumn = '80'                      -- 80 character limit on line
 
 opt.completeopt = { "menuone", "noselect" } -- For better selection with cmp
 
+opt.foldcolumn = '3'                        -- Set 3 spaces on the left gutter for folding data
+
 
 -- Searching
 opt.hlsearch = true                         -- highlight all matches on previous search pattern
@@ -58,3 +60,11 @@ opt.autoindent = true                       -- Automatically indent lines as you
 -- Have org files be 2 spaces for tabs and indentation
 vim.api.nvim_exec([[ autocmd FileType org setlocal tabstop=2 shiftwidth=2 softtabstop=2 ]], false)
 
+-- Remember folds on exit
+vim.api.nvim_exec([[
+    augroup remember_folds
+      autocmd!
+      autocmd BufWinLeave *.* mkview
+      autocmd BufWinEnter *.* silent! loadview
+    augroup END
+]], false)

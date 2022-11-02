@@ -57,6 +57,14 @@ super + shift + {h,j,k,l}
 super + ctrl + shift + {h,l}
     bspc node --to-desktop {prev,next}.local --focus
 
+# Fullscreen mode
+super + f
+    bspc node -t '~fullscreen'
+
+# Monicle/Maximize Mode
+super + m
+    bspc desktop -l next
+
 # program launcher
 # super + @space
 # 	dmenu_run

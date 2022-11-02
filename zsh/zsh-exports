@@ -9,6 +9,11 @@ export LSCOLORS=ExFxCxDxBxegedabagacad # ls command colored output
 # Used for work kubernetes clusters
 export HOSTNAME="bryleys-local-machine-1234-5678"
 
+# For SnowflakeDatabaseTools module to not focus on externalbrowser auth (for work)
+export SF_CMD_BEFORE_FIRST_QUERY="bspc config ignore_ewmh_focus true"
+export SF_CMD_AFTER_FIRST_QUERY="bspc config ignore_ewmh_focus false"
+
+
 # Setup syntax highlighting colors
 typeset -Ag ZSH_HIGHLIGHT_STYLES
 

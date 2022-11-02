@@ -32,6 +32,16 @@ keymap("n", "<C-l>", "<cmd>SidewaysRight<CR>", opts) -- sideways.vim plugin
 -- keymap("n", "<leader>c", "<cmd>lua require'docstr'.docstr()<CR>", verbose)
 keymap("n", "<leader>c", "<cmd>lua require('neogen').generate()<CR>", verbose)
 
+-- LSP
+keymap('n', 'gd'	, '<cmd>lua vim.lsp.buf.definition()<CR>',		opts)
+keymap('n', 'gD'	, '<cmd>lua vim.lsp.buf.declaration()<CR>',		opts)
+keymap('n', 'gr'	, '<cmd>lua vim.lsp.buf.references()<CR>',		opts)
+keymap('n', 'gi'	, '<cmd>lua vim.lsp.buf.implementation()<CR>',	opts)
+keymap('n', 'K'	, '<cmd>lua vim.lsp.buf.hover()<CR>',			opts)
+keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',	opts)
+keymap('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev()<CR>',opts)
+keymap('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>',opts)
+
 -- Terminal --
 keymap("t", "<Esc>", "<C-\\><C-n>", opts)    -- Esc goes to normal mode in term
 
@@ -72,6 +82,7 @@ keymap('n', '<leader>dc', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("
 
 -- icon-picker
 keymap('n', '<leader>i', '<cmd>IconPickerNormal nerd_font<CR>', opts)
+-- This fails due to <C-I> acting like Tab in terminal
 -- keymap('i', '<C-i>', '<cmd>IconPickerInsert<CR>', opts)
 
 

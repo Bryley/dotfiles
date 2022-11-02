@@ -5,6 +5,9 @@ xrdb -merge ~/.Xresources &
 # Keyboard event software
 pkill sxhkd; sxhkd &
 
+# Notification Software
+pkill dunst; dunst &
+
 # Bar
 bash $DOT_DIR/polybar/launch.sh
 

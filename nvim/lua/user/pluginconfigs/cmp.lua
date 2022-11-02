@@ -4,6 +4,11 @@ if not cmp_status_ok then
   return
 end
 
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then
+  return
+end
+
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
