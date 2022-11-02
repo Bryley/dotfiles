@@ -11,5 +11,7 @@ title="$(xtitle "$wid")"
 [ -z "$class" ] && [ -z "$instance" ] && [ "$title" = "Picture in picture" ] \
     && echo 'state=floating'
 
+[ "$class" = "Matplotlib" ] && echo 'state=floating' ]
+
 # echo "'${title}' '${wid}'" "'${class}'" "'${instance}'" "'${consequences}'" >> ~/Desktop/test_rules
 

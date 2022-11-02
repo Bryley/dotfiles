@@ -1,6 +1,6 @@
 
 # Use .Xresources (handy for high DPI screens
-# xrdb -merge ~/.Xresources &
+xrdb -merge ~/.Xresources &
 
 # Keyboard event software
 pkill sxhkd; sxhkd &
