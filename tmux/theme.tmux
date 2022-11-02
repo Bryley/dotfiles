@@ -11,7 +11,11 @@ TMUX_VAR_BG=#262626
 
 TMUX_VAR_PRI=#5FAFFF
 
+
 set-option -g status-interval 3
+set-option -g automatic-rename on
+set-option -g automatic-rename-format '#{b:pane_current_path}'
+
 set-option -g status-fg "$TMUX_VAR_FG"
 set-option -g status-bg "$TMUX_VAR_BG"
 

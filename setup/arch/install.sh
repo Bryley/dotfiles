@@ -55,8 +55,6 @@ packages=(
 
     'tmux'                  # Terminal multiplexer
     'zsh'                   # Z shell, modern alternate to bash
-    'neovim'                # The latest version of neovim text editor
-    'ripgrep'               # A better grep alternative used by neovim plugin telescope
     'imagemagick'           # An image manipulation software that can be used to blur images
 
     'networkmanager'        # An easy to use network manager tool (use `nmtui` command)
@@ -67,6 +65,16 @@ packages=(
     'ncdu'                  # NCurses Disk Usage. A terminal UI for analysing disk usage
     'exa'                   # Better alternative to ls command
     'pkgfile'               # Contains the command not found searching tool for better errors
+
+    # Neovim related #
+    'neovim'                # The latest version of neovim text editor
+    'ripgrep'               # A better grep alternative used by neovim plugin telescope
+    # LSPs
+    'pyright'               # Python language server by microsoft
+    'typescript-language-server' # Typescript and Javascript LSP
+    'lua-language-server'   # Sumoneko lua language server
+    'rust-analyzer'         # Language server for rust
+
 
     # Fonts
     'inter-font'            # Font used for GUI
@@ -85,6 +93,8 @@ aur_packages=(
     'nvm'                   # Node version manager (Node is used by neovim)
     'command-not-found'     # Shows list of packages for unknown command
     'udiskie'               # Utility for automounting USBs
+
+    'nodejs-svelte-language-server' # Svelte Language server
 
     # Fonts
     'nerd-fonts-hack'       # Font used by terminal emulator

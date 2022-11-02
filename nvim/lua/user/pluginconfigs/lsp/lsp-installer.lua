@@ -1,36 +1,46 @@
-
-local status_ok, lspconfig = pcall(require, "lspconfig")
-if not status_ok then
-	return
-end
-
-local status_ok, mason = pcall(require, "mason")
-if not status_ok then
-	return
-end
-
-local status_ok, config = pcall(require, "mason-lspconfig")
-if not status_ok then
-	return
-end
-
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
+local status_ok1, lspconfig = pcall(require, "lspconfig")
+if not status_ok1 then
     return
 end
 
-mason.setup{}
-config.setup{}
+local status_ok2, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok2 then
+    return
+end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local status_ok3, null_ls = pcall(require, "null-ls")
+if not status_ok3 then
+    return
+end
+
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- TODO if you need any more language setups look at:
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
-lspconfig.sumneko_lua.setup { capabilities=capabilities }
-lspconfig.tsserver.setup { capabilities=capabilities }
-lspconfig.pyright.setup { capabilities=capabilities }
-lspconfig.svelte.setup { capabilities=capabilities }
-lspconfig.rust_analyzer.setup { capabilities=capabilities }
+lspconfig.sumneko_lua.setup {
+    capabilities = capabilities,
+    settings = { Lua = { diagnostics = { globals = { 'vim' } } } }
+}
+lspconfig.tsserver.setup {
+    capabilities = capabilities
+}
+lspconfig.pyright.setup {
+    capabilities = capabilities
+}
+lspconfig.svelte.setup {
+    capabilities = capabilities
+}
+lspconfig.rust_analyzer.setup {
+    capabilities = capabilities
+}
+
+null_ls.setup {
+    sources = {
+        -- TODO put these in the install scripts
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.stylua,
+    },
+}
 
 require("user.pluginconfigs.lsp.lsp-settings")
 -- local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")

@@ -61,9 +61,10 @@ return packer.startup(function(use)
     use 'anuvyklack/keymap-amend.nvim'      -- Keymap plugin for fold preview
 
     -- Essentials
-    use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
+    --use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
+    use "kylechui/nvim-surround"            -- Ability to change surrounding characters on text objects.
     use "tkhren/vim-textobj-numeral"        -- Adds text object 'n' for number
-    use "tpope/vim-repeat"                  -- Adds better repeatability for surround.vim
+    -- use "tpope/vim-repeat"                  -- Adds better repeatability for surround.vim
     use "psliwka/vim-smoothie"              -- Adds smooth scrolling
     use "ggandor/leap.nvim"                 -- Navigation plugin for jumping around file
     use "AndrewRadev/sideways.vim"          -- Adds ':Sideways<Left|Right>' for swapping objects
@@ -105,10 +106,16 @@ return packer.startup(function(use)
     use 'anuvyklack/fold-preview.nvim'      -- Have preview of folds when hovering
 
     -- LSP
-    use 'neovim/nvim-lspconfig'             -- LSP setup
-    --use 'williamboman/nvim-lsp-installer'   -- Easy to use installer for LSP servers
-    use { "williamboman/mason.nvim" }       -- Easy to use installer for LSP servers
-    use { "williamboman/mason-lspconfig.nvim" } -- Plugin for mason.nvim
+    use "neovim/nvim-lspconfig"             -- LSP setup for Neovim
+    use "jose-elias-alvarez/null-ls.nvim"   -- A plugin that allows external formatters and linters to work with LSP
+    -- use {
+    --     "williamboman/mason.nvim",          -- Installer for LSP servers, linters and formatters
+    --     "jose-elias-alvarez/null-ls.nvim",  -- A plugin that allows external formatters and linters to work with LSP
+    --     "jayp0521/mason-null-ls.nvim",      -- Plugin for Mason for null-ls support
+    --     "williamboman/mason-lspconfig.nvim",-- Plugin for LSP support with Mason
+    --     "neovim/nvim-lspconfig",            -- LSP setup for Neovim
+    --     "RubixDev/mason-update-all"         -- Plugin to update all packages at once in Mason
+    -- }
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp"                  -- The base auto completion plugin

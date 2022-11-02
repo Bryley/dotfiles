@@ -20,5 +20,6 @@ require "user.pluginconfigs.leap"
 require "user.pluginconfigs.session"
 require "user.pluginconfigs.prettyfold"
 require "user.pluginconfigs.foldpreview"
+require "user.pluginconfigs.surround"
 
 require "user.pluginconfigs.lsp"
