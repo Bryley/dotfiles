@@ -21,5 +21,7 @@ require "user.pluginconfigs.session"
 require "user.pluginconfigs.prettyfold"
 require "user.pluginconfigs.foldpreview"
 require "user.pluginconfigs.surround"
+require "user.pluginconfigs.trouble"
+require "user.pluginconfigs.neoscroll"
 
 require "user.pluginconfigs.lsp"

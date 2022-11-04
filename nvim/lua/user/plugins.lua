@@ -61,11 +61,10 @@ return packer.startup(function(use)
     use 'anuvyklack/keymap-amend.nvim'      -- Keymap plugin for fold preview
 
     -- Essentials
-    --use "tpope/vim-surround"                -- Ability to change surrounding characters on text objects.
     use "kylechui/nvim-surround"            -- Ability to change surrounding characters on text objects.
     use "tkhren/vim-textobj-numeral"        -- Adds text object 'n' for number
-    -- use "tpope/vim-repeat"                  -- Adds better repeatability for surround.vim
-    use "psliwka/vim-smoothie"              -- Adds smooth scrolling
+    use "karb94/neoscroll.nvim"             -- Smooth scrolling for neovim
+    -- use "psliwka/vim-smoothie"              -- Adds smooth scrolling
     use "ggandor/leap.nvim"                 -- Navigation plugin for jumping around file
     use "AndrewRadev/sideways.vim"          -- Adds ':Sideways<Left|Right>' for swapping objects
     use "p00f/nvim-ts-rainbow"              -- Adds rainbow brackets
@@ -78,6 +77,7 @@ return packer.startup(function(use)
     use 'norcalli/nvim-colorizer.lua'       -- Color preview
     use 'ziontee113/icon-picker.nvim'       -- Icon picking plugin
     use 'Shatur/neovim-session-manager'     -- Session Manager for nvim
+    use 'junegunn/vim-easy-align'           -- Aligns code/text like csv files
 
     -- Org mode Stuff
     use 'nvim-orgmode/orgmode'              -- Neovim Orgmode
@@ -104,6 +104,7 @@ return packer.startup(function(use)
     use 'simrat39/rust-tools.nvim'          -- Rust Tools
     use 'anuvyklack/pretty-fold.nvim'       -- Pretty Folds with zf
     use 'anuvyklack/fold-preview.nvim'      -- Have preview of folds when hovering
+    use 'folke/trouble.nvim'                -- List of project wide diagnostics
 
     -- LSP
     use "neovim/nvim-lspconfig"             -- LSP setup for Neovim
