@@ -33,12 +33,24 @@ lspconfig.svelte.setup {
 lspconfig.rust_analyzer.setup {
     capabilities = capabilities
 }
+lspconfig.dockerls.setup {
+    capabilities = capabilities
+}
+lspconfig.ltex.setup {
+    capabilities = capabilities
+}
 
 null_ls.setup {
     sources = {
         -- TODO put these in the install scripts
         require("null-ls").builtins.formatting.black,
         require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.formatting.prettier.with({
+            extra_args = { "--tab-width", "4" }
+        }),
+        require("null-ls").builtins.formatting.sqlfluff.with({
+            extra_args = { "--dialect", "mysql" }, -- change to your dialect
+        }),
     },
 }
 

@@ -95,6 +95,8 @@ aur_packages=(
     'udiskie'               # Utility for automounting USBs
 
     'nodejs-svelte-language-server' # Svelte Language server
+    'dockerfile-language-server-bin' # Docker language server
+    'ltex-ls-bin'           # Latex/Markdown/Org language server
 
     # Fonts
     'nerd-fonts-hack'       # Font used by terminal emulator

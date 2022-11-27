@@ -23,5 +23,6 @@ require "user.pluginconfigs.foldpreview"
 require "user.pluginconfigs.surround"
 require "user.pluginconfigs.trouble"
 require "user.pluginconfigs.neoscroll"
+require "user.pluginconfigs.textcase"
 
 require "user.pluginconfigs.lsp"

@@ -78,6 +78,7 @@ return packer.startup(function(use)
     use 'ziontee113/icon-picker.nvim'       -- Icon picking plugin
     use 'Shatur/neovim-session-manager'     -- Session Manager for nvim
     use 'junegunn/vim-easy-align'           -- Aligns code/text like csv files
+    use 'johmsalas/text-case.nvim'          -- Text altering with snake and camel case
 
     -- Org mode Stuff
     use 'nvim-orgmode/orgmode'              -- Neovim Orgmode
