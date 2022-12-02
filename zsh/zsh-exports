@@ -35,6 +35,11 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export PATH=$ZDOTDIR/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
+# pnpm
+export PNPM_HOME="/home/bryley/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
 
 # This is for Node version manager
 source /usr/share/nvm/init-nvm.sh
