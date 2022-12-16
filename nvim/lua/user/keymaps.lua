@@ -23,6 +23,8 @@ keymap("n", "<F3>", ":noh<CR>", opts)
 keymap("n", "<F4>", "<cmd>ToggleTerm<CR>", opts)
 -- Runs python code for the current file using venv in ./.venv/ folder
 keymap("n", "<F5>", "<cmd>TermExec cmd='./.venv/bin/python <C-r>%'<CR>", verbose)
+keymap("n", "<F7>", "<Plug>SnipRun", opts)
+keymap("v", "<F7>", "<Plug>SnipRun", opts)
 keymap("n", "<C-Q>", "<Nop>", opts) -- Stop from quitting
 
 keymap("n", "<C-h>", "<cmd>SidewaysLeft<CR>", opts) -- sideways.vim plugin
@@ -59,6 +61,13 @@ keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
+
+-- SnipRun
+keymap("v", "<leader>s", "<Plug>SnipRun", opts)
+keymap("n", "<leader>s", "<Plug>SnipRunOperator", opts)
+keymap("n", "<leader>ss", "<Plug>SnipRun", opts)
+keymap("n", "<leader>sc", "<Plug>SnipClose", opts)
+keymap("n", "<leader>sq", "<Plug>SnipReset", opts)
 
 -- Buffers
 keymap("n", "<A-h>", "<cmd>bprev<CR>", opts)

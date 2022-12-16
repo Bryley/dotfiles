@@ -79,6 +79,7 @@ return packer.startup(function(use)
     use 'Shatur/neovim-session-manager'     -- Session Manager for nvim
     use 'junegunn/vim-easy-align'           -- Aligns code/text like csv files
     use 'johmsalas/text-case.nvim'          -- Text altering with snake and camel case
+    use {'michaelb/sniprun', run = 'bash ./install.sh'} -- Send code to repl
 
     -- Org mode Stuff
     use 'nvim-orgmode/orgmode'              -- Neovim Orgmode
