@@ -24,7 +24,7 @@ xsetroot -cursor_name left_ptr &
 pkill redshift; redshift -l 27.4705:153.0260 &
 
 # TODO Auto download wallpaper online and set it
-feh --bg-fill $DOT_DIR/bspwm/wallpaper.jpg &
+feh --bg-fill $DOT_DIR/bspwm/wallpaper.jpeg &
 
 # Compositor
 picom -b --animations --animation-window-mass=0.5 --animation-stiffness=350 --animation-for-open-window=zoom
