@@ -18,6 +18,9 @@ DISTRO=arch
 bash setup/$DISTRO/install.sh
 bash setup/symlinks.sh
 
+# Setup wallpaper
+bash ./bspwm/wallpaper.sh
+
 # Installing software
 
 printf "\n%b\n" "\e[32m All done you might want to reboot your computer for some changes to take place \e[0m"
