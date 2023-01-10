@@ -19,6 +19,6 @@ fi
 curl -L -o downloaded_image $WALLPAPER
 
 EXT=$(identify downloaded_image | cut -f 2 -d " " | tr '[:upper:]' '[:lower:]')
-mv downloaded_image "wallpaper.$EXT"
+mv downloaded_image "$DOT_DIR/bspwm/wallpaper.$EXT"
 
-convert -quality 100 "wallpaper.$EXT" wallpaper.jpeg
+convert -quality 100 "$DOT_DIR/bspwm/wallpaper.$EXT" $DOT_DIR/bspwm/wallpaper.jpeg
