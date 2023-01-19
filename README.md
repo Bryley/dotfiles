@@ -20,6 +20,12 @@ WARNING this may delete files/directories within `~/.config` so if there are any
 1. For zsh, the plugin `fast-syntax-highlighting` is installed which gives nice colors in the terminal.
 There are different themes to choose from using the `fast-theme` command, I believe `base16` goes the best with the other colors `fast-theme base16`.
 
+## Optional Additional Stuff
+
+- To add colored output to pacman and yay go to `/etc/pacman.conf` and uncomment the `Color` line.
+
+
+
 ## Python
 
 1. Type `python3 -m venv .venv` to create venv inside current project. (Replace `python3` with `python3.8` for python 3.8)

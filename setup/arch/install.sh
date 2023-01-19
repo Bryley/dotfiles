@@ -65,6 +65,8 @@ packages=(
     'ncdu'                  # NCurses Disk Usage. A terminal UI for analysing disk usage
     'exa'                   # Better alternative to ls command
     'pkgfile'               # Contains the command not found searching tool for better errors
+    'fd'                    # Better alternative to the 'find' command.
+    'fzf'                   # Fuzzy finder for the command line.
 
     # Neovim related #
     'neovim'                # The latest version of neovim text editor

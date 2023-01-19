@@ -1,5 +1,9 @@
 # File contains aliases crated by me
 
+# Handy alias function for changing directory to fuzzy file
+function f() {
+    cd $(fd --hidden --type directory --exclude node_modules --exclude .git | fzf --height 40% --reverse)
+}
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias ls="exa --icons --color always"
