@@ -64,10 +64,10 @@ return packer.startup(function(use)
     use "kylechui/nvim-surround"            -- Ability to change surrounding characters on text objects.
     use "tkhren/vim-textobj-numeral"        -- Adds text object 'n' for number
     use "karb94/neoscroll.nvim"             -- Smooth scrolling for neovim
-    -- use "psliwka/vim-smoothie"              -- Adds smooth scrolling
     use "ggandor/leap.nvim"                 -- Navigation plugin for jumping around file
     use "AndrewRadev/sideways.vim"          -- Adds ':Sideways<Left|Right>' for swapping objects
     use "p00f/nvim-ts-rainbow"              -- Adds rainbow brackets
+    use "nvim-treesitter/nvim-treesitter-textobjects" -- Adds extra text objects like function and class
     use "nvim-treesitter/playground"        -- Shows AST for current code using treesitter
     use "folke/which-key.nvim"              -- When pressing leader gives hints for remembering
     use "terrortylor/nvim-comment"          -- Commenting plugin
@@ -140,6 +140,8 @@ return packer.startup(function(use)
     use 'tomasiser/vim-code-dark'           -- vscode like colourschemes
     use 'Mofiqul/vscode.nvim'               -- Another vscode theme
     use 'NTBBloodbath/doom-one.nvim'        -- Doom theme
+    use "olimorris/onedarkpro.nvim"         -- One dark pro theme
+    use 'folke/tokyonight.nvim'             -- Tokyonight colorscheme
 
     use 'elkowar/yuck.vim'                  -- Language support for 'yuck' language
 

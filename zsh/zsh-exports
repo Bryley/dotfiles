@@ -13,6 +13,9 @@ export HOSTNAME="bryleys-local-machine-1234-5678"
 export SF_CMD_BEFORE_FIRST_QUERY="bspc config ignore_ewmh_focus true"
 export SF_CMD_AFTER_FIRST_QUERY="bspc config ignore_ewmh_focus false"
 
+# For Jupyterlab extensions to work
+export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
+
 
 # Setup syntax highlighting colors
 typeset -Ag ZSH_HIGHLIGHT_STYLES

@@ -17,7 +17,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- TODO if you need any more language setups look at:
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
 	capabilities = capabilities,
 	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 })

@@ -11,6 +11,11 @@ alias t="tmux -2"
 alias clipboard="xsel --clipboard"      # stdin to clipboard ('pwd | clipboard')
 alias less="less -R"                    # Use color if available
 
+# Opens the git project url in the browser
+function gitopen() {
+    xdg-open $(git remote get-url origin | sed 's;:;/;' | sed 's;^git@;https://;' | sed 's;.git$;;')
+}
+
 # Python aliases
 alias python="python3.9"                # Make python 3.9 default version.
 alias activate="source ./.venv/bin/activate"

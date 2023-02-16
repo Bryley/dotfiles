@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# TODO INSTALL scrot and tesseract-data-eng slop
+
+# Dependencies: tesseract-ocr imagemagick scrot xsel slop
+
+# select tesseract_lang in eng rus equ ;do break;done
+# quick language menu, add more if you need other languages.
+
+# SCR_IMG=`mktemp`
+FILE_NAME=$(mktemp)
+# FILE_NAME=test
+# trap "rm $SCR_IMG*" EXIT
+
+# scrot -s $SCR_IMG.png -q 100
+scrot -a $(slop -f '%x,%y,%w,%h') $FILE_NAME.png -q 100
+# increase image quality with option -q from default 75 to 100
+
+# mogrify -modulate 100,0 -resize 400% $SCR_IMG.png 
+#should increase detection rate
+
+tesseract $FILE_NAME.png $FILE_NAME &> /dev/null
+cat $FILE_NAME.txt | xsel --clipboard
+
+rm $FILE_NAME.txt
+rm $FILE_NAME.png
+
