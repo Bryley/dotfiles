@@ -89,7 +89,7 @@ return packer.startup(function(use)
     use 'dhruvasagar/vim-table-mode'        -- Better nvim table support (TODO play around with it)
 
     -- IDE like
-    use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side
+    use "kyazdani42/nvim-tree.lua"          -- Adds better file navigator to the side (TODO give neotree a try instead)
     use {
         "akinsho/bufferline.nvim",          -- Adds buffer line to top bar
         branch="main"
