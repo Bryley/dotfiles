@@ -32,7 +32,7 @@ opt.colorcolumn = '80'                      -- 80 character limit on line
 
 opt.completeopt = { "menuone", "noselect" } -- For better selection with cmp
 
-opt.foldcolumn = '3'                        -- Set 3 spaces on the left gutter for folding data
+opt.foldcolumn = '0'                        -- Set 0 spaces on the left gutter for folding data
 
 
 -- Searching

@@ -82,7 +82,8 @@ return packer.startup(function(use)
     use {'michaelb/sniprun', run = 'bash ./install.sh'} -- Send code to repl
 
     -- Org mode Stuff
-    use 'nvim-orgmode/orgmode'              -- Neovim Orgmode
+    use { 'nvim-neorg/neorg', run = ":Neorg sync-parsers" } -- Neovim version of Org mode
+    -- use 'nvim-orgmode/orgmode'              -- Neovim Orgmode
     -- use 'akinsho/org-bullets.nvim'          -- Add more stylish bullets
     -- use 'lukas-reineke/headlines.nvim'      -- Adds highlighting to headlines and source code
     use 'dhruvasagar/vim-table-mode'        -- Better nvim table support (TODO play around with it)
@@ -104,8 +105,9 @@ return packer.startup(function(use)
     -- use 'jpalardy/vim-slime'                -- Vim + TMUX support
     -- use 'rust-lang/rust.vim'                -- Rust language support
     use 'simrat39/rust-tools.nvim'          -- Rust Tools
-    use 'anuvyklack/pretty-fold.nvim'       -- Pretty Folds with zf
-    use 'anuvyklack/fold-preview.nvim'      -- Have preview of folds when hovering
+    -- Disabled plugins as they clashed with neorg
+    -- use 'anuvyklack/pretty-fold.nvim'       -- Pretty Folds with zf
+    -- use 'anuvyklack/fold-preview.nvim'      -- Have preview of folds when hovering
     use 'folke/trouble.nvim'                -- List of project wide diagnostics
 
     -- LSP
@@ -142,6 +144,7 @@ return packer.startup(function(use)
     use 'NTBBloodbath/doom-one.nvim'        -- Doom theme
     use "olimorris/onedarkpro.nvim"         -- One dark pro theme
     use 'folke/tokyonight.nvim'             -- Tokyonight colorscheme
+    use ({ 'projekt0n/github-nvim-theme', tag = 'v0.0.7' }) -- Multiple cool looking themes
 
     use 'elkowar/yuck.vim'                  -- Language support for 'yuck' language
 
