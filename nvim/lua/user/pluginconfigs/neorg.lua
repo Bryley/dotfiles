@@ -7,5 +7,12 @@ neorg.setup({
     load = {
         ["core.defaults"] = {}, -- Loads defaults
         ["core.norg.concealer"] = {}, -- Adds icons to files
+        ["core.norg.dirman"] = {
+            config = {
+                workspaces = {
+                    work = "~/Documents/notes/work",
+                }
+            }
+        }
     }
 })
