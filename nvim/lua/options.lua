@@ -10,7 +10,7 @@ opt.mouse = "a"             -- Enables mouse
 opt.writebackup = false     -- Can't edit file when being edited by another software
 opt.completeopt = "menu,menuone,noselect" -- Selection options for cmp plugin
 opt.undofile = true         -- Keeps undo history even on close
-opt.timeoutlen = 300        -- Time to wait for mapped sequence to complete
+opt.timeoutlen = 1000        -- Time to wait for mapped sequence to complete
 opt.updatetime = 200        -- Have nvim update quicker
 
 opt.splitbelow = true       -- Forces new splits to open below
