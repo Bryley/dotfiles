@@ -1,12 +1,19 @@
 return {
 	{
 		"Shatur/neovim-session-manager",
+        lazy=false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+        -- cmd = "SessionManager",
 		keys = {
 			{ "<F1>", "<cmd>SessionManager load_last_session<cr>", desc = "Load last session" },
 		},
+        config = function ()
+            require("session_manager").setup({
+                autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+            })
+        end
 	},
 	{
 		-- Ability to change surrounding characters on text objects.
@@ -37,6 +44,7 @@ return {
 	{
 		-- Fuzzy finder plugin
 		"nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
         keys = {
             {"<leader>ff", "<cmd>Telescope find_files<cr>", desc='find files'},
             {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc='grep'},

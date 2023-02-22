@@ -1,9 +1,9 @@
 local opts = { noremap = true, silent = true }
-local verbose = { noremap = true, silent = false }
-
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
+
+keymap("n", "<F3>", "<cmd>noh<cr>", opts) -- Control backspace deletes a word
 
 keymap("i", "<C-H>", "<C-W>", opts) -- Control backspace deletes a word
 
