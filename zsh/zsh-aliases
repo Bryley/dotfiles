@@ -4,6 +4,9 @@
 function f() {
     cd $(fd --hidden --type directory --exclude node_modules --exclude .git | fzf --height 40% --reverse)
 }
+function ff() {
+    cd $(dirname $(fd --hidden --exclude node_modules --exclude .git | fzf --height 40% --reverse))
+}
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias ls="exa --icons --color always"
