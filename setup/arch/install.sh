@@ -93,7 +93,7 @@ aur_packages=(
 
     # Essential Programs
     'nvm'                   # Node version manager (Node is used by neovim)
-    'command-not-found'     # Shows list of packages for unknown command
+    'find-the-command'      # Shows list of packages for unknown command
     'udiskie'               # Utility for automounting USBs
 
     'nodejs-svelte-language-server' # Svelte Language server
@@ -101,8 +101,8 @@ aur_packages=(
     'ltex-ls-bin'           # Latex/Markdown/Org language server
 
     # Fonts
-    'nerd-fonts-hack'       # Font used by terminal emulator
-    'nerd-fonts-roboto-mono' # Roboto Nerd font for Awesome WM
+    'ttf-hack-nerd'         # Nerd font for terminal
+    'ttf-roboto-mono-nerd'  # Roboto Nerd font for UI
     'ttf-material-icons-git' # Googles Material Icons
 )
 
