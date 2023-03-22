@@ -6,33 +6,36 @@ local capabilities = cmp.default_capabilities()
 -- TODO if you need any more language setups look at:
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 lsp.lua_ls.setup({
-	capabilities = capabilities,
-	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+    capabilities = capabilities,
+    settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 })
 lsp.tsserver.setup({
-	capabilities = capabilities,
+    capabilities = capabilities,
 })
 lsp.pyright.setup({
-	capabilities = capabilities,
-	settings = {
-		python = {
-			analysis = {
-				autoSearchPaths = true,
-				diagnosticMode = "workspace",
-				useLibraryCodeForTypes = true,
-			},
-		},
-	},
+    capabilities = capabilities,
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true,
+            },
+        },
+    },
 })
 lsp.svelte.setup({
-	capabilities = capabilities,
+    capabilities = capabilities,
 })
 lsp.rust_analyzer.setup({
-	capabilities = capabilities,
+    capabilities = capabilities,
 })
 lsp.dockerls.setup({
-	capabilities = capabilities,
+    capabilities = capabilities,
 })
 lsp.ltex.setup({
-	capabilities = capabilities,
+    capabilities = capabilities,
 })
+lsp.gopls.setup {
+    capabilities = capabilities,
+}

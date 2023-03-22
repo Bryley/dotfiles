@@ -13,3 +13,4 @@ for monitor in $(xrandr --query | grep ' connected' | awk '{print $1}'); do
 done
 
 echo "Bars launched..."
+

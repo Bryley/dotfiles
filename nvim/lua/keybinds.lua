@@ -13,3 +13,5 @@ keymap("t", "<Esc>", "<C-\\><C-n>", opts) -- Esc goes to normal mode in term
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+keymap("v", "<leader>s", "yPgv<cmd>'<,'>AI fix up my writing and grammer to be more clear<cr>", opts)
+keymap("v", "<leader>c", "<cmd>'<,'>NeoAI<cr>", { noremap = true, silent = false })

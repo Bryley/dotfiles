@@ -42,6 +42,9 @@ packages=(
     'udisks2'               # Automatic mounting of USB sticks
     'redshift'              # Filters blue light based on time of day
     'dunst'                 # Notification daemon
+    'nemo'                  # Best file manager
+    'nemo-fileroller'       # Archive manager for nemo
+    'nemo-preview'          # Previews in nemo
 
     # Audio
     'pipewire'              # Audio framework
@@ -67,6 +70,8 @@ packages=(
     'pkgfile'               # Contains the command not found searching tool for better errors
     'fd'                    # Better alternative to the 'find' command.
     'fzf'                   # Fuzzy finder for the command line.
+    'polkit'                # System wide authentication, useful for 1password
+    'lxqt-policykit'        # Authentication agent for polkit
 
     # Neovim related #
     'neovim'                # The latest version of neovim text editor
@@ -90,6 +95,8 @@ aur_packages=(
     'picom-pijulius-git'    # A compositor for xorg with great animations
     'awesome-git'           # Awesome Window Manger (dev branch)
     'i3lock-color'          # Lockscreen for X server
+    'arc-gtk-theme'         # Good dark GTK theme
+    'lxappearance-gtk3'     # Program for changing gtk theme
 
     # Essential Programs
     'nvm'                   # Node version manager (Node is used by neovim)

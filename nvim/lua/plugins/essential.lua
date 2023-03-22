@@ -1,19 +1,19 @@
 return {
 	{
 		"Shatur/neovim-session-manager",
-        lazy=false,
+		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-        -- cmd = "SessionManager",
+		-- cmd = "SessionManager",
 		keys = {
 			{ "<F1>", "<cmd>SessionManager load_last_session<cr>", desc = "Load last session" },
 		},
-        config = function ()
-            require("session_manager").setup({
-                autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
-            })
-        end
+		config = function()
+			require("session_manager").setup({
+				autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
+			})
+		end,
 	},
 	{
 		-- Ability to change surrounding characters on text objects.
@@ -38,20 +38,20 @@ return {
 		},
 		config = true,
 	},
-    {
-        'dhruvasagar/vim-table-mode'
-    },
+	{
+		"dhruvasagar/vim-table-mode",
+	},
 	{
 		-- Fuzzy finder plugin
 		"nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
-        keys = {
-            {"<leader>ff", "<cmd>Telescope find_files<cr>", desc='find files'},
-            {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc='grep'},
-            {"<leader>fb", "<cmd>Telescope buffers<cr>", desc='buffers'},
-            {"<leader>fh", "<cmd>Telescope help_tags<cr>", desc='help tags'},
-            {"<leader>fc", "<cmd>Telescope colorscheme<cr>", desc='colorscheme'},
-        },
+		cmd = "Telescope",
+		keys = {
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
+			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
+			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "buffers" },
+			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "help tags" },
+			{ "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "colorscheme" },
+		},
 		opts = {
 			pickers = {
 				find_files = {
@@ -66,5 +66,30 @@ return {
 				},
 			},
 		},
+	},
+	{
+		"jackMort/ChatGPT.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		cmd = {
+            "ChatGPT",
+            "ChatGPTActAs",
+            "ChatGPTEditWithInstructions",
+        },
+		config = function()
+			require("chatgpt").setup({
+				-- optional configuration
+			})
+		end,
+	},
+	{
+		-- 'Bryley/neoai',
+		dir = "~/Documents/personal/neoai",
+		dev = true,
+		cmd = "NeoAI",
+		lazy = false,
 	},
 }

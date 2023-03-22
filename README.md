@@ -23,6 +23,7 @@ There are different themes to choose from using the `fast-theme` command, I beli
 ## Optional Additional Stuff
 
 - To add colored output to pacman and yay go to `/etc/pacman.conf` and uncomment the `Color` line.
+- To change the GTK theme use the `lxappearance` command
 
 
 

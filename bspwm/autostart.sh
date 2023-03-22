@@ -11,6 +11,9 @@ pkill dunst; dunst &
 # Bar
 bash $DOT_DIR/polybar/launch.sh
 
+# Polkit authentication agent
+pkill lxqt-policykit-agent; lxqt-policykit-agent &
+
 # Program for auto mounting USBs
 pkill udiskie; udiskie &
 

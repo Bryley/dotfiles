@@ -89,3 +89,6 @@ schemes:
 
 colors: *dark
 # colors: *light
+key_bindings:
+# https://stackoverflow.com/a/42461580
+- { key: Return, mods: Control, chars: "\x1b[13;5u" }
