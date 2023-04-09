@@ -85,11 +85,18 @@ return {
 			})
 		end,
 	},
-	{
-		-- 'Bryley/neoai',
-		dir = "~/Documents/personal/neoai",
+	-- {
+	-- 	-- 'Bryley/neoai',
+	-- 	dir = "~/Documents/personal/neoai",
+	-- 	dev = true,
+	-- 	cmd = "NeoAI",
+	-- 	lazy = false,
+	-- },
+    {
+        dir = "~/Documents/coding/neovim-plugins/neoai",
 		dev = true,
 		cmd = "NeoAI",
 		lazy = false,
-	},
+        config = true,
+    },
 }
