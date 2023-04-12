@@ -75,21 +75,37 @@ return {
 			"nvim-telescope/telescope.nvim",
 		},
 		cmd = {
-            "ChatGPT",
-            "ChatGPTActAs",
-            "ChatGPTEditWithInstructions",
-        },
+			"ChatGPT",
+			"ChatGPTActAs",
+			"ChatGPTEditWithInstructions",
+		},
 		config = function()
 			require("chatgpt").setup({
 				-- optional configuration
+				openai_edit_params = {
+					model = "code-davinci-edit-001",
+					-- model = "code-davinci-edit-002",
+					temperature = 0,
+					top_p = 1,
+					n = 1,
+				},
 			})
 		end,
 	},
+	-- {
+	-- 	-- 'Bryley/neoai',
+	-- 	dir = "~/Documents/personal/neoai",
+	-- 	dev = true,
+	-- 	cmd = "NeoAI",
+	-- 	lazy = false,
+	-- },
 	{
-		-- 'Bryley/neoai',
-		dir = "~/Documents/personal/neoai",
+		dir = "~/Documents/personal/neovim-plugins/neoai",
 		dev = true,
-		cmd = "NeoAI",
+		cmd = { "NeoAI" },
 		lazy = false,
+		config = function ()
+            require("neoai").setup()
+		end,
 	},
 }

@@ -2,9 +2,11 @@
 export DOT_DIR="$HOME/dotfiles"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
+export PAGER="nvimpager"
 export TERM=$TERMINAL
 export CLICOLOR=1                   # Adds colored output
 export LSCOLORS=ExFxCxDxBxegedabagacad # ls command colored output
+export GOPATH=$HOME/go
 
 # Used for work kubernetes clusters
 export HOSTNAME="bryleys-local-machine-1234-5678"
@@ -36,6 +38,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Add the custom bin to the path
 export PATH=$ZDOTDIR/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 # pnpm

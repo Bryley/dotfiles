@@ -39,3 +39,6 @@ lsp.ltex.setup({
 lsp.gopls.setup {
     capabilities = capabilities,
 }
+lsp.volar.setup {
+    capabilities = capabilities,
+}
