@@ -5,7 +5,7 @@ require("options")
 -- [X] LSP and Null ls
 -- [X] Telescope
 -- [X] Colorscheme select telescope
--- [ ] Git signs
+-- [X] Git signs
 -- [X] Visual mode block keep
 -- [X] control backspace
 
@@ -23,6 +23,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
 require("keybinds")
 require("autocmds")

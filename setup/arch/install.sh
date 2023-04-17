@@ -107,6 +107,8 @@ aur_packages=(
     'nodejs-svelte-language-server' # Svelte Language server
     'dockerfile-language-server-bin' # Docker language server
     'ltex-ls-bin'           # Latex/Markdown/Org language server
+    'yaml-language-server'  # YAML lang server
+    'vscode-langservers-extracted' # JSON LSP
 
     # Fonts
     'ttf-hack-nerd'         # Nerd font for terminal
