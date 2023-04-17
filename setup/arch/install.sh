@@ -81,6 +81,7 @@ packages=(
     'typescript-language-server' # Typescript and Javascript LSP
     'lua-language-server'   # Sumoneko lua language server
     'rust-analyzer'         # Language server for rust
+    'svelte-language-server' # Svelte Language Server
 
 
     # Fonts
@@ -93,7 +94,6 @@ aur_packages=(
     # 'picom-git'             # A compositor for xorg
     'xtitle'                # Command that gives info about open window used by bspwm rules
     'picom-pijulius-git'    # A compositor for xorg with great animations
-    'awesome-git'           # Awesome Window Manger (dev branch)
     'i3lock-color'          # Lockscreen for X server
     'arc-gtk-theme'         # Good dark GTK theme
     'lxappearance-gtk3'     # Program for changing gtk theme
@@ -104,7 +104,6 @@ aur_packages=(
     'find-the-command'      # Shows list of packages for unknown command
     'udiskie'               # Utility for automounting USBs
 
-    'nodejs-svelte-language-server' # Svelte Language server
     'dockerfile-language-server-bin' # Docker language server
     'ltex-ls-bin'           # Latex/Markdown/Org language server
     'yaml-language-server'  # YAML lang server

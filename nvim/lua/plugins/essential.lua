@@ -142,5 +142,5 @@ return {
 		config = function()
 			require("neoai").setup()
 		end,
-	},
+    },
 }

@@ -4,13 +4,13 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-        "p00f/nvim-ts-rainbow",              -- Adds rainbow brackets
         "nvim-treesitter/nvim-treesitter-textobjects", -- Adds extra text objects like function and class
         "nvim-treesitter/playground",        -- Shows AST for current code using treesitter
     },
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = "all",
+            ignore_install = { "haskell", "jsonc", "smali" },
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = true,
@@ -39,9 +39,6 @@ return {
                     -- },
                     include_surrounding_whitespace = true,
                 },
-            },
-            rainbow = {
-                enable = true
             },
         })
     end,
