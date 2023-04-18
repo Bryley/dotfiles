@@ -134,6 +134,12 @@ return {
 			require("illuminate").configure()
 		end,
 	},
+    {
+        -- Highlights color hex with color
+        "NvChad/nvim-colorizer.lua",
+        lazy=false,
+        config=true,
+    },
 	{
 		dir = "~/Documents/personal/neovim-plugins/neoai",
 		dev = true,
