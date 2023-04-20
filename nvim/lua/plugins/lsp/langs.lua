@@ -7,7 +7,30 @@ local capabilities = cmp.default_capabilities()
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 lsp.lua_ls.setup({
     capabilities = capabilities,
-    settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {
+                    "vim",
+                    "describe",
+                    "it",
+                    "before_each",
+                    "after_each",
+                    "before",
+                    "after",
+                    "assert",
+                    "spy",
+                    "mock",
+                    "stub",
+                    "pending",
+                    "teardown",
+                    "setup",
+                    "lazy_setup",
+                    "lazy_teardown",
+                }
+            }
+        }
+    },
 })
 lsp.tsserver.setup({
     capabilities = capabilities,
