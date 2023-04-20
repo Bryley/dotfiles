@@ -1,4 +1,9 @@
 return {
+    {
+        -- Better UI for neovim lua functions like vim.ui.input()
+        'stevearc/dressing.nvim',
+        config = true,
+    },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		version = "v2.x",
@@ -15,7 +20,6 @@ return {
 						bo = {
 							-- if the file type is one of following, the window will be ignored
 							filetype = { "neo-tree", "neo-tree-popup", "notify" },
-
 							-- if the buffer type is one of following, the window will be ignored
 							buftype = { "terminal", "quickfix" },
 						},
@@ -30,6 +34,7 @@ return {
 			close_if_last_window = true,
 			window = {
 				mappings = {
+					["<space>"] = function() end,
 					["<cr>"] = "open_with_window_picker",
 					["o"] = "open_with_window_picker",
 					["S"] = "split_with_window_picker",
@@ -92,5 +97,12 @@ return {
 	{
 		-- Adds indent guides to the code
 		"lukas-reineke/indent-blankline.nvim",
+	},
+	{
+		"rcarriga/nvim-notify",
+		lazy = false,
+		config = function()
+			vim.notify = require("notify")
+		end,
 	},
 }

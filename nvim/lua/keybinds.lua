@@ -1,4 +1,4 @@
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = false }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -12,6 +12,3 @@ keymap("t", "<Esc>", "<C-\\><C-n>", opts) -- Esc goes to normal mode in term
 -- Stay in indent mode when in visual mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
-
-keymap("v", "<leader>s", "yPgv<cmd>'<,'>AI fix up my writing and grammer to be more clear<cr>", opts)
-keymap("v", "<leader>c", "<cmd>'<,'>NeoAI<cr>", { noremap = true, silent = false })

@@ -7,7 +7,7 @@ return {
 		},
 		-- cmd = "SessionManager",
 		keys = {
-			{ "<F1>", "<cmd>SessionManager load_last_session<cr>", desc = "Load last session" },
+			{ "<F1>", "<cmd>SessionManager load_current_dir_session<cr>", desc = "Load last session" },
 		},
 		config = function()
 			require("session_manager").setup({
@@ -35,6 +35,7 @@ return {
 		"akinsho/toggleterm.nvim",
 		keys = {
 			{ "<F4>", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal" },
+			{ "<F5>", "<cmd>TermExec cmd='./.venv/bin/python <C-r>%'<CR>", desc = "Run Python" },
 		},
 		config = true,
 	},
@@ -46,12 +47,16 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		keys = {
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
-			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
-			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "buffers" },
-			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "help tags" },
-			{ "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "colorscheme" },
+			"<leader>ff",
+			"<leader>fg",
+			"<leader>fb",
+			"<leader>fh",
+			"<leader>fc",
+			"<leader>fr",
+			"<leader>fk",
+			"<leader>fC",
 		},
+        lazy = false,
 		opts = {
 			pickers = {
 				find_files = {
@@ -75,28 +80,73 @@ return {
 			"nvim-telescope/telescope.nvim",
 		},
 		cmd = {
-            "ChatGPT",
-            "ChatGPTActAs",
-            "ChatGPTEditWithInstructions",
-        },
+			"ChatGPT",
+			"ChatGPTActAs",
+			"ChatGPTEditWithInstructions",
+		},
 		config = function()
 			require("chatgpt").setup({
 				-- optional configuration
+				openai_edit_params = {
+					model = "code-davinci-edit-001",
+					-- model = "code-davinci-edit-002",
+					temperature = 0,
+					top_p = 1,
+					n = 1,
+				},
 			})
 		end,
 	},
-	-- {
-	-- 	-- 'Bryley/neoai',
-	-- 	dir = "~/Documents/personal/neoai",
-	-- 	dev = true,
-	-- 	cmd = "NeoAI",
-	-- 	lazy = false,
-	-- },
+	{
+		-- Autocompletes brackets TODO move into a separate snippets.lua with LuaSnip and others
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"hrsh7th/nvim-cmp",
+		},
+	},
+	{
+		-- Adds git signs to the edge of the document
+		"lewis6991/gitsigns.nvim",
+		config = true,
+	},
+	{
+		-- Breadcrumbs, TODO not working
+		"SmiteshP/nvim-navic",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
+		event = "User FileOpened",
+		config = true,
+	},
+	{
+		"b0o/schemastore.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
+	},
+	{
+		-- Illuminates same word under cursor
+		"RRethy/vim-illuminate",
+		config = function()
+			require("illuminate").configure()
+		end,
+	},
     {
-        dir = "~/Documents/coding/neovim-plugins/neoai",
+        -- Highlights color hex with color
+        "NvChad/nvim-colorizer.lua",
+        lazy=false,
+        config=true,
+    },
+	{
+		dir = "~/Documents/personal/neovim-plugins/neoai",
 		dev = true,
-		cmd = "NeoAI",
+		cmd = { "NeoAI" },
 		lazy = false,
-        config = true,
+		config = function()
+			require("neoai").setup()
+		end,
     },
 }

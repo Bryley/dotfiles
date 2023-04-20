@@ -97,6 +97,7 @@ aur_packages=(
     'i3lock-color'          # Lockscreen for X server
     'arc-gtk-theme'         # Good dark GTK theme
     'lxappearance-gtk3'     # Program for changing gtk theme
+    'nvimpager'             # Paging within neovim like less command
 
     # Essential Programs
     'nvm'                   # Node version manager (Node is used by neovim)
@@ -105,6 +106,8 @@ aur_packages=(
 
     'dockerfile-language-server-bin' # Docker language server
     'ltex-ls-bin'           # Latex/Markdown/Org language server
+    'yaml-language-server'  # YAML lang server
+    'vscode-langservers-extracted' # JSON LSP
 
     # Fonts
     'ttf-hack-nerd'         # Nerd font for terminal
