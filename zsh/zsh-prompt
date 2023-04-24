@@ -5,6 +5,7 @@
 # TODO move these colors to a new place where they can be shared everywhere
 PRIMARY_COLOR=#5FAFFF
 BRIGHT_GREEN=#00c438
+DARKER_BLUE=#3169DF
 
 # OPTIONS #
 MAX_PATH_LEN=4
@@ -50,6 +51,9 @@ draw_prompt() {
     if [[ $VIRTUAL_ENV_NAME ]]; then
         RPROMPT="$RPROMPT %F{$BRIGHT_GREEN}%B$VIRTUAL_ENV_NAME "
     fi
+    if [[ $KUBECTL_CONTEXT ]]; then
+        RPROMPT="$RPROMPT %F{$DARKER_BLUE}%B$KUBECTL_CONTEXT 󱃾 "
+    fi
 }
 
 # Sets the virtual env variable
@@ -61,6 +65,10 @@ virtual_env_set() {
             VIRTUAL_ENV_NAME=$(echo $VIRTUAL_ENV | awk -F '/' '{print $(NF-1)}')
         fi
     fi
+}
+
+kubectl_context_set() {
+    KUBECTL_CONTEXT=$(kubectl config current-context)
 }
 
 # Sets the timer variables
@@ -103,6 +111,7 @@ theme_preexec() {
 theme_precmd() {
     timer_set
     virtual_env_set
+    kubectl_context_set
 
     # Draw the prompt
     draw_prompt

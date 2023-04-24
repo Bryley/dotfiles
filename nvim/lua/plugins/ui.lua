@@ -1,9 +1,9 @@
 return {
-    {
-        -- Better UI for neovim lua functions like vim.ui.input()
-        'stevearc/dressing.nvim',
-        config = true,
-    },
+	{
+		-- Better UI for neovim lua functions like vim.ui.input()
+		"stevearc/dressing.nvim",
+		config = true,
+	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		version = "v2.x",
@@ -72,27 +72,69 @@ return {
 			},
 		},
 	},
-	{},
+	{
+		-- Breadcrumbs
+		"SmiteshP/nvim-navic",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
+		event = "User FileOpened",
+		lazy = false,
+		config = function()
+			require("nvim-navic").setup({
+				highlight = true,
+				click = true,
+			})
+		end,
+	},
+	{
+		-- Breadcrumbs GUI
+		"SmiteshP/nvim-navbuddy",
+        lazy = false,
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim",
+		},
+		opts = { lsp = { auto_attach = true } },
+	},
 	{
 		"nvim-lualine/lualine.nvim",
-		opts = {
-			sections = {
-				lualine_a = { "mode" },
-				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = { { "filename", path = 1 } },
-				lualine_x = { "encoding", "fileformat", "filetype" },
-				lualine_y = { "progress" },
-				lualine_z = { "location" },
-			},
-			inactive_sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = { { "filename", path = 1 } },
-				lualine_x = { "location" },
-				lualine_y = {},
-				lualine_z = {},
-			},
+		dependencies = {
+			"SmiteshP/nvim-navic",
 		},
+		config = function()
+			local navic = require("nvim-navic")
+			require("lualine").setup({
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch", "diff", "diagnostics" },
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = { "location" },
+					lualine_y = {},
+					lualine_z = {},
+				},
+				winbar = {
+					lualine_c = {
+						{
+							function()
+								return navic.get_location()
+							end,
+							cond = function()
+								return navic.is_available()
+							end,
+						},
+					},
+				},
+			})
+		end,
 	},
 	{
 		-- Adds indent guides to the code

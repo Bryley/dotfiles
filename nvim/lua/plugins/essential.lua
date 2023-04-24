@@ -113,15 +113,6 @@ return {
 		config = true,
 	},
 	{
-		-- Breadcrumbs, TODO not working
-		"SmiteshP/nvim-navic",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-		},
-		event = "User FileOpened",
-		config = true,
-	},
-	{
 		"b0o/schemastore.nvim",
 		dependencies = {
 			"neovim/nvim-lspconfig",

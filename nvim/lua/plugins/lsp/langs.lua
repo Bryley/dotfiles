@@ -9,7 +9,7 @@ local on_attach = function(client, bufnr)
 	end
 end
 
--- TODO if you need any more language setups look at:
+-- If you need any more language setups look at:
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 lsp.lua_ls.setup({
 	capabilities = capabilities,

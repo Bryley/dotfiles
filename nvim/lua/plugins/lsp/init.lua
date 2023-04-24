@@ -16,6 +16,8 @@ return {
 			"folke/neodev.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"jose-elias-alvarez/null-ls.nvim",
+            "SmiteshP/nvim-navic",
+
 		},
 		config = function()
 			require("plugins.lsp.langs")

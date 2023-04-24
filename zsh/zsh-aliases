@@ -2,10 +2,10 @@
 
 # Handy alias function for changing directory to fuzzy file
 function f() {
-    cd $(fd --hidden --type directory --exclude node_modules --exclude .git | fzf --height 40% --reverse)
+    cd $(fd --hidden --type directory --exclude node_modules --exclude .git | fzf)
 }
 function ff() {
-    cd $(dirname $(fd --hidden --exclude node_modules --exclude .git | fzf --height 40% --reverse))
+    cd $(dirname $(fd --hidden --exclude node_modules --exclude .git | fzf))
 }
 alias vim="nvim"
 alias vimdiff="nvim -d"

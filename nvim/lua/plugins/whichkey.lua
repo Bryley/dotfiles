@@ -1,5 +1,5 @@
 return {
-	-- TODO register some extra keymap names
+	-- Register some extra keymap names
 	"folke/which-key.nvim",
 	config = function()
 		vim.o.timeout = true
@@ -41,6 +41,7 @@ return {
 				a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 				f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
 				r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+				n = { "<cmd>lua require('nvim-navbuddy').open()<cr>", "Navbuddy" },
 			},
 			t = {
 				name = "Table Mode",

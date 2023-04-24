@@ -12,3 +12,14 @@ keymap("t", "<Esc>", "<C-\\><C-n>", opts) -- Esc goes to normal mode in term
 -- Stay in indent mode when in visual mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+-- Resize Windows with arrowkeys
+keymap("n", "<Left>", "<cmd>vertical resize +1<cr>", opts)
+keymap("n", "<Right>", "<cmd>vertical resize -1<cr>", opts)
+keymap("n", "<Up>", "<cmd>resize +1<cr>", opts)
+keymap("n", "<Down>", "<cmd>resize -1<cr>", opts)
+
+keymap("n", "<S-Left>", "<cmd>vertical resize +5<cr>", opts)
+keymap("n", "<S-Right>", "<cmd>vertical resize -5<cr>", opts)
+keymap("n", "<S-Up>", "<cmd>resize +5<cr>", opts)
+keymap("n", "<S-Down>", "<cmd>resize -5<cr>", opts)

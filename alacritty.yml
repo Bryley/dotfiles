@@ -9,10 +9,21 @@ font:
     family: "Hack Nerd Font"
   italic:
     family: "Hack Nerd Font"
+# font:
+#   size: 14
+#   normal:
+#     family: "SFMono Nerd Font Mono"
+#     style: Regular
+#   bold:
+#     family: "SFMono Nerd Font Mono"
+#   italic:
+#     family: "SFMono Nerd Font Mono"
 
 key_bindings:
   - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
   - { key: I, mods: Control, chars: "\x1b[105;5u" }
+  # https://stackoverflow.com/a/42461580
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
 
 window:
   opacity: 1
@@ -90,6 +101,3 @@ schemes:
 
 colors: *dark
 # colors: *light
-key_bindings:
-# https://stackoverflow.com/a/42461580
-- { key: Return, mods: Control, chars: "\x1b[13;5u" }
