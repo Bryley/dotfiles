@@ -12,9 +12,31 @@ end
 -- If you need any more language setups look at:
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 lsp.lua_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {
+                    "vim",
+                    "describe",
+                    "it",
+                    "before_each",
+                    "after_each",
+                    "before",
+                    "after",
+                    "assert",
+                    "spy",
+                    "mock",
+                    "stub",
+                    "pending",
+                    "teardown",
+                    "setup",
+                    "lazy_setup",
+                    "lazy_teardown",
+                }
+            }
+        }
+    },
 })
 lsp.tsserver.setup({
 	capabilities = capabilities,
